@@ -1,0 +1,14 @@
+com/clientmobile/ReactNativeFlipper.java
+ com.clientmobile.ReactNativeFlipper
+ com.clientmobile.ReactNativeFlipper$1
+ com.clientmobile.ReactNativeFlipper$2
+ com.clientmobile.ReactNativeFlipper$2$1
+com/clientmobile/MainActivity.java
+ com.clientmobile.MainActivity
+com/clientmobile/MainApplication.java
+ com.clientmobile.MainApplication
+ com.clientmobile.MainApplication$1
+com/clientmobile/BuildConfig.java
+ com.clientmobile.BuildConfig
+com/facebook/react/PackageList.java
+ com.facebook.react.PackageList

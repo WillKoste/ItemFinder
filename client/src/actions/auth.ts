@@ -1,0 +1,71 @@
+import axios, {AxiosResponse} from 'axios';
+import {User} from '../types/redux';
+import {LOGIN_SUCCESS, LOGIN_FAIL, REGISTER_SUCCESS, REGISTER_FAIL, AUTH_ERROR, GET_CURRENT_USER, LOGOUT} from './types';
+
+export const getCurrentUser = () => async (dispatch: any) => {
+	try {
+		const res: AxiosResponse<{user: User}> = await axios.get('/api/v1/users/me');
+		dispatch({
+			type: GET_CURRENT_USER,
+			payload: res.data.user
+		});
+	} catch (err: any) {
+		console.error(err);
+		dispatch({
+			type: AUTH_ERROR,
+			payload: err.response
+		});
+	}
+};
+
+export const login = (formData: any) => async (dispatch: any) => {
+	const config = {
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	};
+	const body = JSON.stringify(formData);
+
+	try {
+		const res: AxiosResponse<{user: User}> = await axios.post('/api/v1/users/login', body, config);
+		dispatch({
+			type: LOGIN_SUCCESS,
+			payload: res.data.user
+		});
+	} catch (err: any) {
+		console.error(err);
+		dispatch({
+			type: LOGIN_FAIL,
+			payload: err.response
+		});
+	}
+};
+
+export const register = (formData: any) => async (dispatch: any) => {
+	const config = {
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	};
+	const body = JSON.stringify(formData);
+
+	try {
+		const res: AxiosResponse<{user: User}> = await axios.post('/api/v1/users/register', body, config);
+		dispatch({
+			type: REGISTER_SUCCESS,
+			payload: res.data.user
+		});
+	} catch (err: any) {
+		console.error(err);
+		dispatch({
+			type: REGISTER_FAIL,
+			payload: err.response
+		});
+	}
+};
+
+export const logout = () => async (dispatch: any) => {
+	dispatch({
+		type: LOGOUT
+	});
+};

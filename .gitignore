@@ -1,0 +1,66 @@
+node_modules/
+*.env
+
+# Client Mobile
+# OSX
+#
+clientMobile/.DS_Store
+
+# Xcode
+#
+clientMobile/build/
+clientMobile/*.pbxuser
+clientMobile/!default.pbxuser
+clientMobile/*.mode1v3
+clientMobile/!default.mode1v3
+clientMobile/*.mode2v3
+clientMobile/!default.mode2v3
+clientMobile/*.perspectivev3
+clientMobile/!default.perspectivev3
+clientMobile/xcuserdata
+clientMobile/*.xccheckout
+clientMobile/*.moved-aside
+clientMobile/DerivedData
+clientMobile/*.hmap
+clientMobile/*.ipa
+clientMobile/*.xcuserstate
+
+# Android/IntelliJ
+#
+clientMobile/build/
+clientMobile/.idea
+clientMobile/.gradle
+clientMobile/local.properties
+clientMobile/*.iml
+clientMobile/*.hprof
+
+# BUCK
+clientMobile/buck-out/
+clientMobile/\.buckd/
+clientMobile/*.keystore
+clientMobile/!debug.keystore
+
+# fastlane
+#
+# It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
+# screenshots whenever they are needed.
+# For more information about the recommended setup visit:
+# https://docs.fastlane.tools/best-practices/source-control/
+
+clientMobile/*/fastlane/report.xml
+clientMobile/*/fastlane/Preview.html
+clientMobile/*/fastlane/screenshots
+
+# Bundle artifact
+clientMobile/*.jsbundle
+
+# CocoaPods
+clientMobile//ios/Pods/
+
+
+
+# Client
+client/build
+
+# Server
+server/dist/
