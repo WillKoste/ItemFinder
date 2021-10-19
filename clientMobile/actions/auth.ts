@@ -3,22 +3,9 @@ import {AxiosResponse} from 'axios';
 import {User} from '../types/redux';
 import {REGISTER_SUCCESS, REGISTER_FAIL, LOGOUT, LOGIN_SUCCESS, LOGIN_FAIL, AUTH_ERROR, GET_CURRENT_USER} from './types';
 import {AuthDataProps} from '../types/general';
-// import {saveSession, getValueFor} from '../utils/sessionUtils';
-import SecureStore from 'expo-secure-store';
 import {SESSION_NAME} from '../utils/constants';
 
-async function tryGet() {
-	const rezzult = await SecureStore.getItemAsync('w7id');
-	if (rezzult) {
-		console.log(`Here it is ${rezzult}`);
-	} else {
-		console.log('It didnt work');
-	}
-}
-
 export const getCurrentUser = () => async (dispatch: any) => {
-	// await getValueFor('w7id');
-	// await tryGet();
 	try {
 		const res: AxiosResponse<{user: User}> = await customAxios.get('/api/v1/users/me');
 		dispatch({
@@ -49,7 +36,6 @@ export const login = (formData: AuthDataProps) => async (dispatch: any) => {
 			type: LOGIN_SUCCESS,
 			payload: res.data.user
 		});
-		// saveSession(SESSION_NAME, res.data.session);
 	} catch (err: any) {
 		console.error(err);
 		dispatch({
@@ -73,7 +59,6 @@ export const register = (formData: any) => async (dispatch: any) => {
 			type: REGISTER_SUCCESS,
 			payload: res.data.user
 		});
-		// saveSession('w7id', res.data.session);
 	} catch (err: any) {
 		console.error(err);
 		dispatch({
