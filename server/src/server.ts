@@ -56,6 +56,7 @@ if (process.env.NODE_ENV === 'production') {
 		res.sendFile(path.resolve(__dirname, '../', '../', 'client', 'build', 'index.html'));
 	});
 }
+console.log('hey');
 
 const port = process.env.PORT || 5001;
 const mode = process.env.NODE_ENV || 'DEFAULT';

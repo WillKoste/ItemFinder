@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import {View, Text} from 'react-native';
-import {TextInput} from 'react-native-gesture-handler';
+import {View, Text, ScrollView, TextInput} from 'react-native';
+import {styles} from '../../style/App';
+const {innerContainer, scrollOuterContainer, authHeader, contentContainer, form, formLabel, formGroup, formControl} = styles;
 
 interface RegisterProps {}
 
@@ -18,18 +19,27 @@ const Register: React.FC<RegisterProps> = () => {
 	});
 
 	const {email, password, password2} = formData;
-	console.log({email});
 
 	return (
-		<View style={{alignItems: 'center', justifyContent: 'center', height: '100%'}}>
-			<Text>Register Page</Text>
-			<View>
-				<View>
-					<Text>Email</Text>
-					<TextInput style={{backgroundColor: 'red', padding: 6}} value={email} onChangeText={(e: string) => setFormData({...formData, email: e})} />
+		<ScrollView style={scrollOuterContainer} contentContainerStyle={contentContainer}>
+			<View style={innerContainer}>
+				<Text style={authHeader}>Register</Text>
+				<View style={form}>
+					<View style={formGroup}>
+						<Text style={formLabel}>Email</Text>
+						<TextInput value={email} style={formControl} onChangeText={(e) => setFormData({...formData, email: e})} />
+					</View>
+					<View style={formGroup}>
+						<Text style={formLabel}>Password</Text>
+						<TextInput value={password} style={formControl} onChangeText={(e) => setFormData({...formData, password: e})} secureTextEntry />
+					</View>
+					<View style={formGroup}>
+						<Text style={formLabel}>Confirm password</Text>
+						<TextInput value={password2} style={formControl} onChangeText={(e) => setFormData({...formData, password2: e})} secureTextEntry />
+					</View>
 				</View>
 			</View>
-		</View>
+		</ScrollView>
 	);
 };
 
