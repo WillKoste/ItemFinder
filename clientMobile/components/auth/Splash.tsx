@@ -9,20 +9,22 @@ const {textWhite, btn, innerContainer, outerContainer, splashHeader} = styles;
 interface SplashProps {}
 
 const Splash: React.FC<SplashProps> = ({}) => {
-	const navigation = useNavigation<splashNavProps>();
+	// const navigation = useNavigation<splashNavProps>();
 
-	navigation.navigate('Splash');
+	// navigation.navigate('Splash');
 
 	return (
 		<View style={outerContainer}>
 			<View style={innerContainer}>
 				<Text style={splashHeader}>Splash Page</Text>
 				<View style={{width: '100%', paddingBottom: 100}}>
-					<TouchableOpacity style={btn} activeOpacity={0.9} onPress={() => navigation.navigate('Register')}>
+					<TouchableOpacity style={btn} activeOpacity={0.9}>
+						{/* <TouchableOpacity style={btn} activeOpacity={0.9} onPress={() => navigation.navigate('Register')}> */}
 						{/* <TouchableOpacity style={btn} activeOpacity={0.9} onPress={async () => await getValueFor('w7id')}> */}
 						<Text style={textWhite}>Register</Text>
 					</TouchableOpacity>
-					<TouchableOpacity style={btn} activeOpacity={0.9} onPress={() => navigation.navigate('Login')}>
+					<TouchableOpacity style={btn} activeOpacity={0.9} onPress={() => console.log('It worked fine')}>
+						{/* <TouchableOpacity style={btn} activeOpacity={0.9} onPress={() => navigation.navigate('Login')}> */}
 						<Text style={textWhite}>Login</Text>
 					</TouchableOpacity>
 				</View>

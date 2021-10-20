@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import {View, Text, ScrollView, TextInput, TouchableOpacity, Alert} from 'react-native';
 import {styles} from '../../style/App';
 import {login} from '../../actions/auth';
 import {AuthDataProps} from '../../types/general';
+import {getAllTokens} from '../../utils/sessionUtils';
 const {innerContainer, scrollOuterContainer, authHeader, contentContainer, form, formGroup, formLabel, formControl, btn, textWhite} = styles;
 
 interface LoginProps {
@@ -16,6 +17,10 @@ const Login: React.FC<LoginProps> = ({login}) => {
 		password: ''
 	});
 
+	useEffect(() => {
+		getAllTokens();
+	}, []);
+
 	const {email, password} = formData;
 
 	const onSubmit = (e: any) => {
@@ -26,6 +31,7 @@ const Login: React.FC<LoginProps> = ({login}) => {
 			Alert.alert('Data required', 'Please provide your valid email and password');
 		} else {
 			login(formData);
+			// console.log('No issues yet');
 		}
 	};
 

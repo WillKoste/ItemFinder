@@ -25,6 +25,30 @@ clientMobile/*.hmap
 clientMobile/*.ipa
 clientMobile/*.xcuserstate
 
+# Client Mobile 2
+# OSX
+#
+clientMobile2/.DS_Store
+
+# Xcode
+#
+clientMobile2/build/
+clientMobile2/*.pbxuser
+clientMobile2/!default.pbxuser
+clientMobile2/*.mode1v3
+clientMobile2/!default.mode1v3
+clientMobile2/*.mode2v3
+clientMobile2/!default.mode2v3
+clientMobile2/*.perspectivev3
+clientMobile2/!default.perspectivev3
+clientMobile2/xcuserdata
+clientMobile2/*.xccheckout
+clientMobile2/*.moved-aside
+clientMobile2/DerivedData
+clientMobile2/*.hmap
+clientMobile2/*.ipa
+clientMobile2/*.xcuserstate
+
 # Android/IntelliJ
 #
 clientMobile/build/
