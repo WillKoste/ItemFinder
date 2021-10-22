@@ -1,10 +1,13 @@
-import axios, {AxiosResponse} from 'axios';
-import {User} from '../types/redux';
+import {customAxios} from '../utils/customAxios';
+import {AxiosResponse} from 'axios';
+import {AuthFormDataTypes} from '../types/general';
+import {User} from '../types/general';
 import {LOGIN_SUCCESS, LOGIN_FAIL, REGISTER_SUCCESS, REGISTER_FAIL, AUTH_ERROR, GET_CURRENT_USER, LOGOUT} from './types';
 
 export const getCurrentUser = () => async (dispatch: any) => {
+	console.log('ujj')
 	try {
-		const res: AxiosResponse<{user: User}> = await axios.get('/api/v1/users/me');
+		const res: AxiosResponse<{user: User}> = await customAxios.get('/api/v1/users/me');
 		dispatch({
 			type: GET_CURRENT_USER,
 			payload: res.data.user
@@ -18,7 +21,7 @@ export const getCurrentUser = () => async (dispatch: any) => {
 	}
 };
 
-export const login = (formData: any) => async (dispatch: any) => {
+export const loginUser = (formData: AuthFormDataTypes) => async (dispatch: any) => {
 	const config = {
 		headers: {
 			'Content-Type': 'application/json'
@@ -27,7 +30,7 @@ export const login = (formData: any) => async (dispatch: any) => {
 	const body = JSON.stringify(formData);
 
 	try {
-		const res: AxiosResponse<{user: User}> = await axios.post('/api/v1/users/login', body, config);
+		const res: AxiosResponse<{user: User}> = await customAxios.post('/api/v1/users/login', body, config);
 		dispatch({
 			type: LOGIN_SUCCESS,
 			payload: res.data.user
@@ -41,7 +44,7 @@ export const login = (formData: any) => async (dispatch: any) => {
 	}
 };
 
-export const register = (formData: any) => async (dispatch: any) => {
+export const registerUser = (formData: AuthFormDataTypes) => async (dispatch: any) => {
 	const config = {
 		headers: {
 			'Content-Type': 'application/json'
@@ -50,7 +53,7 @@ export const register = (formData: any) => async (dispatch: any) => {
 	const body = JSON.stringify(formData);
 
 	try {
-		const res: AxiosResponse<{user: User}> = await axios.post('/api/v1/users/register', body, config);
+		const res: AxiosResponse<{user: User}> = await customAxios.post('/api/v1/users/register', body, config);
 		dispatch({
 			type: REGISTER_SUCCESS,
 			payload: res.data.user
@@ -65,7 +68,17 @@ export const register = (formData: any) => async (dispatch: any) => {
 };
 
 export const logout = () => async (dispatch: any) => {
-	dispatch({
-		type: LOGOUT
-	});
+	console.log('Fuck this');
+	try {
+		await customAxios.post('/api/v1/users/logout');
+		dispatch({
+			type: LOGOUT
+		});
+	} catch (err) {
+		console.error(err);
+		dispatch({
+			type: AUTH_ERROR,
+			payload: err
+		});
+	}
 };

@@ -4,8 +4,10 @@ interface FavoritesProps {}
 
 const Favorites: React.FC<FavoritesProps> = () => {
 	return (
-		<div>
-			<h1>Favorites Page</h1>
+		<div className='favorites'>
+			<div className='container'>
+				<h1>Favorites Page</h1>
+			</div>
 		</div>
 	);
 };

@@ -64,6 +64,7 @@ router.post('/login', async (req: Request, res: Response) => {
 	const {email, password} = req.body;
 
 	try {
+		console.log({email, password});
 		const checkUser: QueryResult<User> = await pool.query(`SELECT * FROM users WHERE email = $1`, [email]);
 
 		if (checkUser.rowCount === 0) {

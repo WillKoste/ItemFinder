@@ -1,13 +1,19 @@
 import React from 'react';
+import {connect} from 'react-redux'
 
-interface TrendsProps {}
+interface TrendsProps {
+}
 
-const Trends: React.FC<TrendsProps> = () => {
+const Trends: React.FC<TrendsProps> = ({}) => {
+
+	
 	return (
-		<div>
-			<h1>Trends Page</h1>
+		<div className='trends'>
+			<div className='container'>
+				<h1>Trends Page</h1>
+			</div>
 		</div>
 	);
 };
 
-export default Trends;
+export default connect(null, {})(Trends);

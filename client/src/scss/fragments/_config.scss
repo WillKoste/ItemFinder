@@ -1,0 +1,106 @@
+$primary-color: #cbdfbd;
+$secondary-color: #f6f4d2;
+$highlight-color: #f19c79;
+$success-color: #d4e09b;
+$danger-color: #a44a3f;
+$dark-color: #333;
+$light-color: #dddddd;
+$max-width: 1250px;
+$border-radius: 8px;
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	line-height: 1.4;
+	font-family: Arial, Helvetica, sans-serif;
+	background: #f4f4f4;
+}
+
+a {
+	text-decoration: none;
+	color: #333;
+}
+
+img {
+	width: 100%;
+}
+
+li {
+	list-style-type: none;
+}
+
+input[type='text'],
+input[type='password'],
+textarea {
+	// border: #a7a7a7 1px solid;
+	border: none;
+	box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.13);
+	&:focus {
+		outline: #7c7c7c 1px solid;
+	}
+}
+
+@function set-text-color($color) {
+	@if (lightness($color) > 60) {
+		@return #333;
+	} @else {
+		@return #fff;
+	}
+}
+
+@mixin set-background($color) {
+	background: $color;
+	color: set-text-color($color);
+}
+
+$spaceamounts: (1, 2, 3, 4, 5);
+
+@each $space in $spaceamounts {
+	.m-#{$space} {
+		margin: #{$space / 2}rem;
+	}
+	.mt-#{$space} {
+		margin-top: #{$space / 2}rem;
+	}
+	.mb-#{$space} {
+		margin-bottom: #{$space / 2}rem;
+	}
+	.ml-#{$space} {
+		margin-left: #{$space / 2}rem;
+	}
+	.mr-#{$space} {
+		margin-right: #{$space / 2}rem;
+	}
+	.my-#{$space} {
+		margin: #{$space / 2}rem 0;
+	}
+	.mx-#{$space} {
+		margin: 0 #{$space / 2}rem;
+	}
+
+	.p-#{$space} {
+		padding: #{$space / 2}rem;
+	}
+	.pt-#{$space} {
+		padding-top: #{$space / 2}rem;
+	}
+	.pb-#{$space} {
+		padding-bottom: #{$space / 2}rem;
+	}
+	.pl-#{$space} {
+		padding-left: #{$space / 2}rem;
+	}
+	.pr-#{$space} {
+		padding-right: #{$space / 2}rem;
+	}
+	.py-#{$space} {
+		padding: #{$space / 2}rem 0;
+	}
+	.px-#{$space} {
+		padding: 0 #{$space / 2}rem;
+	}
+}

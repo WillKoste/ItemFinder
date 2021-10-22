@@ -1,6 +1,8 @@
 import 'reflect-metadata';
 import 'dotenv-safe/config';
 import 'colors';
+import https from 'https';
+import fs from 'fs';
 import path from 'path';
 import express from 'express';
 import {connectDB} from './config/pg';
@@ -34,7 +36,7 @@ app.use(
 		name: process.env.COOKIE_NAME,
 		store: new RedisStore({client: redis, disableTouch: true}),
 		cookie: {
-			secure: 'auto',
+			secure: true,
 			sameSite: 'none',
 			httpOnly: true
 		},
@@ -61,6 +63,10 @@ console.log('hey');
 const port = process.env.PORT || 5001;
 const mode = process.env.NODE_ENV || 'DEFAULT';
 
-app.listen(port, () => {
+// app.listen(port, () => {
+// 	console.log(`Express server running on port ${port}, in ${mode} mode`.cyan.underline.bold);
+// });
+
+https.createServer({key: fs.readFileSync(path.join(__dirname, '../', './server.key')), cert: fs.readFileSync(path.join(__dirname, '../', './server.cert'))}, app).listen(port, () => {
 	console.log(`Express server running on port ${port}, in ${mode} mode`.cyan.underline.bold);
 });

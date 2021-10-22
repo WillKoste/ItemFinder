@@ -1,5 +1,5 @@
 import {LOGIN_SUCCESS, LOGIN_FAIL, REGISTER_FAIL, REGISTER_SUCCESS, AUTH_ERROR, GET_CURRENT_USER, LOGOUT} from '../actions/types';
-import {UserReducer} from '../types/redux';
+import {UserReducer} from '../types/general';
 
 const inititalState = {
 	user: null,

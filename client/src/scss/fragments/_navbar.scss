@@ -1,0 +1,30 @@
+.navbar {
+	padding: 0.5rem 1.3rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.12);
+
+	// .navbar-brand {
+	// }
+	.navbar-links {
+		display: flex;
+
+		li {
+			margin: 0 0.3rem;
+			a {
+				padding: 1rem;
+				border-radius: $border-radius;
+				transition: background-color 0.1s ease-in-out;
+
+				&:hover {
+					background: darken($primary-color, 10%);
+				}
+			}
+		}
+
+		.current {
+			color: red;
+		}
+	}
+}

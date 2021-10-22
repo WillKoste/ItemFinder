@@ -1,0 +1,131 @@
+.container {
+	max-width: $max-width;
+	margin: auto;
+	padding: 1.3rem;
+}
+
+.wrapper {
+	&-lg {
+		margin: auto;
+		height: 300px;
+		width: 1100px;
+		// background: rgb(200, 255, 200);
+	}
+	&-md {
+		width: 900px;
+		background: rgb(191, 191, 247);
+		height: 300px;
+		margin: auto;
+	}
+	&-sm {
+		width: 740px;
+		min-width: 10px;
+		background: rgb(236, 205, 205);
+		height: 300px;
+		margin: auto;
+	}
+}
+
+.text {
+	&-xl {
+		font-size: 3.5rem;
+		line-height: 1.2;
+		margin-bottom: 1rem;
+	}
+	&-lg {
+		font-size: 2.8rem;
+		line-height: 1.2;
+		margin-bottom: 1rem;
+	}
+	&-md {
+		font-size: 2rem;
+		line-height: 1.2;
+		margin-bottom: 0.8rem;
+	}
+
+	&-primary {
+		color: $primary-color;
+	}
+	&-secondary {
+		color: $secondary-color;
+	}
+	&-highlight {
+		color: $highlight-color;
+	}
+	&-dark {
+		color: $dark-color;
+	}
+	&-light {
+		color: $light-color;
+	}
+}
+
+.round-img {
+	border-radius: 50%;
+}
+
+.bg {
+	&-primary {
+		@include set-background($primary-color);
+	}
+	&-secondary {
+		@include set-background($secondary-color);
+	}
+	&-highlight {
+		@include set-background($highlight-color);
+	}
+	&-dark {
+		@include set-background($dark-color);
+	}
+	&-light {
+		@include set-background($light-color);
+	}
+}
+
+.btn {
+	cursor: pointer;
+	background: $light-color;
+	color: #333;
+	padding: 0.8rem 1.3rem;
+	border-radius: $border-radius;
+	font-size: 1.1rem;
+	margin: 0.8rem 0;
+	border: none;
+	transition: transform background-color 0.1s ease-in-out;
+
+	&.btn-primary {
+		@include set-background($primary-color);
+		&:hover {
+			background: darken($primary-color, 7%);
+		}
+	}
+	&.btn-secondary {
+		@include set-background($secondary-color);
+		&:hover {
+			background: darken($secondary-color, 7%);
+		}
+	}
+	&.btn-highlight {
+		@include set-background($highlight-color);
+		&:hover {
+			background: darken($highlight-color, 7%);
+		}
+	}
+	&.btn-dark {
+		@include set-background($dark-color);
+		&:hover {
+			background: lighten($dark-color, 7%);
+		}
+	}
+
+	&:hover {
+		background: darken($light-color, 10%);
+	}
+	&:active {
+		transform: scale(0.99);
+		outline: none;
+	}
+	&:focus {
+		outline: none;
+	}
+}
