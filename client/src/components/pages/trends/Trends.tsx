@@ -1,12 +1,9 @@
 import React from 'react';
-import {connect} from 'react-redux'
+import {connect} from 'react-redux';
 
-interface TrendsProps {
-}
+interface TrendsProps {}
 
 const Trends: React.FC<TrendsProps> = ({}) => {
-
-	
 	return (
 		<div className='trends'>
 			<div className='container'>

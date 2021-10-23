@@ -17,7 +17,7 @@ export interface User {
 export interface Product {
 	id: number;
 	name: string;
-	sku: string;
+	sku?: string;
 	category?: string;
 	description?: string;
 	rating?: number;

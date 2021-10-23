@@ -9,3 +9,15 @@ export interface User {
 	password: string;
 	partner_code?: string;
 }
+
+export interface Product {
+	id: number;
+	name: string;
+	sku?: string;
+	category?: string;
+	description: string;
+	rating?: number;
+	image?: string;
+	price?: number;
+	qty?: string;
+}

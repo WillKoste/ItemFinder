@@ -5,7 +5,6 @@ import {User} from '../types/general';
 import {LOGIN_SUCCESS, LOGIN_FAIL, REGISTER_SUCCESS, REGISTER_FAIL, AUTH_ERROR, GET_CURRENT_USER, LOGOUT} from './types';
 
 export const getCurrentUser = () => async (dispatch: any) => {
-	console.log('ujj')
 	try {
 		const res: AxiosResponse<{user: User}> = await customAxios.get('/api/v1/users/me');
 		dispatch({

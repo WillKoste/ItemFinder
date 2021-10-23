@@ -11,6 +11,7 @@ import morgan from 'morgan';
 import cors from 'cors';
 import connectRedis from 'connect-redis';
 import {redis} from './config/redis';
+import cookiesMiddleware from 'universal-cookie-express';
 
 import userRoutes from './routes/user';
 import reviewsRoutes from './routes/reviews';
@@ -28,6 +29,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.use(cors({origin: [process.env.CORS_ORIGIN], credentials: true}));
+app.use(cookiesMiddleware());
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(
@@ -58,7 +60,6 @@ if (process.env.NODE_ENV === 'production') {
 		res.sendFile(path.resolve(__dirname, '../', '../', 'client', 'build', 'index.html'));
 	});
 }
-console.log('hey');
 
 const port = process.env.PORT || 5001;
 const mode = process.env.NODE_ENV || 'DEFAULT';

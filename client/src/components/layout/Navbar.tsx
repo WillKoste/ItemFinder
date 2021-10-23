@@ -51,11 +51,6 @@ const Navbar: React.FC<NavbarProps> = ({logout}) => {
 						Account
 					</NavLink>
 				</li>
-				<li>
-					<NavLink to='/' exact activeClassName='current'>
-						Logout
-					</NavLink>
-				</li>
 			</ul>
 		</div>
 	);

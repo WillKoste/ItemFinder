@@ -5,3 +5,10 @@ export const REGISTER_FAIL = 'REGISTER_FAIL';
 export const GET_CURRENT_USER = 'GET_CURRENT_USER';
 export const AUTH_ERROR = 'AUTH_ERROR';
 export const LOGOUT = 'LOGOUT';
+
+export const GET_PRODUCTS = 'GET_PRODUCTS';
+export const GET_PRODUCT = 'GET_PRODUCT';
+export const PRODUCTS_ERROR = 'PRODUCTS_ERROR';
+export const CREATE_PRODUCT = 'CREATE_PRODUCT';
+export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
+export const DELETE_PRODUCT = 'DELETE_PRODUCT';

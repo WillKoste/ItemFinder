@@ -1,5 +1,5 @@
 import 'express-session';
-import {User} from './routes';
+import {Product, User} from './routes';
 
 declare module 'express-session' {
 	interface Session {
@@ -13,6 +13,14 @@ export interface UserResponse {
 	users?: User[];
 	user?: User;
 	count: number;
+}
+
+export interface ProductResponse {
+	success: boolean;
+	data?: string;
+	products?: Product[];
+	product?: Product;
+	count?: number;
 }
 
 declare global {
