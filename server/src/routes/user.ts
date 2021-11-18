@@ -27,6 +27,26 @@ router.get('/', [checkAuth, checkRole], async (_: any, res: Response): Promise<R
 });
 
 /**
+ * @name Get Current User
+ */
+router.get('/me', [checkAuth], async (req: Request, res: Response) => {
+	console.log(req.session);
+
+	try {
+		if (!req.session.userId) {
+			return res.status(401).json({success: false, data: 'Authorization Denied'});
+		}
+
+		const user = await pool.query(`SELECT id, email, phone, image, is_admin, is_partner, is_premium, partner_code FROM users WHERE id = $1`, [req.session.userId]);
+
+		return res.json({success: true, user: user.rows[0]});
+	} catch (err) {
+		console.error(err);
+		return res.status(500).json({success: false, data: 'Server Error'});
+	}
+});
+
+/**
  * @name Register
  */
 router.post('/register', [check('email', 'Email is required').isEmail(), check('phone', 'Phone is required').not().isEmpty(), check('password', 'Password is required, and must be at least 6 characters').isLength({min: 6})], async (req: Request, res: Response): Promise<Response> => {

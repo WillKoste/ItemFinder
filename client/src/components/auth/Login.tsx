@@ -33,6 +33,7 @@ const Login: React.FC<LoginProps> = ({loginUser}) => {
 		<div className='login'>
 			<div className='container'>
 				<h1 className='text-lg pb-4'>Login</h1>
+
 				<form className='form wrapper-lg' onSubmit={onSubmit}>
 					<div className='form-group'>
 						<label htmlFor='email'>Email</label>

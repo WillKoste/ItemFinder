@@ -48,4 +48,5 @@ export interface AuthFormDataTypes {
 	email?: string | undefined;
 	password?: string | undefined;
 	password2?: string | undefined;
+	phone?: string | undefined;
 }
