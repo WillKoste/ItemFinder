@@ -1,14 +1,16 @@
 import React, {useState} from 'react';
-import {Link} from 'react-router-dom';
+import {Redirect, Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {registerUser} from '../../actions/auth';
-import {AuthFormDataTypes} from '../../types/general';
+import {AuthFormDataTypes, UserReducer} from '../../types/general';
+import {Tooltip} from 'react-bootstrap';
 
 interface RegisterProps {
 	registerUser: (data: AuthFormDataTypes) => void;
+	authRed: UserReducer;
 }
 
-const Register: React.FC<RegisterProps> = ({registerUser}) => {
+const Register: React.FC<RegisterProps> = ({registerUser, authRed: {isAuthenticated}}) => {
 	const [formData, setFormData] = useState({
 		email: '',
 		password: '',
@@ -34,6 +36,10 @@ const Register: React.FC<RegisterProps> = ({registerUser}) => {
 		}
 	};
 
+	if (isAuthenticated) {
+		return <Redirect to='/home' />;
+	}
+
 	return (
 		<div className='register'>
 			<div className='container'>
@@ -57,9 +63,19 @@ const Register: React.FC<RegisterProps> = ({registerUser}) => {
 					</div>
 					<input type='submit' value='Sign Up' className='btn btn-dark' />
 				</form>
+				<p>
+					Already have an account?{' '}
+					<Link to='/login' className='link-highlight'>
+						Click here to login.
+					</Link>
+				</p>
 			</div>
 		</div>
 	);
 };
 
-export default connect(null, {registerUser})(Register);
+const mapStateToProps = (state: any) => ({
+	authRed: state.authRed
+});
+
+export default connect(mapStateToProps, {registerUser})(Register);

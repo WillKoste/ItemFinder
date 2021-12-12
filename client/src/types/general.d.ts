@@ -26,6 +26,14 @@ export interface Product {
 	qty?: number;
 }
 
+export interface Location {
+	id: number;
+	partnerId: number;
+	image?: string;
+	address?: string;
+	rating?: number;
+}
+
 export interface UserReducer {
 	user: User | null;
 	isAuthenticated: boolean | null;
@@ -34,14 +42,23 @@ export interface UserReducer {
 }
 
 export interface ProductsReducer {
-	products: Product[];
+	products: Product[] | [];
 	product: Product | null;
+	loading: boolean;
+	error: any;
+}
+
+export interface LocationsReducer {
+	locations: Location | [];
+	location: Location | null;
 	loading: boolean;
 	error: any;
 }
 
 export interface RootRedTypes {
 	authRed?: UserReducer;
+	productsRed?: ProductsReducer;
+	locationsRed?: LocationsReducer;
 }
 
 export interface AuthFormDataTypes {

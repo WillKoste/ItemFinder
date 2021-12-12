@@ -129,3 +129,14 @@
 		outline: none;
 	}
 }
+
+.link {
+	&-highlight {
+		cursor: pointer;
+		color: $highlight-color;
+
+		&:visited {
+			color: $highlight-color;
+		}
+	}
+}

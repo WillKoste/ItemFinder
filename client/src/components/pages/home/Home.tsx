@@ -1,16 +1,19 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
+import {getLocations} from '../../../actions/locations';
 import {getProducts} from '../../../actions/products';
 import {ProductsReducer} from '../../../types/general';
 
 interface HomeProps {
 	productsRed: ProductsReducer;
 	getProducts: () => void;
+	getLocations: () => void;
 }
 
-const Home: React.FC<HomeProps> = ({productsRed, getProducts}) => {
+const Home: React.FC<HomeProps> = ({productsRed, getProducts, getLocations}) => {
 	useEffect(() => {
 		getProducts();
+		getLocations();
 	}, []);
 
 	return (
@@ -39,4 +42,4 @@ const mapStateToProps = (state: any) => ({
 	productsRed: state.productsRed
 });
 
-export default connect(mapStateToProps, {getProducts})(Home);
+export default connect(mapStateToProps, {getProducts, getLocations})(Home);

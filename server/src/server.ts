@@ -1,8 +1,6 @@
 import 'reflect-metadata';
 import 'dotenv-safe/config';
 import 'colors';
-import https from 'https';
-import fs from 'fs';
 import path from 'path';
 import express from 'express';
 import {connectDB} from './config/pg';
@@ -67,6 +65,9 @@ const mode = process.env.NODE_ENV || 'DEFAULT';
 // app.listen(port, () => {
 // 	console.log(`Express server running on port ${port}, in ${mode} mode`.cyan.underline.bold);
 // });
+
+import https from 'https';
+import fs from 'fs';
 
 https.createServer({key: fs.readFileSync(path.join(__dirname, '../', './server.key')), cert: fs.readFileSync(path.join(__dirname, '../', './server.cert'))}, app).listen(port, () => {
 	console.log(`Express server running on port ${port}, in ${mode} mode`.cyan.underline.bold);

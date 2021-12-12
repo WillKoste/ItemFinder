@@ -1,14 +1,16 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
+import {Link, Redirect} from 'react-router-dom';
 import {loginUser, getCurrentUser} from '../../actions/auth';
-import {AuthFormDataTypes} from '../../types/general';
+import {AuthFormDataTypes, UserReducer} from '../../types/general';
 
 interface LoginProps {
 	loginUser: (data: AuthFormDataTypes) => Promise<void>;
 	getCurrentUser: () => Promise<void>;
+	authRed: UserReducer;
 }
 
-const Login: React.FC<LoginProps> = ({loginUser}) => {
+const Login: React.FC<LoginProps> = ({loginUser, authRed: {isAuthenticated}}) => {
 	const [formData, setFormData] = useState<AuthFormDataTypes>({
 		email: '',
 		password: ''
@@ -29,6 +31,10 @@ const Login: React.FC<LoginProps> = ({loginUser}) => {
 		}
 	};
 
+	if (isAuthenticated) {
+		return <Redirect to='/home' />;
+	}
+
 	return (
 		<div className='login'>
 			<div className='container'>
@@ -45,9 +51,19 @@ const Login: React.FC<LoginProps> = ({loginUser}) => {
 					</div>
 					<input type='submit' value='Confirm' className='btn btn-dark' />
 				</form>
+				<p>
+					Don't have an account?{' '}
+					<Link to='/register' className='link-highlight'>
+						Click here to set one up.
+					</Link>
+				</p>
 			</div>
 		</div>
 	);
 };
 
-export default connect(null, {loginUser, getCurrentUser})(Login);
+const mapStateToProps = (state: any) => ({
+	authRed: state.authRed
+});
+
+export default connect(mapStateToProps, {loginUser, getCurrentUser})(Login);

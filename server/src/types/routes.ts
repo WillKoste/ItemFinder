@@ -21,3 +21,11 @@ export interface Product {
 	price?: number;
 	qty?: string;
 }
+
+export interface Location {
+	id: number;
+	partnerId: number;
+	image?: string;
+	address?: string;
+	rating?: number;
+}

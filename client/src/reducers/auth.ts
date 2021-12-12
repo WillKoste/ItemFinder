@@ -19,7 +19,8 @@ export default function (state = inititalState, action: any): UserReducer {
 				...state,
 				user: payload,
 				loading: false,
-				isAuthenticated: true
+				isAuthenticated: true,
+				error: null
 			};
 		case LOGIN_FAIL:
 		case REGISTER_FAIL:

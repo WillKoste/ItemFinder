@@ -13,11 +13,7 @@ const Navbar: React.FC<NavbarProps> = ({logout, authRed: {isAuthenticated}}) => 
 	return (
 		<div className='navbar bg-primary'>
 			<div className='navbar-brand'>
-				{isAuthenticated ? (
-					<button className='btn btn-dark' onClick={logout}>
-						Logout
-					</button>
-				) : null}
+				<h1>ItemFinder</h1>
 			</div>
 			<ul className='navbar-links'>
 				{!isAuthenticated ? (
