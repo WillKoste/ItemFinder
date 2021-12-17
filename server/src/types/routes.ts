@@ -29,3 +29,18 @@ export interface Location {
 	address?: string;
 	rating?: number;
 }
+
+export interface Contact {
+	id: number;
+	firstName: string;
+	lastName: string;
+	address: string;
+	creditCard?: string;
+	contactType: string;
+}
+
+export interface Review {
+	id: number;
+	title: string;
+	body: string;
+}

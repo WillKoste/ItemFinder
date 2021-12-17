@@ -23,6 +23,13 @@ export interface ProductResponse {
 	count?: number;
 }
 
+export interface LocationReqBody {
+	name: string;
+	image: string;
+	address: string;
+	rating: number;
+}
+
 declare global {
 	namespace Express {
 		interface Request {

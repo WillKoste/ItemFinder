@@ -1,5 +1,6 @@
 import express, {Request, Response} from 'express';
 import {QueryResult} from 'pg';
+import {LocationReqBody} from 'src/types/express';
 import {pool} from '../config/pg';
 import {Location} from '../types/routes';
 const router = express.Router();
@@ -32,6 +33,19 @@ router.get('/:locationId', async (req: Request, res: Response) => {
 		}
 
 		return res.json({success: true, location: location.rows[0]});
+	} catch (err) {
+		console.error(err);
+		return res.status(500).json({success: false, data: 'Server Error'});
+	}
+});
+
+router.post('/', async (req: Request<{hey: 'hey'}>, res: Response) => {
+	const {address, name, image, rating}: LocationReqBody = req.body;
+
+	try {
+		const newLocation: QueryResult<Location> = await pool.query(`INSERT INTO locations (name, image, address, rating) VALUES ($1, $2, $3, $4) RETURNING *`, [name, image, address, rating]);
+
+		return res.status(201).json({success: true, location: newLocation.rows[0]});
 	} catch (err) {
 		console.error(err);
 		return res.status(500).json({success: false, data: 'Server Error'});
