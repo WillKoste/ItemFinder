@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react';
-import {NavLink} from 'react-router-dom';
+import {NavLink, Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {logout} from '../../actions/auth';
 import {UserReducer} from '../../types/general';
@@ -13,7 +13,9 @@ const Navbar: React.FC<NavbarProps> = ({logout, authRed: {isAuthenticated}}) => 
 	return (
 		<div className='navbar bg-primary'>
 			<div className='navbar-brand'>
-				<h1>ItemFinder</h1>
+				<Link to='/home'>
+					<h1>ItemFinder</h1>
+				</Link>
 			</div>
 			<ul className='navbar-links'>
 				{!isAuthenticated ? (

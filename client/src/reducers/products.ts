@@ -2,7 +2,7 @@ import {ProductsReducer} from '../types/general';
 import {Action} from '../types/redux';
 import {PRODUCTS_ERROR, GET_PRODUCTS, GET_PRODUCT, CREATE_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT} from '../actions/types';
 
-const initialState = {
+const initialState: ProductsReducer = {
 	products: [],
 	product: null,
 	loading: true,

@@ -12,5 +12,25 @@ export const getProducts = () => async (dispatch: any) => {
 		});
 	} catch (err) {
 		console.error(err);
+		dispatch({
+			type: PRODUCTS_ERROR,
+			payload: err
+		});
+	}
+};
+
+export const getProduct = (productId: string) => async (dispatch: any) => {
+	try {
+		const res: AxiosResponse<{product: Product}> = await customAxios.get(`/api/v1/products/${productId}`);
+		dispatch({
+			type: GET_PRODUCT,
+			payload: res.data.product
+		});
+	} catch (err) {
+		console.error(err);
+		dispatch({
+			type: PRODUCTS_ERROR,
+			payload: err
+		});
 	}
 };

@@ -1,8 +1,8 @@
 export interface Dispatch {
 	type: string;
-	payload: any;
+	payload?: any;
 }
 export interface Action {
 	type: string;
-	payload: any;
+	payload?: any;
 }

@@ -34,6 +34,29 @@ export interface Location {
 	rating?: number;
 }
 
+export interface Partner {
+	id: number;
+	name: string;
+	partnerCode: string;
+}
+
+export interface Contact {
+	id: number;
+	name: string;
+	firstName?: string;
+	lastName?: string;
+	address?: string;
+	creditCard?: string;
+}
+
+export interface Review {
+	id: number;
+	title: string;
+	body: string;
+	createdAt?: string;
+	updatedAt?: string;
+}
+
 export interface UserReducer {
 	user: User | null;
 	isAuthenticated: boolean | null;
@@ -52,6 +75,30 @@ export interface LocationsReducer {
 	locations: Location | [];
 	location: Location | null;
 	loading: boolean;
+	error: any;
+}
+
+export interface PartnersReducer {
+	partners: Partner[] | [];
+	partner: Partner | null;
+	loadingPartners: boolean;
+	loadingPartner: boolean;
+	error: any;
+}
+
+export interface ContactsReducer {
+	contacts: Contact[];
+	contact: Contact | null;
+	loadingContacts: boolean;
+	loadingContact: boolean;
+	error: any;
+}
+
+export interface ReviewsReducer {
+	reviews: Review[];
+	review: Review | null;
+	loadingReviews: boolean;
+	loadingReview: boolean;
 	error: any;
 }
 
