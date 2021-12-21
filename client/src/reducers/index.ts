@@ -4,6 +4,7 @@ import contacts from './contacts';
 import locations from './locations';
 import partners from './partners';
 import products from './products';
+import productsHistory from './productsHistory';
 import reviews from './reviews';
 
 export default combineReducers({
@@ -12,5 +13,6 @@ export default combineReducers({
 	locationsRed: locations,
 	partnersRed: partners,
 	reviewsRed: reviews,
-	contactsRed: contacts
+	contactsRed: contacts,
+	productsHistoryRed: productsHistory
 });

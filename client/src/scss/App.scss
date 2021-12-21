@@ -2,8 +2,52 @@
 @import './fragments/utils';
 @import './fragments/navbar';
 @import './fragments/form';
+@import './fragments/table';
 
 @import './fragments/responsive/large';
 @import './fragments/responsive/tablet';
 @import './fragments/responsive/small';
 @import './fragments/responsive/mobile';
+
+// ACCOUNT
+.account {
+	display: flex;
+}
+
+.account-left {
+	flex: 1;
+
+	ul {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+
+		li {
+			padding: 1rem 2rem;
+			border-bottom: 1px solid lightgray;
+			width: 100%;
+
+			&:hover {
+				cursor: pointer;
+				background: #f4f4f4;
+			}
+		}
+	}
+}
+
+.account-right {
+	flex: 6;
+	// background: lightblue;
+	padding: 1.5rem 3rem;
+
+	.account-header {
+		font-size: 1.8rem;
+		margin-bottom: 2.3rem;
+	}
+
+	.add-contact {
+		margin-top: 1rem;
+	}
+}

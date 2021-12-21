@@ -26,6 +26,14 @@ export interface Product {
 	qty?: number;
 }
 
+export interface ProductHistory {
+	id: number;
+	product_id: number;
+	partner_id: number;
+	price?: number;
+	created_at?: string;
+}
+
 export interface Location {
 	id: number;
 	partnerId: number;
@@ -41,8 +49,8 @@ export interface Partner {
 }
 
 export interface Contact {
-	id: number;
-	name: string;
+	id?: number;
+	name?: string;
 	firstName?: string;
 	lastName?: string;
 	address?: string;
@@ -62,6 +70,7 @@ export interface UserReducer {
 	isAuthenticated: boolean | null;
 	loading: boolean;
 	error: any;
+	success?: boolean | null;
 }
 
 export interface ProductsReducer {
@@ -69,6 +78,15 @@ export interface ProductsReducer {
 	product: Product | null;
 	loading: boolean;
 	error: any;
+	success?: boolean | null;
+}
+
+export interface ProductsHistoryReducer {
+	productsHistory: ProductHistory[] | [];
+	productHistory: Product | null;
+	loadingHistory: boolean;
+	error: any;
+	success: boolean | null;
 }
 
 export interface LocationsReducer {
@@ -76,6 +94,7 @@ export interface LocationsReducer {
 	location: Location | null;
 	loading: boolean;
 	error: any;
+	success?: boolean | null;
 }
 
 export interface PartnersReducer {
@@ -84,6 +103,7 @@ export interface PartnersReducer {
 	loadingPartners: boolean;
 	loadingPartner: boolean;
 	error: any;
+	success?: boolean | null;
 }
 
 export interface ContactsReducer {
@@ -92,6 +112,7 @@ export interface ContactsReducer {
 	loadingContacts: boolean;
 	loadingContact: boolean;
 	error: any;
+	success?: boolean | null;
 }
 
 export interface ReviewsReducer {
@@ -106,6 +127,8 @@ export interface RootRedTypes {
 	authRed?: UserReducer;
 	productsRed?: ProductsReducer;
 	locationsRed?: LocationsReducer;
+	partnersRed?: PartnersReducer;
+	contactsRed?: ContactsReducer;
 }
 
 export interface AuthFormDataTypes {

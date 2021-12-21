@@ -1,8 +1,14 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {getProducts} from '../../../actions/products';
 
-interface FavoritesProps {}
+interface FavoritesProps {
+	getProducts: () => void;
+}
 
-const Favorites: React.FC<FavoritesProps> = () => {
+const Favorites: React.FC<FavoritesProps> = ({getProducts}) => {
+	getProducts();
+
 	return (
 		<div className='favorites'>
 			<div className='container'>
@@ -12,4 +18,4 @@ const Favorites: React.FC<FavoritesProps> = () => {
 	);
 };
 
-export default Favorites;
+export default connect(null, {getProducts})(Favorites);

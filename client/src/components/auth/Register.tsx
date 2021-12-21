@@ -44,7 +44,7 @@ const Register: React.FC<RegisterProps> = ({registerUser, authRed: {isAuthentica
 		<div className='register'>
 			<div className='container'>
 				<h1 className='text-lg pb-4'>Register</h1>
-				<form className='form wrapper-lg' onSubmit={onSubmit}>
+				<form className='form wrapper-lg m-auto' onSubmit={onSubmit}>
 					<div className='form-group'>
 						<label htmlFor='email'>Email</label>
 						<input type='text' className='form-control' name='email' value={email} onChange={onChange} />

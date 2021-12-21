@@ -27,6 +27,14 @@ export default function (state = initialState, action: Action): ProductsReducer 
 				product: payload,
 				error: null
 			};
+		case CREATE_PRODUCT:
+			return {
+				...state,
+				loading: false,
+				product: payload,
+				success: true,
+				error: null
+			};
 		case PRODUCTS_ERROR:
 			return {
 				...state,

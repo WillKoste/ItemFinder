@@ -1,0 +1,24 @@
+.table {
+	min-width: 1200px;
+	border: none;
+	border-collapse: collapse;
+
+	thead {
+		@include set-background($dark-color);
+		tr {
+			th {
+				padding: 0.6rem;
+			}
+		}
+	}
+
+	tbody {
+		tr {
+			td {
+				border: none;
+				padding: 0.6rem;
+				text-align: center;
+			}
+		}
+	}
+}

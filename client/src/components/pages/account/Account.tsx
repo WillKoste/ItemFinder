@@ -1,15 +1,24 @@
-import React from 'react';
+import React, {useState} from 'react';
+import {connect, ConnectedProps} from 'react-redux';
+import {createContact} from '../../../actions/contacts';
+import {Contact} from '../../../types/general';
+import AccountLeft from './AccountLeft';
+import AccountRight from './AccountRight';
 
-interface AccountProps {}
+interface AccountProps {
+	getContacts: () => void;
+	createContact: (formData: Contact) => void;
+}
 
-const Account: React.FC<AccountProps> = () => {
+const Account: React.FC<AccountProps> = ({createContact}) => {
+	const [section, setSection] = useState(1);
+
 	return (
 		<div className='account'>
-			<div className='container'>
-				<h1>Account Page</h1>
-			</div>
+			<AccountLeft setSection={setSection} section={section} />
+			<AccountRight section={section} />
 		</div>
 	);
 };
 
-export default Account;
+export default connect(null, {createContact})(Account);

@@ -4,6 +4,10 @@
 	padding: 1.3rem;
 }
 
+.m-auto {
+	margin: auto;
+}
+
 .wrapper {
 	&-lg {
 		margin: auto;
@@ -13,16 +17,16 @@
 	}
 	&-md {
 		width: 900px;
-		background: rgb(191, 191, 247);
+		// background: rgb(191, 191, 247);
 		height: 300px;
 		margin: auto;
 	}
 	&-sm {
 		width: 740px;
 		min-width: 10px;
-		background: rgb(236, 205, 205);
+		// background: rgb(236, 205, 205);
 		height: 300px;
-		margin: auto;
+		// margin: auto;
 	}
 }
 

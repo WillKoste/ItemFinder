@@ -17,6 +17,7 @@ import productsRoutes from './routes/products';
 import partnersRoutes from './routes/partners';
 import locationsRoutes from './routes/locations';
 import contactsRoutes from './routes/contacts';
+import productsHistoryRoutes from './routes/productsHistory';
 
 connectDB();
 const RedisStore = connectRedis(session);
@@ -48,6 +49,7 @@ app.use(
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/reviews', reviewsRoutes);
 app.use('/api/v1/products', productsRoutes);
+app.use('/api/v1/productsHistory', productsHistoryRoutes);
 app.use('/api/v1/partners', partnersRoutes);
 app.use('/api/v1/locations', locationsRoutes);
 app.use('/api/v1/contacts', contactsRoutes);

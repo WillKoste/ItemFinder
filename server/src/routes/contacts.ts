@@ -9,7 +9,7 @@ const router = express.Router();
  */
 router.get('/', async (_, res: Response) => {
 	try {
-		const contacts = await pool.query(`SELECT * FROM contacts`);
+		const contacts = await pool.query(`SELECT id, first_name, last_name, contact_type, address, created_at FROM contacts`);
 		if (contacts.rowCount === 0) {
 			return res.status(404).json({success: false, data: `Contacts not found`});
 		}
@@ -25,7 +25,7 @@ router.get('/', async (_, res: Response) => {
  */
 router.get('/:contactId', async (req: Request, res: Response) => {
 	try {
-		const contact = await pool.query(`SELECT * FROM contacts WHERE id = $1`, [req.params.contactId]);
+		const contact = await pool.query(`SELECT id, first_name, last_name, contact_type, address, created_at FROM contacts WHERE id = $1`, [req.params.contactId]);
 		if (contact.rowCount === 0) {
 			return res.status(404).json({success: false, data: `Could not find contact ${req.params.contactId}`});
 		}
@@ -89,7 +89,6 @@ router.delete('/:contactId', async (req: Request, res: Response) => {
 		if (contact.rowCount === 0) {
 			return res.status(404).json({success: false, data: `Contact ${req.params.contactId} could not be found`});
 		}
-
 		await pool.query(`DELETE FROM contacts WHERE id = $1`, [req.params.contactId]);
 		return res.json({success: true, data: `Contact ${req.params.contactId} has been deleted`});
 	} catch (err) {

@@ -44,3 +44,11 @@ export interface Review {
 	title: string;
 	body: string;
 }
+
+export interface ProductHistoryResponse {
+	id: number;
+	productId: number;
+	partnerId: number;
+	price: number;
+	recorded_on: string;
+}

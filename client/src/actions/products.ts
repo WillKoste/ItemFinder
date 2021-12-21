@@ -34,3 +34,31 @@ export const getProduct = (productId: string) => async (dispatch: any) => {
 		});
 	}
 };
+
+export const createProduct = (formData: any) => async (dispatch: any) => {
+	const config = {
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	};
+	const body = JSON.stringify(formData);
+
+	try {
+		const res: AxiosResponse<{product: Product}> = await customAxios.post(`/api/v1/products`, body, config);
+		console.log({res});
+		dispatch({
+			type: CREATE_PRODUCT,
+			payload: res.data.product
+		});
+	} catch (err) {
+		console.error(err);
+		dispatch({
+			type: PRODUCTS_ERROR,
+			payload: err
+		});
+	}
+};
+
+export const updateContact = () => async (dispatch: any) => {
+	console.log('hey');
+};

@@ -7,7 +7,8 @@ const inititalState: ContactsReducer = {
 	contact: null,
 	loadingContact: true,
 	loadingContacts: true,
-	error: null
+	error: null,
+	success: null
 };
 
 export default function (state = inititalState, action: Action) {
@@ -18,14 +19,16 @@ export default function (state = inititalState, action: Action) {
 				...state,
 				contacts: payload,
 				loadingContacts: false,
-				error: null
+				error: null,
+				success: true
 			};
 		case GET_CONTACT:
 			return {
 				...state,
 				contact: payload,
 				loadingContact: false,
-				error: null
+				error: null,
+				success: true
 			};
 		case CONTACTS_ERROR:
 			return {
@@ -34,7 +37,8 @@ export default function (state = inititalState, action: Action) {
 				loadingContact: false,
 				error: payload,
 				contacts: [],
-				contact: null
+				contact: null,
+				success: null
 			};
 		default:
 			return state;

@@ -15,6 +15,7 @@ export default function (state = initialState, action: Action) {
 
 	switch (type) {
 		case GET_PARTNERS:
+			console.log({payload});
 			return {
 				...state,
 				partners: payload,
