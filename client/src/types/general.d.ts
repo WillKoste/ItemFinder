@@ -31,6 +31,7 @@ export interface ProductHistory {
 	product_id: number;
 	partner_id: number;
 	price?: number;
+	ratring?: number;
 	created_at?: string;
 }
 
@@ -83,7 +84,7 @@ export interface ProductsReducer {
 
 export interface ProductsHistoryReducer {
 	productsHistory: ProductHistory[] | [];
-	productHistory: Product | null;
+	productHistory: ProductHistory | null;
 	loadingHistory: boolean;
 	error: any;
 	success: boolean | null;

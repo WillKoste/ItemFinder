@@ -50,5 +50,6 @@ export interface ProductHistoryResponse {
 	productId: number;
 	partnerId: number;
 	price: number;
+	rating: number;
 	recorded_on: string;
 }

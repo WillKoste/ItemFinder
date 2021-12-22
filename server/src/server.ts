@@ -49,11 +49,13 @@ app.use(
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/reviews', reviewsRoutes);
 app.use('/api/v1/products', productsRoutes);
-app.use('/api/v1/productsHistory', productsHistoryRoutes);
+app.use('/api/v1/productHistory', productsHistoryRoutes);
 app.use('/api/v1/partners', partnersRoutes);
 app.use('/api/v1/locations', locationsRoutes);
 app.use('/api/v1/contacts', contactsRoutes);
 
+app.use('/api/v1/public', express.static(path.join(__dirname, 'public', 'images')));
+console.log('hey');
 if (process.env.NODE_ENV === 'production') {
 	app.use(express.static(path.join(__dirname, '../', '../', 'client', 'build')));
 	app.get('*', (_, res) => {

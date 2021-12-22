@@ -53,7 +53,7 @@ const Login: React.FC<LoginProps> = ({loginUser, authRed: {isAuthenticated}}) =>
 				</form>
 				<p>
 					Don't have an account?{' '}
-					<Link to='/register' className='link-highlight'>
+					<Link to='/register' className='text-secondary'>
 						Click here to set one up.
 					</Link>
 				</p>

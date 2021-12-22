@@ -65,7 +65,7 @@ const Register: React.FC<RegisterProps> = ({registerUser, authRed: {isAuthentica
 				</form>
 				<p>
 					Already have an account?{' '}
-					<Link to='/login' className='link-highlight'>
+					<Link to='/login' className='text-secondary'>
 						Click here to login.
 					</Link>
 				</p>

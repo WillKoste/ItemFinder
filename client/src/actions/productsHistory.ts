@@ -5,9 +5,10 @@ import {customAxios} from '../utils/customAxios';
 export const getProductsHistory = (productId: number) => async (dispatch: any) => {
 	try {
 		const res: AxiosResponse<{productHistory: ProductHistory[]}> = await customAxios.get(`/api/v1/productHistory/all/${productId}`);
-		dispatch({
-			payload: res.data.productHistory
-		});
+		console.log({AXIOS: res.data});
+		// dispatch({
+		// 	payload: res.data.productHistory
+		// });
 	} catch (err) {
 		console.error(err);
 		dispatch({

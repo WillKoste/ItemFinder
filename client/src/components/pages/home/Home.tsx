@@ -5,6 +5,7 @@ import {getLocations} from '../../../actions/locations';
 import {getPartners} from '../../../actions/partners';
 import {getProducts} from '../../../actions/products';
 import {getReviews} from '../../../actions/reviews';
+import Card1 from '../../../Reusable/Card1';
 import {ProductsReducer} from '../../../types/general';
 
 interface HomeProps {
@@ -17,17 +18,15 @@ interface HomeProps {
 }
 
 const Home: React.FC<HomeProps> = ({productsRed, getProducts, getLocations, getPartners, getContacts, getReviews}) => {
+	useEffect(() => {
+		getProducts();
+	}, []);
+
 	return (
 		<div>
 			<div className='container'>
 				<h1 className='text-xl'>Home Component</h1>
-				{!productsRed.loading && productsRed.products.length > 0
-					? productsRed.products.map((prod) => (
-							<div key={prod.id}>
-								<h1>{prod.name}</h1>
-							</div>
-					  ))
-					: null}
+				<div className='cards-grid mb-4'>{!productsRed.loading && productsRed.products.length > 0 ? productsRed.products.map((prod) => <Card1 key={prod.id} data={prod} />) : null}</div>
 				<button className='btn btn-dark mr-2' onClick={getProducts}>
 					Get Products
 				</button>
@@ -43,7 +42,7 @@ const Home: React.FC<HomeProps> = ({productsRed, getProducts, getLocations, getP
 				<button className='btn btn-dark mr-2' onClick={getReviews}>
 					Get Reviews
 				</button>
-				<div className='wrapper-lg'>hey</div>
+				<div className='wrapper-lg'></div>
 				<div className='wrapper-md'></div>
 				<div className='wrapper-sm'></div>
 			</div>
