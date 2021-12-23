@@ -78,6 +78,7 @@ export interface ProductsReducer {
 	products: Product[] | [];
 	product: Product | null;
 	loading: boolean;
+	loadingProduct: boolean;
 	error: any;
 	success?: boolean | null;
 }

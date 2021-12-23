@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Redirect} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import {RootRedTypes, UserReducer} from '../../types/general';
 
 interface SplashProps {
@@ -12,8 +12,19 @@ const Splash: React.FC<SplashProps> = ({authRed: {isAuthenticated}}) => {
 		<Redirect to='/home' />
 	) : (
 		<div className='splash'>
-			<div className='container'>
-				<h1>Splash Page</h1>
+			<div className='dark-overlay'>
+				<div className='container'>
+					<h1>Item Finder</h1>
+					<p className='lead'>Find today's most popular products and learn more about availability and price.</p>
+					<div className='splash-btns'>
+						<Link className='btn btn-highlight' to='/login'>
+							Login
+						</Link>
+						<Link className='btn btn-light' to='/register'>
+							Register
+						</Link>
+					</div>
+				</div>
 			</div>
 		</div>
 	);

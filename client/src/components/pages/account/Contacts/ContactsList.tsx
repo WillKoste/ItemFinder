@@ -6,14 +6,14 @@ import {Contact, ContactsReducer} from '../../../../types/general';
 import {ContactArrData} from '../../../../types/table';
 
 interface ContactsListProps {
-	getContacts: () => void;
+	getContacts: (limit?: number, offset?: number) => void;
 	contactsRed: ContactsReducer;
 }
 
 const ContactsList: React.FC<ContactsListProps> = ({getContacts, contactsRed: {contacts, loadingContacts}}) => {
 	const [contactsData, setContactsData] = useState([]);
 	useEffect(() => {
-		getContacts();
+		getContacts(10, 0);
 	}, []);
 	useEffect(() => {
 		setContactsData(contacts as any);

@@ -13,6 +13,7 @@ import Home from '../pages/home/Home';
 import NotFound from '../pages/notFound/NotFound';
 import Trends from '../pages/trends/Trends';
 import {getCurrentUser} from '../../actions/auth';
+import ProductPage from '../pages/products/ProductPage';
 
 interface RoutesProps {
 	getCurrentUser: () => void;
@@ -33,6 +34,7 @@ const Routes: React.FC<RoutesProps> = ({getCurrentUser}) => {
 						<Route exact path='/register' render={() => <Register />} />
 						<Route exact path='/home' render={() => <Home />} />
 						<Route exact path='/favorites' render={() => <Favorites />} />
+						<Route exact path='/product/info/:productId' component={ProductPage} />
 						<PrivateRoute exact path='/account' component={Account} />
 						<Route exact path='/trends' component={Trends} />
 						<Route component={NotFound} />

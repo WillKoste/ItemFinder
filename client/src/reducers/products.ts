@@ -6,6 +6,7 @@ const initialState: ProductsReducer = {
 	products: [],
 	product: null,
 	loading: true,
+	loadingProduct: true,
 	error: null
 };
 
@@ -23,7 +24,7 @@ export default function (state = initialState, action: Action): ProductsReducer 
 		case GET_PRODUCT:
 			return {
 				...state,
-				loading: false,
+				loadingProduct: false,
 				product: payload,
 				error: null
 			};
