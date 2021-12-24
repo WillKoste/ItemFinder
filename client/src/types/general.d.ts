@@ -66,6 +66,11 @@ export interface Review {
 	updatedAt?: string;
 }
 
+export interface Category {
+	id?: number;
+	category_name: string;
+}
+
 export interface UserReducer {
 	user: User | null;
 	isAuthenticated: boolean | null;
@@ -122,6 +127,12 @@ export interface ReviewsReducer {
 	review: Review | null;
 	loadingReviews: boolean;
 	loadingReview: boolean;
+	error: any;
+}
+
+export interface CategoryReducer {
+	categories: Category[];
+	loadingCategories: boolean;
 	error: any;
 }
 

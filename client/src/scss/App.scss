@@ -107,7 +107,7 @@
 				flex: 1;
 
 				.product-img {
-					max-width: 80%;
+					max-width: 275px;
 					margin-bottom: 1rem;
 				}
 			}
@@ -137,6 +137,11 @@
 			padding: 1.3rem 0 0 5rem;
 			margin: auto;
 			width: 100%;
+
+			.pp-description {
+				line-height: 1.6;
+				margin: 2rem 0;
+			}
 		}
 	}
 
@@ -148,5 +153,6 @@
 
 	.btn {
 		width: 250px;
+		font-size: 1rem;
 	}
 }

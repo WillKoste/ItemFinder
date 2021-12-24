@@ -99,7 +99,7 @@
 	padding: 0.8rem 1.3rem;
 	border-radius: $border-radius;
 	font-size: 1.1rem;
-	// margin: 0.8rem 0;
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.06);
 	border: none;
 	transition: transform background-color 0.1s ease-in-out;
 
@@ -141,7 +141,6 @@
 	}
 	&.btn-light {
 		@include set-background($light-color);
-		box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
 		&:hover {
 			background: darken($light-color, 7%);
 		}
@@ -189,14 +188,32 @@
 
 		.arrow-left {
 			position: absolute;
-			left: -25px;
-			top: 50%;
+			left: -70px;
+			top: 40%;
 		}
 
 		.arrow-right {
 			position: absolute;
-			right: -25px;
-			bottom: 50%;
+			right: -70px;
+			top: 40%;
+		}
+
+		.arrow-left,
+		.arrow-right {
+			font-size: 3rem;
+			border: none;
+			color: $light-color;
+			background: $dark-color;
+			border-radius: 6px;
+			padding: 1.5rem 0.7rem;
+
+			&:active {
+				transform: scale(0.98);
+				transition: transform 0.2s ease;
+			}
+			&:hover {
+				background: lighten($dark-color, 10%);
+			}
 		}
 	}
 }

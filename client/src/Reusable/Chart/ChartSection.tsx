@@ -1,23 +1,12 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
 import {Chart, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend} from 'chart.js';
 import {Line} from 'react-chartjs-2';
-import {ProductsHistoryReducer, ProductsReducer} from '../../../types/general';
-import {getProductsHistory} from '../../../actions/productsHistory';
 
-interface TrendsGraphsProps {
-	productsRed: ProductsReducer;
-	productsHistoryRed: ProductsHistoryReducer;
-	getProductsHistory: (productId: number) => void;
-}
+interface ChartSectionProps {}
 
-const TrendsGraphs: React.FC<TrendsGraphsProps> = ({productsRed: {products}, productsHistoryRed, getProductsHistory}) => {
+const ChartSection: React.FC<ChartSectionProps> = () => {
 	Chart.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
-
-	useEffect(() => {
-		getProductsHistory(3);
-	}, []);
-
 	const options = {
 		responsive: true,
 		plugins: {
@@ -61,8 +50,4 @@ const TrendsGraphs: React.FC<TrendsGraphsProps> = ({productsRed: {products}, pro
 	);
 };
 
-const mapStateToProps = (state: any) => ({
-	productsHistoryRed: state.productsHistoryRed
-});
-
-export default connect(mapStateToProps, {getProductsHistory})(TrendsGraphs);
+export default connect(null, {})(ChartSection);

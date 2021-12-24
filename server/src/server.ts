@@ -18,6 +18,7 @@ import partnersRoutes from './routes/partners';
 import locationsRoutes from './routes/locations';
 import contactsRoutes from './routes/contacts';
 import productsHistoryRoutes from './routes/productsHistory';
+import categoriesRoutes from './routes/categories';
 
 connectDB();
 const RedisStore = connectRedis(session);
@@ -53,6 +54,7 @@ app.use('/api/v1/productHistory', productsHistoryRoutes);
 app.use('/api/v1/partners', partnersRoutes);
 app.use('/api/v1/locations', locationsRoutes);
 app.use('/api/v1/contacts', contactsRoutes);
+app.use('/api/v1/categories', categoriesRoutes);
 
 app.use('/api/v1/public', express.static(path.join(__dirname, 'public', 'images')));
 console.log('hey');

@@ -1,7 +1,7 @@
 import {AxiosResponse} from 'axios';
 import {Product} from '../types/general';
 import {customAxios} from '../utils/customAxios';
-import {PRODUCTS_ERROR, GET_PRODUCTS, GET_PRODUCT, CREATE_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT} from './types';
+import {PRODUCTS_ERROR, GET_PRODUCTS, GET_PRODUCT, CREATE_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT, PRODUCT_CLEAR} from './types';
 
 export const getProducts =
 	(limit: number = 5, offset: number = 0) =>
@@ -64,4 +64,10 @@ export const createProduct = (formData: any) => async (dispatch: any) => {
 
 export const updateContact = () => async (dispatch: any) => {
 	console.log('hey');
+};
+
+export const clearProduct = () => async (dispatch: any) => {
+	dispatch({
+		type: PRODUCT_CLEAR
+	});
 };

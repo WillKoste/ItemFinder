@@ -1,6 +1,6 @@
 import {ProductsReducer} from '../types/general';
 import {Action} from '../types/redux';
-import {PRODUCTS_ERROR, GET_PRODUCTS, GET_PRODUCT, CREATE_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT} from '../actions/types';
+import {PRODUCTS_ERROR, GET_PRODUCTS, GET_PRODUCT, CREATE_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT, PRODUCT_CLEAR} from '../actions/types';
 
 const initialState: ProductsReducer = {
 	products: [],
@@ -35,6 +35,12 @@ export default function (state = initialState, action: Action): ProductsReducer 
 				product: payload,
 				success: true,
 				error: null
+			};
+		case PRODUCT_CLEAR:
+			return {
+				...state,
+				loadingProduct: true,
+				product: null
 			};
 		case PRODUCTS_ERROR:
 			return {

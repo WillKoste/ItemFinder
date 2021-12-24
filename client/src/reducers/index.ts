@@ -3,6 +3,7 @@ import auth from './auth';
 import contacts from './contacts';
 import locations from './locations';
 import partners from './partners';
+import productCategories from './productCategories';
 import products from './products';
 import productsHistory from './productsHistory';
 import reviews from './reviews';
@@ -14,5 +15,6 @@ export default combineReducers({
 	partnersRed: partners,
 	reviewsRed: reviews,
 	contactsRed: contacts,
-	productsHistoryRed: productsHistory
+	productsHistoryRed: productsHistory,
+	productCategoriesRed: productCategories
 });

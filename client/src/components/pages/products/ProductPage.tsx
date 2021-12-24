@@ -70,12 +70,14 @@ const ProductPage: React.FC<ProductPageProps> = ({match, getProduct, productsRed
 		]
 	};
 
-	console.log({hey: getPastMonths(52)});
+	console.log({hey: getPastMonths(30)});
 
 	return (
 		<div className='product-page'>
 			{loadingProduct ? (
-				<h2>Loading...</h2>
+				<div className='container'>
+					<h2>Loading...</h2>
+				</div>
 			) : (
 				<div className='container'>
 					<div className='product-page-left'>
@@ -99,7 +101,7 @@ const ProductPage: React.FC<ProductPageProps> = ({match, getProduct, productsRed
 							</p>
 							<div className='pp-left-btns my-3'>
 								<button className='btn btn-primary btn-block mb-1'>Add To Cart</button>
-								<Link to='/products/buy-now' className='btn btn-success btn-block mb-1'>
+								<Link to='/products/buy-now' className='btn btn-secondary btn-block mb-1'>
 									Buy Now
 								</Link>
 								<button className='btn btn-light btn-block'>Reviews</button>
@@ -111,16 +113,17 @@ const ProductPage: React.FC<ProductPageProps> = ({match, getProduct, productsRed
 							<Line data={data} />
 						</div>
 						<div className='product-buttons mt-5'>
-							<button className='btn btn-secondary' onClick={() => setBtnTab('Availability')}>
+							<button className='btn btn-highlight' onClick={() => setBtnTab('Availability')}>
 								View Availability
 							</button>
 							<button className='btn btn-dark' onClick={() => setBtnTab('Pricing History')}>
 								Pricing History
 							</button>
-							<button className='btn btn-highlight' onClick={() => setBtnTab('Reviews')}>
+							<button className='btn btn-dark' onClick={() => setBtnTab('Reviews')}>
 								Time Period
 							</button>
 						</div>
+						<div className='pp-description'>{product?.description}</div>
 					</div>
 				</div>
 			)}

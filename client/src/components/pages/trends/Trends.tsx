@@ -1,43 +1,26 @@
 import React, {useEffect, useMemo, useState} from 'react';
 import {connect} from 'react-redux';
-import {getProducts} from '../../../actions/products';
-import Card1 from '../../../Reusable/Card1';
+import {clearProduct, getProducts} from '../../../actions/products';
+import CategoryCardStack from '../../../Reusable/Cards/CategoryCardStack';
+import CardStack from '../../../Reusable/Cards/ProductCardStack';
+import ChartSection from '../../../Reusable/Chart/ChartSection';
 import {Product, ProductsHistoryReducer, ProductsReducer} from '../../../types/general';
-import TrendsGraphs from './TrendsGraphs';
 
 interface TrendsProps {
 	productsHistoryRed: ProductsHistoryReducer;
 	productsRed: ProductsReducer;
 	getProducts: () => void;
+	clearProduct: () => void;
 }
 
-const Trends: React.FC<TrendsProps> = ({productsHistoryRed, productsRed, productsRed: {loading, products}, getProducts}) => {
-	const [productsData, setProductsData] = useState<Product[]>([]);
-	useEffect(() => {
-		getProducts();
-	}, []);
-	console.log({products});
-
-	useEffect(() => {
-		setProductsData(products);
-	}, [products]);
-
-	console.log({productsData});
-
+const Trends: React.FC<TrendsProps> = ({productsHistoryRed, productsRed, productsRed: {loading, products, product}, getProducts, clearProduct}) => {
 	return (
 		<div className='trends'>
 			<div className='container'>
-				<h1 className='mb-3'>Trends</h1>
-				{loading ? (
-					<h3>Loading...</h3>
-				) : productsData.length > 0 ? (
-					<div className='cards-grid mb-5'>
-						{productsData.map((prod) => (
-							<Card1 key={prod.id} data={prod} />
-						))}
-					</div>
-				) : null}
-				<TrendsGraphs productsRed={productsRed} />
+				<h1 className='mb-3'>Choose a Category</h1>
+				{/* <CardStack /> */}
+				<CategoryCardStack />
+				<ChartSection />
 			</div>
 		</div>
 	);
@@ -48,4 +31,4 @@ const mapStateToProps = (state: any) => ({
 	productsRed: state.productsRed
 });
 
-export default connect(mapStateToProps, {getProducts})(Trends);
+export default connect(mapStateToProps, {getProducts, clearProduct})(Trends);

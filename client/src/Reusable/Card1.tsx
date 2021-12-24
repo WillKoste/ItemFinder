@@ -19,8 +19,16 @@ const Card1: React.FC<Card1Props> = ({data}) => {
 				{/* <div className='card-content'>{description}</div> */}
 			</div>
 			<div className='card-footer'>
-				<button className='btn btn-block btn-dark btn-slim my-2'>View More</button>
-				<button className='btn btn-block btn-light btn-slim my-2'>Historical</button>
+				<button
+					onClick={(e) => {
+						e.preventDefault();
+						alert('hey');
+					}}
+					className='btn btn-block btn-dark btn-slim my-2'
+				>
+					View More
+				</button>
+				<button className='btn btn-block btn-light btn-slim my-2'>Compare</button>
 			</div>
 		</div>
 	);
