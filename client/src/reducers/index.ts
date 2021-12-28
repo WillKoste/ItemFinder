@@ -1,5 +1,6 @@
 import {combineReducers} from 'redux';
 import auth from './auth';
+import cartItems from './cartItems';
 import contacts from './contacts';
 import locations from './locations';
 import partners from './partners';
@@ -16,5 +17,6 @@ export default combineReducers({
 	reviewsRed: reviews,
 	contactsRed: contacts,
 	productsHistoryRed: productsHistory,
-	productCategoriesRed: productCategories
+	productCategoriesRed: productCategories,
+	cartItemsRed: cartItems
 });

@@ -24,6 +24,9 @@ export interface Product {
 	image?: string;
 	price?: number;
 	qty?: number;
+	product_history_id?: number;
+	partner_id?: number;
+	recorded_on?: string;
 }
 
 export interface ProductHistory {
@@ -33,6 +36,7 @@ export interface ProductHistory {
 	price?: number;
 	ratring?: number;
 	created_at?: string;
+	recorded_on?: string;
 }
 
 export interface Location {

@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import {getContacts} from '../../../actions/contacts';
 import {getLocations} from '../../../actions/locations';
 import {getPartners} from '../../../actions/partners';
+import {clearProduct} from '../../../actions/products';
 import {getReviews} from '../../../actions/reviews';
 import CardStack from '../../../Reusable/Cards/ProductCardStack';
 
@@ -11,9 +12,14 @@ interface HomeProps {
 	getPartners: () => void;
 	getReviews: () => void;
 	getContacts: () => void;
+	clearProduct: () => void;
 }
 
-const Home: React.FC<HomeProps> = ({getLocations, getPartners, getContacts, getReviews}) => {
+const Home: React.FC<HomeProps> = ({getLocations, getPartners, getContacts, getReviews, clearProduct}) => {
+	useEffect(() => {
+		clearProduct();
+	}, []);
+
 	return (
 		<div>
 			<div className='container'>
@@ -40,4 +46,4 @@ const Home: React.FC<HomeProps> = ({getLocations, getPartners, getContacts, getR
 	);
 };
 
-export default connect(null, {getLocations, getPartners, getContacts, getReviews})(Home);
+export default connect(null, {getLocations, getPartners, getContacts, getReviews, clearProduct})(Home);

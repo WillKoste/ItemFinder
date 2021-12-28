@@ -5,7 +5,7 @@ import {getCategories} from '../../actions/productCategories';
 import {CategoryReducer} from '../../types/general';
 
 interface CategoryCardStackProps {
-	getCategories: () => void;
+	getCategories: (lim: number, off: number) => void;
 	productCategoriesRed: CategoryReducer;
 }
 
@@ -15,8 +15,8 @@ const CategoryCardStack: React.FC<CategoryCardStackProps> = ({getCategories, pro
 	const [catData, setCatData] = useState([]);
 
 	useEffect(() => {
-		getCategories();
-	}, []);
+		getCategories(limitState, offsetState);
+	}, [limitState, offsetState]);
 	const onClickLeftArrow = useCallback(() => {
 		setOffsetState((cur) => cur - 3);
 	}, []);

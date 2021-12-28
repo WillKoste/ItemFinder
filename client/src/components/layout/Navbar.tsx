@@ -49,8 +49,11 @@ const Navbar: React.FC<NavbarProps> = ({logout, authRed: {isAuthenticated}}) => 
 							</NavLink>
 						</li>
 						<li>
-							<NavLink to='/favorites' exact activeClassName='current'>
+							{/* <NavLink to='/favorites' exact activeClassName='current'>
 								Favorites
+							</NavLink> */}
+							<NavLink to='/cart' activeClassName='current'>
+								<i className='fas fa-shopping-cart'></i> Cart
 							</NavLink>
 						</li>
 						<li>

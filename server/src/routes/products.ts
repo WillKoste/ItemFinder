@@ -10,7 +10,7 @@ const router = express.Router();
 router.get('/', async (req: Request, res: Response) => {
 	console.log({req: req.query});
 	try {
-		const products: QueryResult<Product[]> = await pool.query(`SELECT * FROM products limit $1 offset $2`, [req.query.limit, req.query.offset]);
+		const products: QueryResult<Product[]> = await pool.query(`SELECT * FROM products p limit $1 offset $2`, [req.query.limit, req.query.offset]);
 		if (products.rowCount === 0) {
 			return res.status(404).json({success: false, data: 'Products could not be found'});
 		}
@@ -28,7 +28,7 @@ router.get('/', async (req: Request, res: Response) => {
  */
 router.get('/:productId', async (req: Request<{productId: string}>, res: Response) => {
 	try {
-		const product = await pool.query(`SELECT * FROM products WHERE id = $1`, [req.params.productId]);
+		const product = await pool.query(`SELECT p.*, ph.id product_history_id, ph.partner_id, ph.recorded_on FROM products p INNER JOIN product_history ph ON ph.product_id = p.id WHERE p.id = $1`, [req.params.productId]);
 		if (product.rowCount === 0) {
 			return res.status(404).json({success: false, data: `Product ${req.params.productId} not found`});
 		}

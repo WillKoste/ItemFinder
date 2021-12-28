@@ -8,7 +8,8 @@ interface AccountLeftProps {
 const AccountLeft: React.FC<AccountLeftProps> = ({setSection, section}) => {
 	const [tabs] = useState([
 		{id: 1, name: 'Contacts'},
-		{id: 2, name: 'Partners'}
+		{id: 2, name: 'Partners'},
+		{id: 3, name: 'Favorites'}
 	]);
 
 	return (

@@ -2,9 +2,8 @@ import moment from 'moment';
 
 export const repeatArray = (arr: any[], repeats: number) => {
 	const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-	const reverseMonths = monthNames.reverse();
 	let arr1: any = [];
-	return arr1.concat(...Array.from({length: repeats}, () => monthNames));
+	return arr1.concat(...Array.from({length: repeats}, () => arr));
 };
 
 export const getPastMonths = (monthsLength: number = 6) => {

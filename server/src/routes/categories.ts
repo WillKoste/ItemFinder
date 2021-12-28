@@ -5,9 +5,11 @@ const router = express.Router();
 /**
  * @name Get All Categories
  */
-router.get('/', async (_, res: Response) => {
+router.get('/', async (req: Request, res: Response) => {
+	const {limit, offset} = req.query;
+
 	try {
-		const categories = await pool.query(`SELECT * FROM categories`);
+		const categories = await pool.query(`SELECT * FROM categories LIMIT $1 OFFSET $2`, [limit, offset]);
 		if (categories.rowCount === 0) {
 			return res.status(404).json({success: false, data: `Could not find categories`});
 		}

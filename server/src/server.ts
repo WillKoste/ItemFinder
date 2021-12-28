@@ -57,7 +57,6 @@ app.use('/api/v1/contacts', contactsRoutes);
 app.use('/api/v1/categories', categoriesRoutes);
 
 app.use('/api/v1/public', express.static(path.join(__dirname, 'public', 'images')));
-console.log('hey');
 if (process.env.NODE_ENV === 'production') {
 	app.use(express.static(path.join(__dirname, '../', '../', 'client', 'build')));
 	app.get('*', (_, res) => {
