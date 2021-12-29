@@ -29,26 +29,27 @@ const Favorites: React.FC<FavoritesProps> = ({favoritesRed: {favorites, loadingF
 			header: 'Product Name',
 			accessor: 'name',
 			style: {
-				padding: '1rem'
+				padding: '1rem 0'
 			}
 		},
 		{
 			id: 2,
 			header: 'Category',
-			accessor: 'category'
+			accessor: 'category',
+			style: {
+				padding: '1rem'
+			}
 		},
 		{
 			id: 3,
 			header: 'Description',
 			accessor: 'description',
 			style: {
-				textAlign: 'left',
-				padding: '0 1rem'
+				padding: '1rem',
+				textAlign: 'left'
 			}
 		}
 	];
-
-	console.log({col: columns, DATTTETTTA: favoritesData});
 
 	return (
 		<div>

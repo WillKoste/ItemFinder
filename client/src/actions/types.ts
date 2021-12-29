@@ -66,6 +66,7 @@ export const ADD_CART = 'ADD_CART';
 export const REMOVE_CART = 'REMOVE_CART';
 export const CLEAR_CART = 'CLEAR_CART';
 export const SET_CART = 'SET_CART';
+export const UPDATE_CART_QTY = 'UPDATE_CART_QTY';
 
 // FAVORITES
 export const GET_FAVORITES = 'GET_FAVORITES';

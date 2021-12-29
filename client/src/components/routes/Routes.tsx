@@ -16,6 +16,7 @@ import ProductPage from '../pages/products/ProductPage';
 import Cart from '../pages/cart/Cart';
 import {CartReducer, Product} from '../../types/general';
 import {setCartItems} from '../../actions/cartItems';
+import Checkout from '../pages/checkout/Checkout';
 
 interface RoutesProps {
 	getCurrentUser: () => void;
@@ -23,7 +24,7 @@ interface RoutesProps {
 	cartItemsRed: CartReducer;
 }
 
-const Routes: React.FC<RoutesProps> = ({getCurrentUser, cartItemsRed: {total}, setCartItems}) => {
+const Routes: React.FC<RoutesProps> = ({getCurrentUser, cartItemsRed, setCartItems}) => {
 	const cartItems = localStorage.getItem('cart');
 	useEffect(() => {
 		getCurrentUser();
@@ -38,7 +39,7 @@ const Routes: React.FC<RoutesProps> = ({getCurrentUser, cartItemsRed: {total}, s
 		} else {
 			localStorage.setItem('cart', JSON.stringify([]));
 		}
-	}, [cartItems, total]);
+	}, [cartItems]);
 
 	return (
 		<Router>
@@ -51,6 +52,7 @@ const Routes: React.FC<RoutesProps> = ({getCurrentUser, cartItemsRed: {total}, s
 						<Route exact path='/register' render={() => <Register />} />
 						<Route exact path='/home' render={() => <Home />} />
 						<Route exact path='/cart' component={Cart} />
+						<Route exact path='/checkout' component={Checkout} />
 						<Route exact path='/product/info/:productId' component={ProductPage} />
 						<PrivateRoute exact path='/account' component={Account} />
 						<Route exact path='/trends' component={Trends} />

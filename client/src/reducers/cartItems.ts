@@ -1,4 +1,4 @@
-import {ADD_CART, REMOVE_CART, CLEAR_CART, SET_CART, LOGOUT} from '../actions/types';
+import {ADD_CART, REMOVE_CART, CLEAR_CART, SET_CART, LOGOUT, UPDATE_CART_QTY} from '../actions/types';
 import {CartReducer} from '../types/general';
 import {Action} from '../types/redux';
 
@@ -13,6 +13,7 @@ export default function (state = inititalState, action: Action) {
 	switch (type) {
 		case ADD_CART:
 		case SET_CART:
+		case UPDATE_CART_QTY:
 			return {
 				...state,
 				items: payload,

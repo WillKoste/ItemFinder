@@ -1,7 +1,7 @@
 import React, {Fragment, useEffect} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {removeItemFromCart} from '../../../actions/cartItems';
+import {removeItemFromCart, updateCartQty} from '../../../actions/cartItems';
 import {addFavorite} from '../../../actions/favorites';
 import {clearProduct} from '../../../actions/products';
 import {CartReducer, UserReducer} from '../../../types/general';
@@ -10,12 +10,13 @@ import {formatCurrency} from '../../../utils/randomUtils';
 interface CartItemsProps {
 	cartItemsRed: CartReducer;
 	authRed: UserReducer;
+	updateCartQty: (itemId: number, newQty: number) => void;
 	clearProduct: () => void;
 	removeItemFromCart: (itemId: number) => void;
 	addFavorite: (uId: number, pId: number) => void;
 }
 
-const CartItems: React.FC<CartItemsProps> = ({cartItemsRed: {items, total}, clearProduct, removeItemFromCart, addFavorite, authRed: {user}}) => {
+const CartItems: React.FC<CartItemsProps> = ({cartItemsRed: {items, total}, clearProduct, removeItemFromCart, addFavorite, authRed: {user}, updateCartQty}) => {
 	useEffect(() => {
 		clearProduct();
 	}, []);
@@ -41,7 +42,13 @@ const CartItems: React.FC<CartItemsProps> = ({cartItemsRed: {items, total}, clea
 									</p>
 									<p>
 										<strong>Quantity: </strong>
-										{item.cart_qty}
+										<select name='qty' className='cart-qty' value={item.cart_qty} onChange={(e) => updateCartQty(item.id, +e.target.value)}>
+											{Array.from(Array(item.qty && item.qty > 100 ? 100 : item.qty).keys()).map((op, ind) => (
+												<option key={ind} value={op + 1}>
+													{op + 1}
+												</option>
+											))}
+										</select>
 									</p>
 									<p>
 										<strong>Subtotal: </strong>
@@ -67,10 +74,13 @@ const CartItems: React.FC<CartItemsProps> = ({cartItemsRed: {items, total}, clea
 			</div>
 
 			{items.length > 0 ? (
-				<p className='cart-total'>
+				<div className='cart-total'>
 					<strong>Total: </strong>
 					{formatCurrency(total)}
-				</p>
+					<Link to={`/checkout`} className='btn btn-success ml-3'>
+						Continue to Checkout
+					</Link>
+				</div>
 			) : null}
 		</Fragment>
 	);
@@ -81,4 +91,4 @@ const mapStateToProps = (state: any) => ({
 	authRed: state.authRed
 });
 
-export default connect(mapStateToProps, {clearProduct, removeItemFromCart, addFavorite})(CartItems);
+export default connect(mapStateToProps, {clearProduct, removeItemFromCart, addFavorite, updateCartQty})(CartItems);

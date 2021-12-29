@@ -10,6 +10,7 @@ import {getPastMonths} from '../../../utils/getPastMonths';
 import {formatCurrency} from '../../../utils/randomUtils';
 import {getProductsHistory} from '../../../actions/productsHistory';
 import {addItemToCart} from '../../../actions/cartItems';
+import RatingStars from '../../../Reusable/Products/RatingStars';
 
 interface ProductPageProps extends RouteComponentProps<{productId: string}> {
 	getProduct: (prodId: string) => void;
@@ -104,16 +105,7 @@ const ProductPage: React.FC<ProductPageProps> = ({match, getProduct, productsRed
 								<p>
 									<strong>Best Price:</strong> {formatCurrency(product?.price)}
 								</p>
-								<p>
-									<strong>Rating:</strong>{' '}
-									<span>
-										<i className='fas fa-star'></i>
-										<i className='fas fa-star'></i>
-										<i className='fas fa-star'></i>
-										<i className='fas fa-star'></i>
-										<i className='fas fa-star'></i>
-									</span>
-								</p>
+								<RatingStars rating={product?.rating} />
 							</div>
 							<div className='right-select'>
 								<div className='pp-qty'>
@@ -137,13 +129,13 @@ const ProductPage: React.FC<ProductPageProps> = ({match, getProduct, productsRed
 							<Link to='/products/buy-now' className='btn btn-secondary btn-block mb-1'>
 								Buy Now
 							</Link>
-							<button className='btn btn-light btn-block'>Reviews</button>
+							<button className='btn btn-light btn-block'>
+								<i className='fas fa-heart mr-1'></i> Favorite this item
+							</button>
 						</div>
 					</div>
 					<div className='product-page-right'>
 						<div className='pp-graph'>
-							{/* <ChartReact type='bar' data={data} options={options} /> */}
-							{/* <Line data={data} options={options} /> */}
 							<Bar data={data} options={options} />
 						</div>
 						<div className='product-buttons mt-5'>

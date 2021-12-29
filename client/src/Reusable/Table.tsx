@@ -8,14 +8,7 @@ interface TableProps {
 }
 
 const Table: React.FC<TableProps> = ({data, columns}) => {
-	console.log({data, columns});
-
-	data.map((d) => {
-		console.log(Object.keys(d));
-	});
-
 	const validFields = columns.map((col) => col.accessor);
-	console.log({validFields});
 
 	return (
 		<table className='table'>
@@ -33,7 +26,6 @@ const Table: React.FC<TableProps> = ({data, columns}) => {
 					const keysArr = Object.keys(d)
 						.filter((d) => validFields.includes(d))
 						.sort((z, x) => validFields.indexOf(z) - validFields.indexOf(x));
-					console.log({keysArr, d});
 					return (
 						<tr
 							onMouseOver={(e) => {
@@ -51,7 +43,6 @@ const Table: React.FC<TableProps> = ({data, columns}) => {
 							style={{background: i % 2 === 0 ? '#ccc' : 'inherit'}}
 						>
 							{keysArr.map((key, end) => {
-								console.log({key, end: columns[end]});
 								const isDescKey = key === 'description';
 								return (
 									// <td style={{background: key === 'description' ? 'lightBlue' : ''}}>
