@@ -2,7 +2,7 @@ import React, {useCallback, useEffect, useState} from 'react';
 import {connect} from 'react-redux';
 import {Link, RouteComponentProps} from 'react-router-dom';
 import {getProduct} from '../../../actions/products';
-import {ProductsHistoryReducer, ProductsReducer, ProductHistory, Product} from '../../../types/general';
+import {ProductsHistoryReducer, ProductsReducer, ProductHistory, Product, CartReducer, CartProduct} from '../../../types/general';
 import {Chart, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, LineOptions, ChartOptions, BarElement, ChartData, BubbleDataPoint, ScatterDataPoint} from 'chart.js';
 import {Line, Chart as ChartReact, Bar} from 'react-chartjs-2';
 import moment from 'moment';
@@ -14,10 +14,10 @@ import {addItemToCart} from '../../../actions/cartItems';
 interface ProductPageProps extends RouteComponentProps<{productId: string}> {
 	getProduct: (prodId: string) => void;
 	getProductsHistory: (prodId: number) => void;
-	addItemToCart: (item: Product, carts: Product[], qty: number) => void;
+	addItemToCart: (item: Product, carts: CartProduct[], qty: number) => void;
 	productsRed: ProductsReducer;
 	productsHistoryRed: ProductsHistoryReducer;
-	cartItemsRed: {items: Product[] | []};
+	cartItemsRed: CartReducer;
 }
 
 const ProductPage: React.FC<ProductPageProps> = ({match, getProduct, productsRed: {loadingProduct, product}, productsHistoryRed: {loadingHistory, productsHistory}, getProductsHistory, addItemToCart, cartItemsRed: {items}}) => {
@@ -122,8 +122,8 @@ const ProductPage: React.FC<ProductPageProps> = ({match, getProduct, productsRed
 									</p>
 									<select name='item-qty' onChange={(e) => setQtyData(+e.target.value)}>
 										{Array.from(Array(product?.qty && product.qty > 100 ? 100 : product?.qty).keys()).map((key) => (
-											<option value={key} key={key}>
-												{key}
+											<option value={key + 1} key={key}>
+												{key + 1}
 											</option>
 										))}
 									</select>

@@ -14,15 +14,32 @@ import Trends from '../pages/trends/Trends';
 import {getCurrentUser} from '../../actions/auth';
 import ProductPage from '../pages/products/ProductPage';
 import Cart from '../pages/cart/Cart';
+import {CartReducer, Product} from '../../types/general';
+import {setCartItems} from '../../actions/cartItems';
 
 interface RoutesProps {
 	getCurrentUser: () => void;
+	setCartItems: (items: Product[]) => void;
+	cartItemsRed: CartReducer;
 }
 
-const Routes: React.FC<RoutesProps> = ({getCurrentUser}) => {
+const Routes: React.FC<RoutesProps> = ({getCurrentUser, cartItemsRed: {total}, setCartItems}) => {
+	const cartItems = localStorage.getItem('cart');
 	useEffect(() => {
 		getCurrentUser();
 	}, []);
+
+	useEffect(() => {
+		if (cartItems) {
+			const parsedItems: Product[] = JSON.parse(cartItems);
+			if (parsedItems.length > 0) {
+				setCartItems(parsedItems);
+			}
+		} else {
+			localStorage.setItem('cart', JSON.stringify([]));
+		}
+	}, [cartItems, total]);
+
 	return (
 		<Router>
 			<Router>
@@ -45,4 +62,8 @@ const Routes: React.FC<RoutesProps> = ({getCurrentUser}) => {
 	);
 };
 
-export default connect(null, {getCurrentUser})(Routes);
+const mapStateToProps = (state: any) => ({
+	cartItemsRed: state.cartItemsRed
+});
+
+export default connect(mapStateToProps, {getCurrentUser, setCartItems})(Routes);

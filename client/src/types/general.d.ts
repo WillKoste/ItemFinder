@@ -29,6 +29,23 @@ export interface Product {
 	recorded_on?: string;
 }
 
+export interface CartProduct {
+	id: number;
+	name: string;
+	sku?: string;
+	category?: string;
+	description?: string;
+	rating?: number;
+	image?: string;
+	price?: number;
+	qty?: number;
+	product_history_id?: number;
+	partner_id?: number;
+	recorded_on?: string;
+	cart_qty: number;
+	cart_subtotal: number;
+}
+
 export interface ProductHistory {
 	id: number;
 	product_id: number;
@@ -73,6 +90,13 @@ export interface Review {
 export interface Category {
 	id?: number;
 	category_name: string;
+}
+
+export interface Favorite {
+	id?: number;
+	userId: number;
+	productId: number;
+	tag?: string;
 }
 
 export interface UserReducer {
@@ -138,6 +162,19 @@ export interface CategoryReducer {
 	categories: Category[];
 	loadingCategories: boolean;
 	error: any;
+}
+
+export interface CartReducer {
+	items: CartProduct[] | [];
+	total?: number;
+}
+
+export interface FavoritesReducer {
+	favorites: Favorite[];
+	favorite: Favorite | null;
+	loadingFavorites: boolean;
+	error: any;
+	success: boolean | null;
 }
 
 export interface RootRedTypes {

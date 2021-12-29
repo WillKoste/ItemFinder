@@ -64,3 +64,13 @@ export const CATEGORIES_ERROR = 'CATEGORIES_ERROR';
 // CART
 export const ADD_CART = 'ADD_CART';
 export const REMOVE_CART = 'REMOVE_CART';
+export const CLEAR_CART = 'CLEAR_CART';
+export const SET_CART = 'SET_CART';
+
+// FAVORITES
+export const GET_FAVORITES = 'GET_FAVORITES';
+export const GET_FAVORITE = 'GET_FAVORITE';
+export const ADD_FAVORITE = 'ADD_FAVORITE';
+export const REMOVE_FAVORITE = 'REMOVE_FAVORITE';
+export const CLEAR_FAVORITE = 'CLEAR_FAVORITE';
+export const FAVORITES_ERROR = 'FAVORITES_ERROR';

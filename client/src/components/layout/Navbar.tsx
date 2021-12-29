@@ -2,14 +2,15 @@ import React, {Fragment} from 'react';
 import {NavLink, Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {logout} from '../../actions/auth';
-import {UserReducer} from '../../types/general';
+import {CartReducer, UserReducer} from '../../types/general';
 
 interface NavbarProps {
 	logout: () => void;
 	authRed: UserReducer;
+	cartItemsRed: CartReducer;
 }
 
-const Navbar: React.FC<NavbarProps> = ({logout, authRed: {isAuthenticated}}) => {
+const Navbar: React.FC<NavbarProps> = ({logout, authRed: {isAuthenticated}, cartItemsRed: {items}}) => {
 	return (
 		<div className='navbar bg-primary'>
 			<div className='navbar-brand'>
@@ -49,11 +50,8 @@ const Navbar: React.FC<NavbarProps> = ({logout, authRed: {isAuthenticated}}) => 
 							</NavLink>
 						</li>
 						<li>
-							{/* <NavLink to='/favorites' exact activeClassName='current'>
-								Favorites
-							</NavLink> */}
 							<NavLink to='/cart' activeClassName='current'>
-								<i className='fas fa-shopping-cart'></i> Cart
+								<i className='fas fa-shopping-cart'></i> Cart {items.length > 0 ? `(${items.length})` : null}
 							</NavLink>
 						</li>
 						<li>
@@ -74,7 +72,8 @@ const Navbar: React.FC<NavbarProps> = ({logout, authRed: {isAuthenticated}}) => 
 };
 
 const mapStateToProps = (state: any) => ({
-	authRed: state.authRed
+	authRed: state.authRed,
+	cartItemsRed: state.cartItemsRed
 });
 
 export default connect(mapStateToProps, {logout})(Navbar);
