@@ -1,3 +1,5 @@
+import React from 'react';
+
 export interface ContactArrData {
 	id: number;
 	first_name: string;
@@ -11,6 +13,8 @@ export interface Column {
 	id: string | number;
 	header: string;
 	accessor: string;
+	style?: React.CSSProperties;
+	headerStyling?: React.CSSProperties;
 }
 
 export interface TableData {
@@ -18,5 +22,7 @@ export interface TableData {
 	fields?: ContactArrData;
 	[d: string]: string;
 }
+
+export type Styling = React.CSSProperties;
 
 export type RemovedFields = 'first_name' | 'last_name' | 'credit_card' | 'address' | 'created_at' | 'contact_type' | 'id';

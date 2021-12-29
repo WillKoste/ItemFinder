@@ -1,4 +1,4 @@
-import {ADD_CART, REMOVE_CART, CLEAR_CART, SET_CART} from '../actions/types';
+import {ADD_CART, REMOVE_CART, CLEAR_CART, SET_CART, LOGOUT} from '../actions/types';
 import {CartReducer} from '../types/general';
 import {Action} from '../types/redux';
 
@@ -25,9 +25,11 @@ export default function (state = inititalState, action: Action) {
 				total
 			};
 		case CLEAR_CART:
+		case LOGOUT:
 			return {
 				...state,
-				items: []
+				items: [],
+				total: 0
 			};
 		default:
 			return state;

@@ -97,6 +97,17 @@ export interface Favorite {
 	userId: number;
 	productId: number;
 	tag?: string;
+	name: string;
+	sku?: string;
+	category?: string;
+	description?: string;
+	rating?: number;
+	image?: string;
+	price?: number;
+	qty?: number;
+	product_history_id?: number;
+	partner_id?: number;
+	recorded_on?: string;
 }
 
 export interface UserReducer {
@@ -183,6 +194,9 @@ export interface RootRedTypes {
 	locationsRed?: LocationsReducer;
 	partnersRed?: PartnersReducer;
 	contactsRed?: ContactsReducer;
+	cartItemsRed?: CartReducer;
+	favoritesRed?: FavoritesReducer;
+	productCategoriesRed?: CategoryReducer;
 }
 
 export interface AuthFormDataTypes {

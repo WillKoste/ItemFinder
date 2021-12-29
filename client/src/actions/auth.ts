@@ -3,6 +3,8 @@ import {AxiosResponse} from 'axios';
 import {AuthFormDataTypes} from '../types/general';
 import {User} from '../types/general';
 import {LOGIN_SUCCESS, LOGIN_FAIL, REGISTER_SUCCESS, REGISTER_FAIL, AUTH_ERROR, GET_CURRENT_USER, LOGOUT} from './types';
+import {clearFavorites} from './favorites';
+import {clearCartItems} from './cartItems';
 
 export const getCurrentUser = () => async (dispatch: any) => {
 	try {
@@ -67,9 +69,10 @@ export const registerUser = (formData: AuthFormDataTypes) => async (dispatch: an
 };
 
 export const logout = () => async (dispatch: any) => {
-	console.log('Fuck this');
 	try {
 		await customAxios.post('/api/v1/users/logout');
+		localStorage.removeItem('cart');
+		localStorage.removeItem('cartTotal');
 		dispatch({
 			type: LOGOUT
 		});

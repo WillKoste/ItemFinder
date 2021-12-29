@@ -1,4 +1,4 @@
-import {ADD_FAVORITE, REMOVE_FAVORITE, GET_FAVORITES, GET_FAVORITE, CLEAR_FAVORITE, FAVORITES_ERROR} from '../actions/types';
+import {ADD_FAVORITE, REMOVE_FAVORITE, GET_FAVORITES, GET_FAVORITE, CLEAR_FAVORITE, FAVORITES_ERROR, LOGOUT} from '../actions/types';
 import {FavoritesReducer} from '../types/general';
 import {Action} from '../types/redux';
 
@@ -16,7 +16,42 @@ export default function (state = initialState, action: Action) {
 		case GET_FAVORITES:
 			return {
 				...state,
-				loadingFavorites: false
+				favorites: payload,
+				loadingFavorites: false,
+				error: null,
+				success: true
+			};
+		case GET_FAVORITE:
+			return {
+				...state,
+				favorite: payload,
+				loadingFavorites: false,
+				error: null,
+				success: true
+			};
+		case ADD_FAVORITE:
+		case REMOVE_FAVORITE:
+			return {
+				...state,
+				loadingFavorites: false,
+				error: null,
+				success: true
+			};
+		case FAVORITES_ERROR:
+			return {
+				...state,
+				loadingFavorites: false,
+				favorites: [],
+				favorite: null,
+				success: false,
+				error: payload
+			};
+		case CLEAR_FAVORITE:
+		case LOGOUT:
+			return {
+				...state,
+				favorites: [],
+				favorite: null
 			};
 		default:
 			return state;

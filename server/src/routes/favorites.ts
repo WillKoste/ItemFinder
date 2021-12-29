@@ -3,6 +3,22 @@ import {pool} from '../config/pg';
 import {checkAuth} from '../middleware/checkAuth';
 const router = express.Router();
 
+router.get('/', async (req: Request, res: Response) => {
+	const {productId} = req.query;
+
+	try {
+		const queryParams = Array.from(Object.keys(req.query)).map((b) => req.query[b]);
+		const favorites = await pool.query(`SELECT * FROM favorites f INNER JOIN products p ON p.id = f.product_id WHERE f.user_id = $1${productId ? `AND f.product_id = $2` : ''}`, queryParams);
+		if (favorites.rowCount === 0) {
+			return res.status(404).json({success: false, data: `Favorite not found`});
+		}
+		return res.json({success: true, count: favorites.rowCount, favorites: favorites.rows});
+	} catch (err) {
+		console.error(err);
+		return res.status(500).json({success: false, data: 'Server Error'});
+	}
+});
+
 router.post('/', checkAuth, async (req: Request, res: Response) => {
 	const {userId, productId} = req.query;
 	try {

@@ -2,15 +2,14 @@ import React, {useState, useEffect, useMemo} from 'react';
 import {connect} from 'react-redux';
 import {getContacts} from '../../../../actions/contacts';
 import Table from '../../../../Reusable/Table';
-import {Contact, ContactsReducer} from '../../../../types/general';
-import {ContactArrData} from '../../../../types/table';
+import {ContactsReducer} from '../../../../types/general';
 
 interface ContactsListProps {
 	getContacts: (limit?: number, offset?: number) => void;
 	contactsRed: ContactsReducer;
 }
 
-const ContactsList: React.FC<ContactsListProps> = ({getContacts, contactsRed: {contacts, loadingContacts}}) => {
+const ContactsList: React.FC<ContactsListProps> = ({getContacts, contactsRed: {contacts}}) => {
 	const [contactsData, setContactsData] = useState([]);
 	useEffect(() => {
 		getContacts(10, 0);

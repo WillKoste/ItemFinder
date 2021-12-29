@@ -22,7 +22,9 @@ const Table: React.FC<TableProps> = ({data, columns}) => {
 			<thead>
 				<tr>
 					{columns.map((col) => (
-						<th key={col.id}>{col.header}</th>
+						<th style={col.headerStyling} key={col.id}>
+							{col.header}
+						</th>
 					))}
 				</tr>
 			</thead>
@@ -48,9 +50,14 @@ const Table: React.FC<TableProps> = ({data, columns}) => {
 							}}
 							style={{background: i % 2 === 0 ? '#ccc' : 'inherit'}}
 						>
-							{keysArr.map((key) => (
-								<td>{d[key].toString().match(/^(\d{4})(?:-?W(\d+)(?:-?(\d+)D?)?|(?:-(\d+))?-(\d+))(?:[T ](\d+):(\d+)(?::(\d+)(?:\.(\d+))?)?)?(?:Z(-?\d*))?$/) ? moment(d[key]).format('MM-DD-YYYY') : d[key]}</td>
-							))}
+							{keysArr.map((key, end) => {
+								console.log({key, end: columns[end]});
+								const isDescKey = key === 'description';
+								return (
+									// <td style={{background: key === 'description' ? 'lightBlue' : ''}}>
+									<td style={columns[end].style}>{d[key].toString().match(/^(\d{4})(?:-?W(\d+)(?:-?(\d+)D?)?|(?:-(\d+))?-(\d+))(?:[T ](\d+):(\d+)(?::(\d+)(?:\.(\d+))?)?)?(?:Z(-?\d*))?$/) ? moment(d[key]).format('MM-DD-YYYY') : d[key]}</td>
+								);
+							})}
 						</tr>
 					);
 				})}

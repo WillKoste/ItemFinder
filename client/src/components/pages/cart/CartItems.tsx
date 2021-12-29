@@ -2,17 +2,20 @@ import React, {Fragment, useEffect} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {removeItemFromCart} from '../../../actions/cartItems';
+import {addFavorite} from '../../../actions/favorites';
 import {clearProduct} from '../../../actions/products';
-import {CartReducer} from '../../../types/general';
+import {CartReducer, UserReducer} from '../../../types/general';
 import {formatCurrency} from '../../../utils/randomUtils';
 
 interface CartItemsProps {
 	cartItemsRed: CartReducer;
+	authRed: UserReducer;
 	clearProduct: () => void;
 	removeItemFromCart: (itemId: number) => void;
+	addFavorite: (uId: number, pId: number) => void;
 }
 
-const CartItems: React.FC<CartItemsProps> = ({cartItemsRed: {items, total}, clearProduct, removeItemFromCart}) => {
+const CartItems: React.FC<CartItemsProps> = ({cartItemsRed: {items, total}, clearProduct, removeItemFromCart, addFavorite, authRed: {user}}) => {
 	useEffect(() => {
 		clearProduct();
 	}, []);
@@ -48,7 +51,9 @@ const CartItems: React.FC<CartItemsProps> = ({cartItemsRed: {items, total}, clea
 								<div className='cart-btns'>
 									<button className='btn btn-slim btn-dark'>Locate</button>
 									<button className='btn btn-slim btn-dark'>Reviews</button>
-									<button className='btn btn-slim btn-dark'>Favorite</button>
+									<button className='btn btn-slim btn-dark' onClick={() => user && addFavorite(user.id, item.id)}>
+										Favorite
+									</button>
 									<button className='btn btn-slim btn-danger' onClick={() => removeItemFromCart(item.id)}>
 										Remove
 									</button>
@@ -72,7 +77,8 @@ const CartItems: React.FC<CartItemsProps> = ({cartItemsRed: {items, total}, clea
 };
 
 const mapStateToProps = (state: any) => ({
-	cartItemsRed: state.cartItemsRed
+	cartItemsRed: state.cartItemsRed,
+	authRed: state.authRed
 });
 
-export default connect(mapStateToProps, {clearProduct, removeItemFromCart})(CartItems);
+export default connect(mapStateToProps, {clearProduct, removeItemFromCart, addFavorite})(CartItems);

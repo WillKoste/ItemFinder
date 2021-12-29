@@ -64,6 +64,7 @@ export const register = (formData: any) => async (dispatch: any) => {
 		}
 	};
 	const body = JSON.stringify(formData);
+	dispatch;
 
 	try {
 		const res: AxiosResponse<{user: User; session: string}> = await customAxios.post('/api/v1/users/register', body, config);
