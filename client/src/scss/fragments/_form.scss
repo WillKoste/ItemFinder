@@ -21,5 +21,44 @@
 		&:last-of-type {
 			margin-bottom: 0.75rem;
 		}
+
+		.shipping-options {
+			.shipping-option {
+				margin-bottom: 0.5rem;
+				small {
+					margin-left: 0.5rem;
+					color: #777;
+				}
+			}
+		}
+
+		textarea {
+			max-width: 100%;
+			min-width: 100%;
+			max-height: 150px;
+			min-height: 150px;
+		}
+
+		input[type='checkbox'] {
+			-ms-transform: scale(1.25);
+			-moz-transform: scale(1.25);
+			-webkit-transform: scale(1.25);
+			-o-transform: scale(1.25);
+			transform: scale(1.25);
+			padding: 10px;
+			margin-right: 2rem;
+		}
+	}
+
+	&.form-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 1rem;
+	}
+
+	&.form-grid-customer-info {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1rem;
 	}
 }

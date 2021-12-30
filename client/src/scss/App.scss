@@ -258,3 +258,14 @@
 		}
 	}
 }
+
+// CHECKOUT
+.checkout-page {
+	.checkout-steps {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 7.5rem;
+		margin: 2rem 0;
+	}
+}

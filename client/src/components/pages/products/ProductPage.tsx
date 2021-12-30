@@ -28,7 +28,7 @@ const ProductPage: React.FC<ProductPageProps> = ({match, getProduct, productsRed
 	const [timePeriod, setTimePeriod] = useState(6);
 	const [graphData, setGraphData] = useState([]);
 	const [productData, setProductData] = useState([]);
-	const [qtyData, setQtyData] = useState(0);
+	const [qtyData, setQtyData] = useState(1);
 
 	useEffect(() => {
 		getProduct(match.params.productId);
@@ -78,7 +78,6 @@ const ProductPage: React.FC<ProductPageProps> = ({match, getProduct, productsRed
 		]
 	};
 
-	// const cartStorage: Product[]|[] = JSON.parse(localStorage.getItem('cart') as string)
 	const onClickAddToCart = () => {
 		if (product) {
 			addItemToCart(product, items, qtyData);
@@ -112,7 +111,7 @@ const ProductPage: React.FC<ProductPageProps> = ({match, getProduct, productsRed
 									<p>
 										<strong>Qty</strong>
 									</p>
-									<select name='item-qty' onChange={(e) => setQtyData(+e.target.value)}>
+									<select name='item-qty' value={qtyData} onChange={(e) => setQtyData(+e.target.value)}>
 										{Array.from(Array(product?.qty && product.qty > 100 ? 100 : product?.qty).keys()).map((key) => (
 											<option value={key + 1} key={key}>
 												{key + 1}
