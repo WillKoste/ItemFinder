@@ -83,6 +83,8 @@ export interface Review {
 	id: number;
 	title: string;
 	body: string;
+	product_id?: number;
+	user_id?: number;
 	createdAt?: string;
 	updatedAt?: string;
 }
@@ -167,6 +169,7 @@ export interface ReviewsReducer {
 	loadingReviews: boolean;
 	loadingReview: boolean;
 	error: any;
+	success: boolean | null;
 }
 
 export interface CategoryReducer {

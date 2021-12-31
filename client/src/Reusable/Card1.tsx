@@ -6,7 +6,6 @@ interface Card1Props {
 }
 
 const Card1: React.FC<Card1Props> = ({data}) => {
-	console.log({data});
 	const {name, description, image} = data;
 
 	return (

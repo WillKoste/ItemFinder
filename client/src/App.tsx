@@ -3,7 +3,7 @@ import {Provider} from 'react-redux';
 import store from './store';
 import {CookiesProvider, withCookies} from 'react-cookie';
 
-import Routes from './components/routes/Routes';
+import Routes from './components/routes/RoutesOrigin';
 
 const App = () => {
 	return (

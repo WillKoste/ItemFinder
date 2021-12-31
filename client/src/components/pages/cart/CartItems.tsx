@@ -56,8 +56,12 @@ const CartItems: React.FC<CartItemsProps> = ({cartItemsRed: {items, total}, clea
 									</p>
 								</div>
 								<div className='cart-btns'>
-									<button className='btn btn-slim btn-dark'>Locate</button>
-									<button className='btn btn-slim btn-dark'>Reviews</button>
+									<Link to={`/locate`} className='btn btn-slim btn-dark text-center'>
+										Locate
+									</Link>
+									<Link to={`/reviews/${item.id}`} className='btn btn-slim btn-dark text-center'>
+										Reviews
+									</Link>
 									<button className='btn btn-slim btn-dark' onClick={() => user && addFavorite(user.id, item.id)}>
 										Favorite
 									</button>

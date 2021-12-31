@@ -1,10 +1,11 @@
-import axios, {AxiosResponse} from 'axios';
+import {AxiosResponse} from 'axios';
 import {Review} from '../types/general';
-import {GET_REVIEWS, GET_REVIEW, REVIEWS_CLEAR, REVIEWS_ERROR, CREATE_REVIEW, DELETE_REVIEW, UPDATE_REVIEW} from './types';
+import {customAxios} from '../utils/customAxios';
+import {GET_REVIEWS, GET_REVIEW, REVIEWS_CLEAR, REVIEWS_ERROR, CREATE_REVIEW, DELETE_REVIEW, UPDATE_REVIEW, GET_PRODUCT_REVIEWS} from './types';
 
 export const getReviews = () => async (dispatch: any) => {
 	try {
-		const res: AxiosResponse<{reviews: Review[]}> = await axios.get('/api/v1/reviews');
+		const res: AxiosResponse<{reviews: Review[]}> = await customAxios.get('/api/v1/reviews');
 		dispatch({
 			type: GET_REVIEWS,
 			payload: res.data.reviews
@@ -16,4 +17,26 @@ export const getReviews = () => async (dispatch: any) => {
 			payload: err
 		});
 	}
+};
+
+export const getReviewByProductId = (productId: number) => async (dispatch: any) => {
+	try {
+		const res: AxiosResponse<{reviews: Review[]}> = await customAxios.get(`/api/v1/reviews/product/${productId}`);
+		dispatch({
+			type: GET_PRODUCT_REVIEWS,
+			payload: res.data.reviews
+		});
+	} catch (err) {
+		console.error(err);
+		dispatch({
+			type: REVIEWS_ERROR,
+			payload: err
+		});
+	}
+};
+
+export const reviewsClear = () => async (dispatch: any) => {
+	dispatch({
+		type: REVIEWS_CLEAR
+	});
 };

@@ -59,7 +59,6 @@ const ProductPage: React.FC<ProductPageProps> = ({
 			setProductData(productsHistory.map((hist, ind) => (ind === 0 ? {label: product?.name, data: pricesArr, borderColor: 'blue', tension: 0.1} : null)).filter((a) => a !== null) as any);
 		}
 	}, [loadingHistory, productsHistory]);
-	console.log({graphData, productData});
 
 	const options = {
 		responsive: true,
@@ -77,7 +76,6 @@ const ProductPage: React.FC<ProductPageProps> = ({
 	const labels = getPastMonths(timePeriod)
 		.map((lab) => `${lab.monthName}, ${lab.year.toString()}`)
 		.reverse();
-	console.log({labels});
 
 	const data = {
 		labels,

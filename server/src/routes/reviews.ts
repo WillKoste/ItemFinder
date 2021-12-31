@@ -35,6 +35,21 @@ router.get('/:reviewId', async (req: Request, res: Response) => {
 	}
 });
 
+router.get('/product/:productId', async (req: Request<{productId: number}>, res: Response) => {
+	const {productId} = req.params;
+
+	try {
+		const reviews = await pool.query(`SELECT * FROM reviews WHERE product_id = $1`, [productId]);
+		if (reviews.rowCount === 0) {
+			return res.status(404).json({success: false, data: `Reviews for item ${req.params.productId} not found`});
+		}
+		return res.json({success: true, reviews: reviews});
+	} catch (err) {
+		console.error(err);
+		return res.status(500).json({success: false, data: 'Server Error'});
+	}
+});
+
 /**
  * @name Create Review
  */
