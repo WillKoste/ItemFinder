@@ -7,9 +7,10 @@ interface ConfirmationProps {
 	phase: number;
 	formData: CheckoutForm;
 	onChange: () => void;
+	saveToLocalStorage: () => void;
 }
 
-const Confirmation: React.FC<ConfirmationProps> = ({setPhase, phase, onChange, formData}) => {
+const Confirmation: React.FC<ConfirmationProps> = ({setPhase, phase, onChange, formData, saveToLocalStorage}) => {
 	const {shippingNotes, shippingOption} = formData;
 
 	return (
@@ -46,7 +47,14 @@ const Confirmation: React.FC<ConfirmationProps> = ({setPhase, phase, onChange, f
 					<textarea name='shippingNotes' value={shippingNotes} onChange={onChange as any} className='form-control'></textarea>
 				</div>
 			</form>
-			<PrevNext goNext={() => setPhase(phase + 1)} goPrev={() => setPhase(phase - 1)} />
+			<PrevNext
+				goNext={() => {
+					saveToLocalStorage();
+					setPhase(phase + 1);
+				}}
+				goPrev={() => setPhase(phase - 1)}
+				submitOrder
+			/>
 		</div>
 	);
 };

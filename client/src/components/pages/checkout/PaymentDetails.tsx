@@ -7,9 +7,10 @@ interface PaymentDetailsProps {
 	phase: number;
 	formData: CheckoutForm;
 	onChange: () => void;
+	saveToLocalStorage: () => void;
 }
 
-const PaymentDetails: React.FC<PaymentDetailsProps> = ({setPhase, phase, formData, onChange}) => {
+const PaymentDetails: React.FC<PaymentDetailsProps> = ({setPhase, phase, formData, onChange, saveToLocalStorage}) => {
 	const {cardNumber, cardFirstName, cardLastName, expirationDate, securityCode} = formData;
 
 	return (
@@ -36,7 +37,13 @@ const PaymentDetails: React.FC<PaymentDetailsProps> = ({setPhase, phase, formDat
 					<input type='text' className='form-control' name='securityCode' value={securityCode} maxLength={3} onChange={onChange} />
 				</div>
 			</form>
-			<PrevNext goNext={() => setPhase(phase + 1)} />
+			<PrevNext
+				goNext={() => {
+					saveToLocalStorage();
+					setPhase(phase + 1);
+				}}
+				backToCart
+			/>
 		</div>
 	);
 };

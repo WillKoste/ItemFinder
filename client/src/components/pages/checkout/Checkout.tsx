@@ -14,6 +14,7 @@ interface CheckoutProps {
 const Checkout: React.FC<CheckoutProps> = ({cartItemsRed: {items}}) => {
 	const [formData, setFormData] = useState({
 		checkoutId: uuidv4(),
+		confirmationNumber: null,
 		cardFirstName: '',
 		cardLastName: '',
 		cardNumber: '',
@@ -84,6 +85,10 @@ const Checkout: React.FC<CheckoutProps> = ({cartItemsRed: {items}}) => {
 		setFormData({...formData, [e.target.name]: e.target.value});
 	};
 
+	const saveToLocalStorage = () => {
+		localStorage.setItem('checkargs', JSON.stringify(formData));
+	};
+
 	const checkBillingAddress = () => {
 		setFormData({...formData, billingSameAsShipping: billingSameAsShipping === 'no' ? 'yes' : 'no'});
 	};
@@ -101,9 +106,9 @@ const Checkout: React.FC<CheckoutProps> = ({cartItemsRed: {items}}) => {
 						);
 					})}
 				</div>
-				{phase === 1 && <PaymentDetails setPhase={setPhase} phase={phase} formData={phase1State} onChange={onChange as any} />}
-				{phase === 2 && <AddressInformation setPhase={setPhase} phase={phase} onChange={onChange as any} formData={phase2State} checkBillingAddress={checkBillingAddress} />}
-				{phase === 3 && <Confirmation setPhase={setPhase} phase={phase} onChange={onChange as any} formData={phase3State} />}
+				{phase === 1 && <PaymentDetails setPhase={setPhase} phase={phase} formData={phase1State} onChange={onChange as any} saveToLocalStorage={saveToLocalStorage} />}
+				{phase === 2 && <AddressInformation setPhase={setPhase} phase={phase} onChange={onChange as any} formData={phase2State} checkBillingAddress={checkBillingAddress} saveToLocalStorage={saveToLocalStorage} />}
+				{phase === 3 && <Confirmation setPhase={setPhase} phase={phase} onChange={onChange as any} formData={phase3State} saveToLocalStorage={saveToLocalStorage} />}
 				{phase === 4 && <ThankYou setPhase={setPhase} />}
 			</div>
 		</div>

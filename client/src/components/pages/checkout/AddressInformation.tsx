@@ -9,9 +9,10 @@ interface AddressInformationProps {
 	formData: CheckoutForm;
 	onChange: () => void;
 	checkBillingAddress: () => void;
+	saveToLocalStorage: () => void;
 }
 
-const AddressInformation: React.FC<AddressInformationProps> = ({setPhase, phase, onChange, formData, checkBillingAddress}) => {
+const AddressInformation: React.FC<AddressInformationProps> = ({setPhase, phase, onChange, formData, checkBillingAddress, saveToLocalStorage}) => {
 	const {billingSameAsShipping, shippingAddress, shippingCity, shippingState, shippingZipcode, billingAddress, billingCity, billingZipcode, billingState} = formData;
 
 	return (
@@ -73,7 +74,16 @@ const AddressInformation: React.FC<AddressInformationProps> = ({setPhase, phase,
 					</Fragment>
 				) : null}
 			</form>
-			<PrevNext goNext={() => setPhase(phase + 1)} goPrev={() => setPhase(phase - 1)} />
+			<PrevNext
+				goNext={() => {
+					saveToLocalStorage();
+					setPhase(phase + 1);
+				}}
+				goPrev={() => {
+					saveToLocalStorage();
+					setPhase(phase - 1);
+				}}
+			/>
 		</div>
 	);
 };
