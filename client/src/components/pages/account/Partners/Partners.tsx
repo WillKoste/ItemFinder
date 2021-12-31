@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useMemo} from 'react';
+import React, {useEffect, useState, useMemo, useCallback} from 'react';
 import {connect} from 'react-redux';
 import {getPartners} from '../../../../actions/partners';
 import Table from '../../../../Reusable/Table';
@@ -7,15 +7,27 @@ import {Column} from '../../../../types/table';
 
 interface PartnersProps {
 	partnersRed: any;
-	getPartners: () => void;
+	getPartners: (limit: number, offset?: number) => void;
 }
 
 const Partners: React.FC<PartnersProps> = ({partnersRed: {partners}, getPartners}) => {
 	const [partnersData, setPartnersData] = useState([]);
+	const [offsetState, setOffsetState] = useState(0);
+
+	const onClickNext = useCallback(() => {
+		setOffsetState(offsetState + 10);
+	}, [offsetState]);
+	const onClickPrev = useCallback(() => {
+		if (offsetState !== 0) {
+			setOffsetState(offsetState - 10);
+		} else {
+			return;
+		}
+	}, [offsetState]);
 
 	useEffect(() => {
-		getPartners();
-	}, []);
+		getPartners(10, offsetState);
+	}, [offsetState]);
 	useEffect(() => {
 		setPartnersData(partners);
 	}, [partners]);
@@ -51,7 +63,7 @@ const Partners: React.FC<PartnersProps> = ({partnersRed: {partners}, getPartners
 	return (
 		<div>
 			<h2 className='account-header'>Partners</h2>
-			<Table columns={columns} data={data} />
+			<Table columns={columns} data={data} onClickNext={onClickNext} onClickPrev={onClickPrev} />
 		</div>
 	);
 };

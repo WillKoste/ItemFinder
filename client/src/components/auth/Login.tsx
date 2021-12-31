@@ -1,16 +1,16 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
-import {Link, Redirect} from 'react-router-dom';
+import {Link, Redirect, RouteComponentProps} from 'react-router-dom';
 import {loginUser, getCurrentUser} from '../../actions/auth';
 import {AuthFormDataTypes, UserReducer} from '../../types/general';
 
-interface LoginProps {
+interface LoginProps extends RouteComponentProps<{}, {}, {from: string}> {
 	loginUser: (data: AuthFormDataTypes) => Promise<void>;
 	getCurrentUser: () => Promise<void>;
 	authRed: UserReducer;
 }
 
-const Login: React.FC<LoginProps> = ({loginUser, authRed: {isAuthenticated}}) => {
+const Login: React.FC<LoginProps> = ({loginUser, authRed: {isAuthenticated}, location}) => {
 	const [formData, setFormData] = useState<AuthFormDataTypes>({
 		email: '',
 		password: ''
@@ -23,7 +23,6 @@ const Login: React.FC<LoginProps> = ({loginUser, authRed: {isAuthenticated}}) =>
 
 	const onSubmit = (e: any) => {
 		e.preventDefault();
-
 		if (email === '' || password === '' || (password && password?.length < 6)) {
 			alert('Please provide all fields');
 		} else {
@@ -32,7 +31,11 @@ const Login: React.FC<LoginProps> = ({loginUser, authRed: {isAuthenticated}}) =>
 	};
 
 	if (isAuthenticated) {
-		return <Redirect to='/home' />;
+		if (location.state && location.state.from) {
+			return <Redirect to={location.state.from} />;
+		} else {
+			return <Redirect to='/home' />;
+		}
 	}
 
 	return (

@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {connect} from 'react-redux';
 import {getFavorites} from '../../../../actions/favorites';
 import Table from '../../../../Reusable/Table';
@@ -8,17 +8,31 @@ import {Column} from '../../../../types/table';
 interface FavoritesProps {
 	favoritesRed: FavoritesReducer;
 	authRed: UserReducer;
-	getFavorites: (uId: number, pId?: number) => void;
+	getFavorites: (uId: number, pId?: number, limit?: number, offset?: number) => void;
 }
 
 const Favorites: React.FC<FavoritesProps> = ({favoritesRed: {favorites, loadingFavorites, favorite}, authRed: {user}, getFavorites}) => {
 	const [favoritesData, setFavoritesData] = useState([] as any);
+	const limitAmt = 5;
+
+	const [offsetState, setOffsetState] = useState(0);
+
+	const onClickNext = useCallback(() => {
+		setOffsetState(offsetState + limitAmt);
+	}, [offsetState]);
+	const onClickPrev = useCallback(() => {
+		if (offsetState !== 0) {
+			setOffsetState(offsetState - limitAmt);
+		} else {
+			return;
+		}
+	}, [offsetState]);
 
 	useEffect(() => {
 		if (user) {
-			getFavorites(user.id);
+			getFavorites(user.id, undefined, limitAmt, offsetState);
 		}
-	}, [user]);
+	}, [user, offsetState]);
 	useEffect(() => {
 		setFavoritesData(favorites);
 	}, [favorites]);
@@ -54,7 +68,7 @@ const Favorites: React.FC<FavoritesProps> = ({favoritesRed: {favorites, loadingF
 	return (
 		<div>
 			<h2 className='account-header'>Favorites</h2>
-			<Table data={favoritesData} columns={columns} />
+			<Table data={favoritesData} columns={columns} onClickNext={onClickNext} onClickPrev={onClickPrev} />
 		</div>
 	);
 };

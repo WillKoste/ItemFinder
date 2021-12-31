@@ -6,9 +6,11 @@ import TablePagination from './Buttons/TablePagination';
 interface TableProps {
 	data: TableData[];
 	columns: Column[];
+	onClickNext?: () => void;
+	onClickPrev?: () => void;
 }
 
-const Table: React.FC<TableProps> = ({data, columns}) => {
+const Table: React.FC<TableProps> = ({data, columns, onClickNext, onClickPrev}) => {
 	const validFields = columns.map((col) => col.accessor);
 
 	return (
@@ -56,7 +58,7 @@ const Table: React.FC<TableProps> = ({data, columns}) => {
 					})}
 				</tbody>
 			</table>
-			<TablePagination />
+			<TablePagination onClickNext={onClickNext} onClickPrev={onClickPrev} />
 		</Fragment>
 	);
 };

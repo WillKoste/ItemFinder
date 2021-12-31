@@ -38,9 +38,6 @@ const Home: React.FC<HomeProps> = ({getLocations, getPartners, getContacts, getR
 				<button className='btn btn-dark mr-2' onClick={getReviews}>
 					Get Reviews
 				</button>
-				{/* <div className='wrapper-lg'></div>
-				<div className='wrapper-md'></div>
-				<div className='wrapper-sm'></div> */}
 			</div>
 		</div>
 	);

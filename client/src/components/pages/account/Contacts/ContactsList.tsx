@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useMemo} from 'react';
+import React, {useState, useEffect, useMemo, useCallback} from 'react';
 import {connect} from 'react-redux';
 import {getContacts} from '../../../../actions/contacts';
 import Table from '../../../../Reusable/Table';
@@ -11,9 +11,21 @@ interface ContactsListProps {
 
 const ContactsList: React.FC<ContactsListProps> = ({getContacts, contactsRed: {contacts}}) => {
 	const [contactsData, setContactsData] = useState([]);
+	const [offsetState, setOffsetState] = useState(0);
+
+	const onClickNext = useCallback(() => {
+		setOffsetState(offsetState + 10);
+	}, [offsetState]);
+	const onClickPrev = useCallback(() => {
+		if (offsetState !== 0) {
+			setOffsetState(offsetState - 10);
+		} else {
+			return;
+		}
+	}, [offsetState]);
 	useEffect(() => {
-		getContacts(10, 0);
-	}, []);
+		getContacts(10, offsetState);
+	}, [offsetState]);
 	useEffect(() => {
 		setContactsData(contacts as any);
 	}, [contacts]);
@@ -54,7 +66,7 @@ const ContactsList: React.FC<ContactsListProps> = ({getContacts, contactsRed: {c
 	return (
 		<div>
 			<h2 className='account-header'>Contacts</h2>
-			<Table data={data} columns={columns} />
+			<Table data={data} columns={columns} onClickPrev={onClickPrev} onClickNext={onClickNext} />
 		</div>
 	);
 };

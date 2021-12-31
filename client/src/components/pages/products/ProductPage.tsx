@@ -2,7 +2,7 @@ import React, {useCallback, useEffect, useState} from 'react';
 import {connect} from 'react-redux';
 import {Link, RouteComponentProps} from 'react-router-dom';
 import {getProduct} from '../../../actions/products';
-import {ProductsHistoryReducer, ProductsReducer, ProductHistory, Product, CartReducer, CartProduct} from '../../../types/general';
+import {ProductsHistoryReducer, ProductsReducer, ProductHistory, Product, CartReducer, CartProduct, UserReducer} from '../../../types/general';
 import {Chart, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, LineOptions, ChartOptions, BarElement, ChartData, BubbleDataPoint, ScatterDataPoint} from 'chart.js';
 import {Line, Chart as ChartReact, Bar} from 'react-chartjs-2';
 import moment from 'moment';
@@ -11,17 +11,31 @@ import {formatCurrency} from '../../../utils/randomUtils';
 import {getProductsHistory} from '../../../actions/productsHistory';
 import {addItemToCart} from '../../../actions/cartItems';
 import RatingStars from '../../../Reusable/Products/RatingStars';
+import {addFavorite} from '../../../actions/favorites';
 
 interface ProductPageProps extends RouteComponentProps<{productId: string}> {
 	getProduct: (prodId: string) => void;
+	addFavorite: (uId: number, pId: number) => void;
 	getProductsHistory: (prodId: number) => void;
 	addItemToCart: (item: Product, carts: CartProduct[], qty: number) => void;
 	productsRed: ProductsReducer;
 	productsHistoryRed: ProductsHistoryReducer;
 	cartItemsRed: CartReducer;
+	authRed: UserReducer;
 }
 
-const ProductPage: React.FC<ProductPageProps> = ({match, getProduct, productsRed: {loadingProduct, product}, productsHistoryRed: {loadingHistory, productsHistory}, getProductsHistory, addItemToCart, cartItemsRed: {items}}) => {
+const ProductPage: React.FC<ProductPageProps> = ({
+	match,
+	location,
+	getProduct,
+	productsRed: {loadingProduct, product},
+	productsHistoryRed: {loadingHistory, productsHistory},
+	getProductsHistory,
+	addItemToCart,
+	cartItemsRed: {items},
+	addFavorite,
+	authRed: {user}
+}) => {
 	Chart.register(CategoryScale, LinearScale, PointElement, BarElement, Title, Tooltip, Legend);
 
 	const [btnTab, setBtnTab] = useState('Availability');
@@ -125,10 +139,20 @@ const ProductPage: React.FC<ProductPageProps> = ({match, getProduct, productsRed
 							<button className='btn btn-primary btn-block mb-1' onClick={onClickAddToCart}>
 								Add To Cart
 							</button>
-							<Link to='/products/buy-now' className='btn btn-secondary btn-block mb-1'>
+							<Link
+								to={{
+									pathname: !user ? `/login` : '/checkout',
+									state: {
+										from: location.pathname,
+										params: match.params
+									}
+								}}
+								className='btn btn-secondary btn-block mb-1'
+								onClick={onClickAddToCart}
+							>
 								Buy Now
 							</Link>
-							<button className='btn btn-light btn-block'>
+							<button className='btn btn-light btn-block' onClick={() => user && product && addFavorite(user.id, product?.id)}>
 								<i className='fas fa-heart mr-1'></i> Favorite this item
 							</button>
 						</div>
@@ -162,7 +186,8 @@ const ProductPage: React.FC<ProductPageProps> = ({match, getProduct, productsRed
 const mapStateToProps = (state: any) => ({
 	productsRed: state.productsRed,
 	productsHistoryRed: state.productsHistoryRed,
-	cartItemsRed: state.cartItemsRed
+	cartItemsRed: state.cartItemsRed,
+	authRed: state.authRed
 });
 
-export default connect(mapStateToProps, {getProduct, getProductsHistory, addItemToCart})(ProductPage);
+export default connect(mapStateToProps, {getProduct, getProductsHistory, addFavorite, addItemToCart})(ProductPage);

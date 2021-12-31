@@ -17,6 +17,7 @@ import Cart from '../pages/cart/Cart';
 import {CartReducer, Product} from '../../types/general';
 import {setCartItems} from '../../actions/cartItems';
 import Checkout from '../pages/checkout/Checkout';
+import Reviews from '../pages/reviews/Reviews';
 
 interface RoutesProps {
 	getCurrentUser: () => void;
@@ -52,6 +53,7 @@ const Routes: React.FC<RoutesProps> = ({getCurrentUser, cartItemsRed, setCartIte
 						<Route exact path='/register' render={() => <Register />} />
 						<Route exact path='/home' render={() => <Home />} />
 						<Route exact path='/cart' component={Cart} />
+						<Route exact path='/reviews' component={Reviews} />
 						<Route exact path='/checkout' component={Checkout} />
 						<Route exact path='/product/info/:productId' component={ProductPage} />
 						<PrivateRoute exact path='/account' component={Account} />
