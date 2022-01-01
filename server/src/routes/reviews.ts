@@ -43,7 +43,7 @@ router.get('/product/:productId', async (req: Request<{productId: number}>, res:
 		if (reviews.rowCount === 0) {
 			return res.status(404).json({success: false, data: `Reviews for item ${req.params.productId} not found`});
 		}
-		return res.json({success: true, reviews: reviews});
+		return res.json({success: true, reviews: reviews.rows});
 	} catch (err) {
 		console.error(err);
 		return res.status(500).json({success: false, data: 'Server Error'});

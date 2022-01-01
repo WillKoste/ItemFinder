@@ -19,7 +19,7 @@ const Reviews: React.FC<ReviewsProps> = ({reviewsRed: {reviews}, getReviewByProd
 	return (
 		<div className='reviews-page'>
 			<div className='container'>
-				<h2>Reviews Page</h2>
+				<h2>Reviews</h2>
 			</div>
 		</div>
 	);

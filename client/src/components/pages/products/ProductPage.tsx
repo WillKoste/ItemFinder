@@ -12,6 +12,8 @@ import {getProductsHistory} from '../../../actions/productsHistory';
 import {addItemToCart} from '../../../actions/cartItems';
 import RatingStars from '../../../Reusable/Products/RatingStars';
 import {addFavorite} from '../../../actions/favorites';
+import Reviews from '../reviews/Reviews';
+import ProductPageReviews from './ProductPageReviews';
 
 interface ProductPageProps extends RouteComponentProps<{productId: string}> {
 	getProduct: (prodId: string) => void;
@@ -174,6 +176,7 @@ const ProductPage: React.FC<ProductPageProps> = ({
 							</select>
 						</div>
 						<div className='pp-description'>{product?.description}</div>
+						<ProductPageReviews />
 					</div>
 				</div>
 			)}

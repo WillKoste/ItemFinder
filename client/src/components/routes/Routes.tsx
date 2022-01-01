@@ -1,5 +1,8 @@
-import React from 'react';
+import React, {useCallback, useEffect} from 'react';
+import {connect} from 'react-redux';
 import {Switch, Route, withRouter, RouteComponentProps} from 'react-router-dom';
+import {reviewsClear} from '../../actions/reviews';
+
 import Login from '../auth/Login';
 import Register from '../auth/Register';
 import Splash from '../auth/Splash';
@@ -14,10 +17,17 @@ import Reviews from '../pages/reviews/Reviews';
 import Trends from '../pages/trends/Trends';
 import PrivateRoute from './PrivateRoute';
 
-interface HeyProps extends RouteComponentProps {}
+interface RoutesProps extends RouteComponentProps {
+	reviewsClear: () => void;
+}
 
-const Hey: React.FC<HeyProps> = ({location}) => {
-	console.log(location);
+const Routes: React.FC<RoutesProps> = ({location, reviewsClear}) => {
+	useEffect(() => {
+		if (location.pathname.includes(`review`) || location.pathname.includes(`product/info`)) {
+			return;
+		}
+		reviewsClear();
+	}, [location.pathname]);
 
 	return (
 		<Switch>
@@ -26,7 +36,7 @@ const Hey: React.FC<HeyProps> = ({location}) => {
 			<Route exact path='/register' render={() => <Register />} />
 			<Route exact path='/home' render={() => <Home />} />
 			<Route exact path='/cart' component={Cart} />
-			<Route exact path='/reviews' component={Reviews} />
+			<Route exact path='/reviews/:productId' component={Reviews} />
 			<Route exact path='/locate/:productId' component={Locate} />
 			<Route exact path='/checkout' component={Checkout} />
 			<Route exact path='/product/info/:productId' component={ProductPage} />
@@ -37,4 +47,4 @@ const Hey: React.FC<HeyProps> = ({location}) => {
 	);
 };
 
-export default withRouter(Hey);
+export default connect(null, {reviewsClear})(withRouter(Routes));

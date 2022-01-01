@@ -6,21 +6,18 @@ import Navbar from '../layout/Navbar';
 import {getCurrentUser} from '../../actions/auth';
 import {CartReducer, Product} from '../../types/general';
 import {setCartItems} from '../../actions/cartItems';
-import {reviewsClear} from '../../actions/reviews';
 import Hey from './Routes';
 
 interface RoutesProps {
 	getCurrentUser: () => void;
 	setCartItems: (items: Product[]) => void;
-	reviewsClear: () => void;
 	cartItemsRed: CartReducer;
 }
 
-const Routes: React.FC<RoutesProps> = ({getCurrentUser, cartItemsRed, setCartItems, reviewsClear}) => {
+const Routes: React.FC<RoutesProps> = ({getCurrentUser, cartItemsRed, setCartItems}) => {
 	const cartItems = localStorage.getItem('cart');
 	useEffect(() => {
 		getCurrentUser();
-		reviewsClear();
 	}, []);
 
 	useEffect(() => {
@@ -48,4 +45,4 @@ const mapStateToProps = (state: any) => ({
 	cartItemsRed: state.cartItemsRed
 });
 
-export default connect(mapStateToProps, {getCurrentUser, setCartItems, reviewsClear})(Routes);
+export default connect(mapStateToProps, {getCurrentUser, setCartItems})(Routes);
