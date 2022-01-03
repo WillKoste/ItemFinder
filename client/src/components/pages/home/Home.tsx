@@ -25,18 +25,11 @@ const Home: React.FC<HomeProps> = ({getLocations, getPartners, getContacts, getR
 			<div className='container'>
 				<h1 className='text-l mb-4'>Featured</h1>
 				<CardStack />
-				<button className='btn btn-dark mr-2'>Get Products</button>
-				<button className='btn btn-dark mr-2' onClick={getContacts}>
-					Get Contacts
-				</button>
 				<button className='btn btn-dark mr-2' onClick={getLocations}>
 					Get Locations
 				</button>
 				<button className='btn btn-dark mr-2' onClick={getPartners}>
 					Get Partners
-				</button>
-				<button className='btn btn-dark mr-2' onClick={getReviews}>
-					Get Reviews
 				</button>
 			</div>
 		</div>

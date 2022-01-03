@@ -85,7 +85,8 @@ export interface Review {
 	body: string;
 	product_id?: number;
 	user_id?: number;
-	createdAt?: string;
+	rating: number;
+	created_at?: string;
 	updatedAt?: string;
 }
 

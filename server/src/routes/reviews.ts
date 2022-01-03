@@ -36,10 +36,11 @@ router.get('/:reviewId', async (req: Request, res: Response) => {
 });
 
 router.get('/product/:productId', async (req: Request<{productId: number}>, res: Response) => {
+	const {limit, offset} = req.query;
 	const {productId} = req.params;
 
 	try {
-		const reviews = await pool.query(`SELECT * FROM reviews WHERE product_id = $1`, [productId]);
+		const reviews = await pool.query(`SELECT * FROM reviews WHERE product_id = $1 LIMIT $2 OFFSET $3`, [productId, limit, offset]);
 		if (reviews.rowCount === 0) {
 			return res.status(404).json({success: false, data: `Reviews for item ${req.params.productId} not found`});
 		}

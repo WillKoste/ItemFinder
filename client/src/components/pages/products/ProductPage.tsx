@@ -12,8 +12,8 @@ import {getProductsHistory} from '../../../actions/productsHistory';
 import {addItemToCart} from '../../../actions/cartItems';
 import RatingStars from '../../../Reusable/Products/RatingStars';
 import {addFavorite} from '../../../actions/favorites';
-import Reviews from '../reviews/Reviews';
 import ProductPageReviews from './ProductPageReviews';
+import {getReviewByProductId} from '../../../actions/reviews';
 
 interface ProductPageProps extends RouteComponentProps<{productId: string}> {
 	getProduct: (prodId: string) => void;
@@ -24,6 +24,7 @@ interface ProductPageProps extends RouteComponentProps<{productId: string}> {
 	productsHistoryRed: ProductsHistoryReducer;
 	cartItemsRed: CartReducer;
 	authRed: UserReducer;
+	getReviewByProductId: (productId: number) => void;
 }
 
 const ProductPage: React.FC<ProductPageProps> = ({
@@ -36,7 +37,8 @@ const ProductPage: React.FC<ProductPageProps> = ({
 	addItemToCart,
 	cartItemsRed: {items},
 	addFavorite,
-	authRed: {user}
+	authRed: {user},
+	getReviewByProductId
 }) => {
 	Chart.register(CategoryScale, LinearScale, PointElement, BarElement, Title, Tooltip, Legend);
 
@@ -48,6 +50,7 @@ const ProductPage: React.FC<ProductPageProps> = ({
 
 	useEffect(() => {
 		getProduct(match.params.productId);
+		getReviewByProductId(+match.params.productId);
 	}, []);
 	useEffect(() => {
 		setGraphData(getPastMonths(timePeriod) as any);
@@ -191,4 +194,4 @@ const mapStateToProps = (state: any) => ({
 	authRed: state.authRed
 });
 
-export default connect(mapStateToProps, {getProduct, getProductsHistory, addFavorite, addItemToCart})(ProductPage);
+export default connect(mapStateToProps, {getProduct, getProductsHistory, addFavorite, addItemToCart, getReviewByProductId})(ProductPage);
