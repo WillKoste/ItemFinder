@@ -20,6 +20,7 @@ import contactsRoutes from './routes/contacts';
 import productsHistoryRoutes from './routes/productsHistory';
 import categoriesRoutes from './routes/categories';
 import favoritesRoutes from './routes/favorites';
+import purchasesRoutes from './routes/purchases';
 
 connectDB();
 const RedisStore = connectRedis(session);
@@ -52,6 +53,7 @@ app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/reviews', reviewsRoutes);
 app.use('/api/v1/products', productsRoutes);
 app.use('/api/v1/productHistory', productsHistoryRoutes);
+app.use('/api/v1/purchases', purchasesRoutes);
 app.use('/api/v1/partners', partnersRoutes);
 app.use('/api/v1/locations', locationsRoutes);
 app.use('/api/v1/contacts', contactsRoutes);
