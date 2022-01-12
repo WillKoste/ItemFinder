@@ -6,9 +6,10 @@ interface PrevNextProps {
 	goPrev?: () => void;
 	backToCart?: boolean;
 	submitOrder?: boolean;
+	onSubmit?: (e: any) => void;
 }
 
-const PrevNext: React.FC<PrevNextProps> = ({goNext, goPrev, submitOrder, backToCart}) => {
+const PrevNext: React.FC<PrevNextProps> = ({goNext, goPrev, submitOrder, backToCart, onSubmit}) => {
 	return (
 		<div>
 			{backToCart ? (
@@ -21,7 +22,7 @@ const PrevNext: React.FC<PrevNextProps> = ({goNext, goPrev, submitOrder, backToC
 				</button>
 			)}
 			{submitOrder ? (
-				<button className='btn btn-success' disabled={!goNext} onClick={goNext}>
+				<button className='btn btn-success' disabled={!goNext} onClick={onSubmit}>
 					Submit order
 				</button>
 			) : (

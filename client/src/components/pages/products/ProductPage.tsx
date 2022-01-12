@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
 import {Link, RouteComponentProps} from 'react-router-dom';
 import {getProduct} from '../../../actions/products';
@@ -16,7 +16,7 @@ import ProductPageReviews from './ProductPageReviews';
 import {getReviewByProductId} from '../../../actions/reviews';
 
 interface ProductPageProps extends RouteComponentProps<{productId: string}> {
-	getProduct: (prodId: string) => void;
+	getProduct: (prodId: number) => void;
 	addFavorite: (uId: number, pId: number) => void;
 	getProductsHistory: (prodId: number) => void;
 	addItemToCart: (item: Product, carts: CartProduct[], qty: number) => void;
@@ -24,7 +24,7 @@ interface ProductPageProps extends RouteComponentProps<{productId: string}> {
 	productsHistoryRed: ProductsHistoryReducer;
 	cartItemsRed: CartReducer;
 	authRed: UserReducer;
-	getReviewByProductId: (productId: number) => void;
+	getReviewByProductId: (productId: number, userId?: number) => void;
 }
 
 const ProductPage: React.FC<ProductPageProps> = ({
@@ -49,15 +49,19 @@ const ProductPage: React.FC<ProductPageProps> = ({
 	const [qtyData, setQtyData] = useState(1);
 
 	useEffect(() => {
-		getProduct(match.params.productId);
-		getReviewByProductId(+match.params.productId);
+		getProduct(+match.params.productId);
+		getProductsHistory(+match.params.productId);
 	}, []);
+	useEffect(() => {
+		if (user) {
+			getReviewByProductId(+match.params.productId, user.id);
+		} else {
+			getReviewByProductId(+match.params.productId);
+		}
+	}, [user]);
 	useEffect(() => {
 		setGraphData(getPastMonths(timePeriod) as any);
 	}, [timePeriod]);
-	useEffect(() => {
-		getProductsHistory(+match.params.productId);
-	}, []);
 	useEffect(() => {
 		if (!loadingHistory && productsHistory.length > 0) {
 			const pricesArr = productsHistory.map((h) => ({x: moment(h.recorded_on).format('MM-DD-YYYY'), y: h.price}));
@@ -107,8 +111,6 @@ const ProductPage: React.FC<ProductPageProps> = ({
 				<div className='container'>
 					<h2>Loading...</h2>
 				</div>
-			) : !loadingProduct && productsHistory.length < 1 ? (
-				'Aint no data'
 			) : (
 				<div className='container'>
 					<div className='product-page-left'>

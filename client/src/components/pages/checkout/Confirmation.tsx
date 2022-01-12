@@ -8,10 +8,12 @@ interface ConfirmationProps {
 	formData: CheckoutForm;
 	onChange: () => void;
 	saveToLocalStorage: () => void;
+	onSubmit?: (e: any) => void;
+	toggleGift: () => void;
 }
 
-const Confirmation: React.FC<ConfirmationProps> = ({setPhase, phase, onChange, formData, saveToLocalStorage}) => {
-	const {shippingNotes, shippingOption} = formData;
+const Confirmation: React.FC<ConfirmationProps> = ({setPhase, phase, onChange, formData, saveToLocalStorage, onSubmit, toggleGift}) => {
+	const {shippingNotes, shippingOption, gift} = formData;
 
 	return (
 		<div>
@@ -46,6 +48,12 @@ const Confirmation: React.FC<ConfirmationProps> = ({setPhase, phase, onChange, f
 					<label htmlFor='shippingNotes'>Shipping Notes</label>
 					<textarea name='shippingNotes' value={shippingNotes} onChange={onChange as any} className='form-control'></textarea>
 				</div>
+				<div className='form-group'>
+					<div className='gift-option'>
+						<input type='checkbox' name='gift' value={gift} onChange={toggleGift} checked={gift === 'yes'} />
+						<label htmlFor='hey'>Does this order include any gifts?</label>
+					</div>
+				</div>
 			</form>
 			<PrevNext
 				goNext={() => {
@@ -54,6 +62,7 @@ const Confirmation: React.FC<ConfirmationProps> = ({setPhase, phase, onChange, f
 				}}
 				goPrev={() => setPhase(phase - 1)}
 				submitOrder
+				onSubmit={onSubmit}
 			/>
 		</div>
 	);

@@ -36,11 +36,11 @@ li {
 input[type='text'],
 input[type='password'],
 textarea {
-	// border: #a7a7a7 1px solid;
 	border: none;
 	box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.13);
+
 	&:focus {
-		outline: #7c7c7c 1px solid;
+		outline: 1px #cecece solid;
 	}
 }
 

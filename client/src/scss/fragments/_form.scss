@@ -37,6 +37,9 @@
 			min-width: 100%;
 			max-height: 150px;
 			min-height: 150px;
+			word-spacing: 0.05rem;
+			font-family: Arial, Helvetica, sans-serif;
+			font-size: 1rem !important;
 		}
 
 		input[type='checkbox'] {
@@ -47,6 +50,24 @@
 			transform: scale(1.25);
 			padding: 10px;
 			margin-right: 2rem;
+		}
+
+		.gift-option {
+			display: flex;
+			align-items: center;
+			justify-content: flex-start;
+			input[type='checkbox'] {
+				-ms-transform: scale(1.25);
+				-moz-transform: scale(1.25);
+				-webkit-transform: scale(1.25);
+				-o-transform: scale(1.25);
+				transform: scale(1.25);
+				padding: 10px;
+				margin-right: 2rem;
+			}
+			label {
+				margin-bottom: 0;
+			}
 		}
 	}
 

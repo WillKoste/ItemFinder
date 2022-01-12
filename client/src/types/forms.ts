@@ -15,4 +15,5 @@ export interface CheckoutForm {
 	billingSameAsShipping?: string;
 	shippingOption?: string;
 	shippingNotes?: string;
+	gift?: string;
 }

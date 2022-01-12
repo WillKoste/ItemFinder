@@ -8,6 +8,7 @@ import partners from './partners';
 import productCategories from './productCategories';
 import products from './products';
 import productsHistory from './productsHistory';
+import purchases from './purchases';
 import reviews from './reviews';
 
 export default combineReducers({
@@ -20,5 +21,6 @@ export default combineReducers({
 	productsHistoryRed: productsHistory,
 	productCategoriesRed: productCategories,
 	cartItemsRed: cartItems,
-	favoritesRed: favorites
+	favoritesRed: favorites,
+	purchasesRed: purchases
 });

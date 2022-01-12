@@ -29,6 +29,17 @@ export interface Product {
 	recorded_on?: string;
 }
 
+export interface Purchase {
+	id: number;
+	items: Product[];
+	shipping_address: string;
+	billing_address: string;
+	gift: boolean;
+	customer_status: string;
+	confirmation_code?: string;
+	shipping_method: string;
+}
+
 export interface CartProduct {
 	id: number;
 	name: string;
@@ -88,6 +99,7 @@ export interface Review {
 	rating: number;
 	created_at?: string;
 	updatedAt?: string;
+	vote_type?: number | null;
 }
 
 export interface Category {
@@ -128,6 +140,15 @@ export interface ProductsReducer {
 	loadingProduct: boolean;
 	error: any;
 	success?: boolean | null;
+}
+
+export interface PurchasesReducer {
+	purchases: Purchase[] | [];
+	purchase: Purchase | null;
+	loadingPurchases: boolean;
+	loadingPurchase: boolean;
+	error: any;
+	success: boolean | null;
 }
 
 export interface ProductsHistoryReducer {
@@ -201,6 +222,7 @@ export interface RootRedTypes {
 	cartItemsRed?: CartReducer;
 	favoritesRed?: FavoritesReducer;
 	productCategoriesRed?: CategoryReducer;
+	reviewsRed?: ReviewsReducer;
 }
 
 export interface AuthFormDataTypes {

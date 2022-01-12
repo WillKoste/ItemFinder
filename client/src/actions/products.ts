@@ -22,7 +22,7 @@ export const getProducts =
 		}
 	};
 
-export const getProduct = (productId: string) => async (dispatch: any) => {
+export const getProduct = (productId: number) => async (dispatch: any) => {
 	try {
 		const res: AxiosResponse<{product: Product}> = await customAxios.get(`/api/v1/products/${productId}`);
 		dispatch({

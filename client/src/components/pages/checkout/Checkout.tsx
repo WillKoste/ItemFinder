@@ -1,17 +1,21 @@
 import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
-import {CartReducer} from '../../../types/general';
+import {CartProduct, CartReducer, Product, UserReducer} from '../../../types/general';
 import AddressInformation from './AddressInformation';
 import Confirmation from './Confirmation';
 import PaymentDetails from './PaymentDetails';
 import ThankYou from './ThankYou';
 import {v4 as uuidv4} from 'uuid';
+import {createPurchase} from '../../../actions/purchases';
+import {CheckoutForm} from '../../../types/forms';
 
 interface CheckoutProps {
 	cartItemsRed: CartReducer;
+	authRed: UserReducer;
+	createPurchase: (data: CheckoutForm, items: CartProduct[], userId: number) => void;
 }
 
-const Checkout: React.FC<CheckoutProps> = ({cartItemsRed: {items}}) => {
+const Checkout: React.FC<CheckoutProps> = ({cartItemsRed: {items, total}, createPurchase, authRed: {user}}) => {
 	const [formData, setFormData] = useState({
 		checkoutId: uuidv4(),
 		confirmationNumber: null,
@@ -30,7 +34,8 @@ const Checkout: React.FC<CheckoutProps> = ({cartItemsRed: {items}}) => {
 		billingZipcode: '',
 		billingSameAsShipping: 'yes',
 		shippingOption: '',
-		shippingNotes: ''
+		shippingNotes: '',
+		gift: 'no'
 	});
 	const {
 		cardFirstName,
@@ -48,7 +53,8 @@ const Checkout: React.FC<CheckoutProps> = ({cartItemsRed: {items}}) => {
 		billingZipcode,
 		billingSameAsShipping,
 		shippingNotes,
-		shippingOption
+		shippingOption,
+		gift
 	} = formData;
 	const phase1State = {
 		cardFirstName,
@@ -70,8 +76,10 @@ const Checkout: React.FC<CheckoutProps> = ({cartItemsRed: {items}}) => {
 	};
 	const phase3State = {
 		shippingNotes,
-		shippingOption
+		shippingOption,
+		gift
 	};
+	const toggleGift = () => setFormData({...formData, gift: gift === 'yes' ? 'no' : 'yes'});
 	console.log(formData);
 	const [numSteps, setNumSteps] = useState([
 		{id: 1, section: 'Payment Details', passed: false},
@@ -93,6 +101,12 @@ const Checkout: React.FC<CheckoutProps> = ({cartItemsRed: {items}}) => {
 		setFormData({...formData, billingSameAsShipping: billingSameAsShipping === 'no' ? 'yes' : 'no'});
 	};
 
+	const onSubmit = (e: any) => {
+		e.preventDefault();
+		createPurchase(formData, items, user ? user.id : 0);
+		setPhase(4);
+	};
+
 	return (
 		<div className='checkout-page'>
 			<div className='container'>
@@ -108,7 +122,7 @@ const Checkout: React.FC<CheckoutProps> = ({cartItemsRed: {items}}) => {
 				</div>
 				{phase === 1 && <PaymentDetails setPhase={setPhase} phase={phase} formData={phase1State} onChange={onChange as any} saveToLocalStorage={saveToLocalStorage} />}
 				{phase === 2 && <AddressInformation setPhase={setPhase} phase={phase} onChange={onChange as any} formData={phase2State} checkBillingAddress={checkBillingAddress} saveToLocalStorage={saveToLocalStorage} />}
-				{phase === 3 && <Confirmation setPhase={setPhase} phase={phase} onChange={onChange as any} formData={phase3State} saveToLocalStorage={saveToLocalStorage} />}
+				{phase === 3 && <Confirmation setPhase={setPhase} phase={phase} onChange={onChange as any} formData={phase3State} saveToLocalStorage={saveToLocalStorage} onSubmit={onSubmit} toggleGift={toggleGift} />}
 				{phase === 4 && <ThankYou setPhase={setPhase} />}
 			</div>
 		</div>
@@ -116,7 +130,8 @@ const Checkout: React.FC<CheckoutProps> = ({cartItemsRed: {items}}) => {
 };
 
 const mapStateToProps = (state: any) => ({
-	cartItemsRed: state.cartItemsRed
+	cartItemsRed: state.cartItemsRed,
+	authRed: state.authRed
 });
 
-export default connect(mapStateToProps, {})(Checkout);
+export default connect(mapStateToProps, {createPurchase})(Checkout);

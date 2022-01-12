@@ -12,6 +12,8 @@ interface ThankYouProps {
 const ThankYou: React.FC<ThankYouProps> = ({setPhase, clearCartItems, phase}) => {
 	useEffect(() => {
 		localStorage.removeItem('checkargs');
+		localStorage.removeItem('cart');
+		localStorage.removeItem('cartTotal');
 		clearCartItems();
 	}, []);
 

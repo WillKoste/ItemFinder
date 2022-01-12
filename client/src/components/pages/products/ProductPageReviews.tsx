@@ -1,37 +1,28 @@
+import React, {useEffect, useState} from 'react';
 import moment from 'moment';
-import React from 'react';
 import {connect} from 'react-redux';
 import SearchBar from '../../../Reusable/Inputs/SearchBar';
-import {ProductsReducer, ReviewsReducer} from '../../../types/general';
+import {ProductsReducer, ReviewsReducer, UserReducer} from '../../../types/general';
+import {RouteComponentProps, withRouter} from 'react-router-dom';
+import ProductPageReviewItem from './ProductPageReviewItem';
 
-interface ProductPageReviewsProps {
+interface ProductPageReviewsProps extends RouteComponentProps<{productId: string}> {
 	reviewsRed: ReviewsReducer;
 	productsRed: ProductsReducer;
 }
 
 const ProductPageReviews: React.FC<ProductPageReviewsProps> = ({productsRed: {product}, reviewsRed: {reviews}}) => {
+	const onSearchReviews = (e: any) => {
+		e.preventDefault();
+		console.log({e});
+	};
+
 	return (
 		<div className='product-page-reviews'>
 			<h2>Reviews for {product?.name}</h2>
-			<SearchBar placeHolder='Search product reviews...' />
+			<SearchBar placeHolder='Search product reviews...' onSearch={onSearchReviews} />
 			{reviews.map((rev) => (
-				<div className='review'>
-					<div>
-						<div className='review-title'>
-							<p>
-								<strong>{rev.title}</strong> <small>Created on: {moment(rev.created_at).format('l')}</small>
-							</p>
-						</div>
-						<div className='review-body'>
-							<p>{rev.body}</p>
-						</div>
-					</div>
-					<div className='vote-btns'>
-						<i className={`fas fa-chevron-up selected`}></i>
-						<div className={`rating ${rev.rating < 0 ? 'rating-negative' : rev.rating > 0 ? 'rating-positive' : ''}`}>{rev.rating}</div>
-						<i className={`fas fa-chevron-down`}></i>
-					</div>
-				</div>
+				<ProductPageReviewItem rev={rev} />
 			))}
 		</div>
 	);
@@ -42,4 +33,4 @@ const mapStateToProps = (state: any) => ({
 	reviewsRed: state.reviewsRed
 });
 
-export default connect(mapStateToProps)(ProductPageReviews);
+export default withRouter(connect(mapStateToProps)(ProductPageReviews));

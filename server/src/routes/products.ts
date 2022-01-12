@@ -28,7 +28,7 @@ router.get('/', async (req: Request, res: Response) => {
  */
 router.get('/:productId', async (req: Request<{productId: string}>, res: Response) => {
 	try {
-		const product = await pool.query(`SELECT p.*, ph.id product_history_id, ph.partner_id, ph.recorded_on FROM products p INNER JOIN product_history ph ON ph.product_id = p.id WHERE p.id = $1`, [req.params.productId]);
+		const product = await pool.query(`SELECT p.*, ph.id product_history_id, ph.partner_id, ph.recorded_on FROM products p LEFT JOIN product_history ph ON ph.product_id = p.id WHERE p.id = $1`, [req.params.productId]);
 		if (product.rowCount === 0) {
 			return res.status(404).json({success: false, data: `Product ${req.params.productId} not found`});
 		}

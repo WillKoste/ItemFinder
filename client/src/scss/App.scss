@@ -165,9 +165,24 @@
 				margin-top: 4rem;
 
 				.search-bar {
+					position: relative;
 					margin: 0.75rem 0;
 					input {
 						font-size: 0.8rem;
+					}
+
+					.search-submit {
+						position: absolute;
+						right: 5px;
+						top: 5px;
+						i {
+							color: #999;
+							padding: 0.2rem;
+
+							&:hover {
+								cursor: pointer;
+							}
+						}
 					}
 				}
 

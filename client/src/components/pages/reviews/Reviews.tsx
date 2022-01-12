@@ -8,13 +8,17 @@ import {ReviewsReducer, UserReducer} from '../../../types/general';
 interface ReviewsProps extends RouteComponentProps<{productId: string}> {
 	reviewsRed: ReviewsReducer;
 	authRed: UserReducer;
-	getReviewByProductId: (productId: number) => void;
+	getReviewByProductId: (productId: number, userId?: number) => void;
 }
 
 const Reviews: React.FC<ReviewsProps> = ({reviewsRed: {reviews}, getReviewByProductId, match, authRed: {user}}) => {
 	useEffect(() => {
-		getReviewByProductId(+match.params.productId);
-	}, []);
+		if (user) {
+			getReviewByProductId(+match.params.productId, +user.id);
+		} else {
+			getReviewByProductId(+match.params.productId);
+		}
+	}, [user]);
 
 	console.log({reviews});
 
