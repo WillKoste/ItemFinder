@@ -1,7 +1,11 @@
 import React, {useState} from 'react';
 import {View, Text, ScrollView, TextInput} from 'react-native';
 import {styles} from '../../style/App';
-const {innerContainer, scrollOuterContainer, authHeader, contentContainer, form, formLabel, formGroup, formControl} = styles;
+import {formStyles} from '../../style/fragments/form';
+import {utils} from '../../style/fragments/utils';
+const {form, formLabel, formGroup, formControl} = formStyles;
+const {innerContainer, scrollOuterContainer, contentContainer} = utils;
+const {authHeader} = styles;
 
 interface RegisterProps {}
 

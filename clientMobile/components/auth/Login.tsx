@@ -1,11 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import {View, Text, ScrollView, TextInput, TouchableOpacity, Alert} from 'react-native';
-import {styles} from '../../style/App';
 import {login} from '../../actions/auth';
 import {AuthDataProps} from '../../types/general';
-import {getAllTokens} from '../../utils/sessionUtils';
-const {innerContainer, scrollOuterContainer, authHeader, contentContainer, form, formGroup, formLabel, formControl, btn, textWhite} = styles;
+import {deleteToken, getAllTokens, getSessionToken} from '../../utils/sessionUtils';
+import {styles} from '../../style/App';
+import {utils} from '../../style/fragments/utils';
+import {formStyles} from '../../style/fragments/form';
+const {authHeader} = styles;
+const {innerContainer, scrollOuterContainer, contentContainer, btnTextLight, textLight, btnSecondary} = utils;
+const {form, formGroup, formLabel, formControl} = formStyles;
 
 interface LoginProps {
 	login: (formData: AuthDataProps) => void;
@@ -18,6 +22,8 @@ const Login: React.FC<LoginProps> = ({login}) => {
 	});
 
 	useEffect(() => {
+		// getSessionToken('w7id');
+		// deleteToken('w7id');
 		getAllTokens();
 	}, []);
 
@@ -48,8 +54,8 @@ const Login: React.FC<LoginProps> = ({login}) => {
 						<Text style={formLabel}>Password</Text>
 						<TextInput style={formControl} secureTextEntry onChangeText={(e) => setFormData({...formData, password: e})} />
 					</View>
-					<TouchableOpacity style={btn} activeOpacity={0.9} onPress={onSubmit}>
-						<Text style={textWhite}>Login</Text>
+					<TouchableOpacity style={btnSecondary} activeOpacity={0.9} onPress={onSubmit}>
+						<Text style={btnTextLight}>Login</Text>
 					</TouchableOpacity>
 				</View>
 			</View>

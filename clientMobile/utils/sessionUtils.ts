@@ -2,6 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const saveSession = async (key: string, value: string) => {
 	try {
+		console.log({key, value});
 		await AsyncStorage.setItem(key, value);
 	} catch (err) {
 		console.log(err);
@@ -25,7 +26,7 @@ export const getSessionToken = async (key: string) => {
 export const getAllTokens = async () => {
 	try {
 		const results = await AsyncStorage.getAllKeys();
-		await AsyncStorage.removeItem('token');
+		// await AsyncStorage.removeItem('token');
 
 		if (results) {
 			console.log({results2: results});
@@ -35,4 +36,8 @@ export const getAllTokens = async () => {
 	} catch (err) {
 		console.log(err);
 	}
+};
+
+export const deleteToken = async (key: string) => {
+	await AsyncStorage.removeItem(key);
 };

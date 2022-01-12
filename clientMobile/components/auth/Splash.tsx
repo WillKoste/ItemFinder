@@ -1,34 +1,36 @@
-import {useNavigation} from '@react-navigation/native';
 import React from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity, ImageBackground} from 'react-native';
 import {splashNavProps} from '../../types/navigation';
 import {styles} from '../../style/App';
-// import {getValueFor} from '../../utils/sessionUtils';
-const {textWhite, btn, innerContainer, outerContainer, splashHeader} = styles;
+import {utils} from '../../style/fragments/utils';
+import {useNavigation} from '@react-navigation/native';
+const SplashImage = require('../../images/splash-img.jpg');
+const {splashHeader, splashImage} = styles;
+const {innerContainer, btnLight, outerContainer, btnTextLight, btnTextDark, btnDark, btnHighlight, btnPrimary, btnSecondary, btnDanger, btnSuccess} = utils;
 
 interface SplashProps {}
 
 const Splash: React.FC<SplashProps> = ({}) => {
-	// const navigation = useNavigation<splashNavProps>();
-
-	// navigation.navigate('Splash');
+	const navigation = useNavigation<splashNavProps>();
+	navigation.navigate('Splash');
 
 	return (
 		<View style={outerContainer}>
-			<View style={innerContainer}>
-				<Text style={splashHeader}>Splash Page</Text>
-				<View style={{width: '100%', paddingBottom: 100}}>
-					<TouchableOpacity style={btn} activeOpacity={0.9}>
-						{/* <TouchableOpacity style={btn} activeOpacity={0.9} onPress={() => navigation.navigate('Register')}> */}
-						{/* <TouchableOpacity style={btn} activeOpacity={0.9} onPress={async () => await getValueFor('w7id')}> */}
-						<Text style={textWhite}>Register</Text>
-					</TouchableOpacity>
-					<TouchableOpacity style={btn} activeOpacity={0.9} onPress={() => console.log('It worked fine')}>
-						{/* <TouchableOpacity style={btn} activeOpacity={0.9} onPress={() => navigation.navigate('Login')}> */}
-						<Text style={textWhite}>Login</Text>
-					</TouchableOpacity>
+			<ImageBackground source={SplashImage} resizeMode='cover' style={splashImage}>
+				<View style={innerContainer}>
+					<Text style={splashHeader}>Splash Page</Text>
+					<View style={{width: '100%', paddingBottom: 100}}>
+						<TouchableOpacity style={btnHighlight} activeOpacity={0.9}>
+							<Text style={btnTextDark} onPress={() => navigation.navigate('Register')}>
+								Register
+							</Text>
+						</TouchableOpacity>
+						<TouchableOpacity style={btnLight} activeOpacity={0.9} onPress={() => navigation.navigate('Login')}>
+							<Text style={btnTextDark}>Login</Text>
+						</TouchableOpacity>
+					</View>
 				</View>
-			</View>
+			</ImageBackground>
 		</View>
 	);
 };

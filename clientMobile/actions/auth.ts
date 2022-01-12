@@ -4,16 +4,16 @@ import {User} from '../types/redux';
 import {REGISTER_SUCCESS, REGISTER_FAIL, LOGOUT, LOGIN_SUCCESS, LOGIN_FAIL, AUTH_ERROR, GET_CURRENT_USER} from './types';
 import {AuthDataProps} from '../types/general';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-// import {SESSION_NAME} from '../utils/constants';
-// import {saveSession} from '../utils/sessionUtils';
+import {SESSION_NAME} from '../utils/constants';
+import {saveSession} from '../utils/sessionUtils';
 
-const saveSession = async (key: string, value: string) => {
-	try {
-		await AsyncStorage.setItem(key, value);
-	} catch (err) {
-		console.log(err);
-	}
-};
+// const saveSession = async (key: string, value: string) => {
+// 	try {
+// 		await AsyncStorage.setItem(key, value);
+// 	} catch (err) {
+// 		console.log(err);
+// 	}
+// };
 
 export const getCurrentUser = () => async (dispatch: any) => {
 	try {
@@ -43,13 +43,14 @@ export const login = (formData: AuthDataProps) => async (dispatch: any) => {
 	try {
 		const res: AxiosResponse<{user: User; session: string}> = await customAxios.post('/api/v1/users/login', body, config);
 		console.log({res});
-		dispatch({
-			type: LOGIN_SUCCESS,
-			payload: res.data.user
-		});
-		// saveSession(SESSION_NAME, res.data.session);
+		// dispatch({
+		// 	type: LOGIN_SUCCESS,
+		// 	payload: res.data.user
+		// });
+		saveSession(SESSION_NAME, res.data.session);
 	} catch (err: any) {
-		console.error(err);
+		console.error({err});
+		console.log('couldnt do it sorry');
 		dispatch({
 			type: LOGIN_FAIL,
 			payload: err.response

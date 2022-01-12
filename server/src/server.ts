@@ -69,11 +69,12 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 const port = process.env.PORT || 5001;
+const portMobile = process.env.PORT_MOBILE || 5002;
 const mode = process.env.NODE_ENV || 'DEFAULT';
 
-// app.listen(port, () => {
-// 	console.log(`Express server running on port ${port}, in ${mode} mode`.cyan.underline.bold);
-// });
+app.listen(portMobile, () => {
+	console.log(`Express mobile server running on port ${portMobile}, in ${mode} mode`.yellow.underline.bold);
+});
 
 import https from 'https';
 import fs from 'fs';

@@ -119,7 +119,7 @@ router.post('/logout', checkAuth, async (req, res): Promise<Response> => {
 				return;
 			}
 		});
-		res.clearCookie(process.env.COOKIE_NAME, {secure: 'auto', sameSite: 'none'});
+		res.clearCookie(process.env.COOKIE_NAME, {secure: true, sameSite: 'none'});
 		return res.json({success: true, data: 'Session has been terminated.'});
 	} catch (err) {
 		console.error(err);

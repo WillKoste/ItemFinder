@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 import {connect} from 'react-redux';
 import {Link, RouteComponentProps} from 'react-router-dom';
 import {getProduct} from '../../../actions/products';
@@ -14,6 +14,7 @@ import RatingStars from '../../../Reusable/Products/RatingStars';
 import {addFavorite} from '../../../actions/favorites';
 import ProductPageReviews from './ProductPageReviews';
 import {getReviewByProductId} from '../../../actions/reviews';
+import swal from 'sweetalert';
 
 interface ProductPageProps extends RouteComponentProps<{productId: string}> {
 	getProduct: (prodId: number) => void;
@@ -99,9 +100,12 @@ const ProductPage: React.FC<ProductPageProps> = ({
 		]
 	};
 
-	const onClickAddToCart = () => {
+	const onClickAddToCart = (e: any) => {
 		if (product) {
 			addItemToCart(product, items, qtyData);
+			if (e.target.name === 'add-to-cart-btn') {
+				swal({text: 'Product added to cart!'});
+			}
 		}
 	};
 
@@ -141,7 +145,7 @@ const ProductPage: React.FC<ProductPageProps> = ({
 							</div>
 						</div>
 						<div className='pp-left-btns my-3'>
-							<button className='btn btn-primary btn-block mb-1' onClick={onClickAddToCart}>
+							<button name='add-to-cart-btn' className='btn btn-primary btn-block mb-1' onClick={onClickAddToCart}>
 								Add To Cart
 							</button>
 							<Link
