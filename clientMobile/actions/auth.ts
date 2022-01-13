@@ -43,10 +43,10 @@ export const login = (formData: AuthDataProps) => async (dispatch: any) => {
 	try {
 		const res: AxiosResponse<{user: User; session: string}> = await customAxios.post('/api/v1/users/login', body, config);
 		console.log({res});
-		// dispatch({
-		// 	type: LOGIN_SUCCESS,
-		// 	payload: res.data.user
-		// });
+		dispatch({
+			type: LOGIN_SUCCESS
+			// payload: res.data.user
+		});
 		saveSession(SESSION_NAME, res.data.session);
 	} catch (err: any) {
 		console.error({err});

@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {checkAuthToken} from './setAuthToken';
 
 export const saveSession = async (key: string, value: string) => {
 	try {
@@ -12,12 +13,8 @@ export const saveSession = async (key: string, value: string) => {
 export const getSessionToken = async (key: string) => {
 	try {
 		const result = await AsyncStorage.getItem(key);
-
-		if (result) {
-			console.log({result});
-		} else {
-			console.log('Didnt work :C');
-		}
+		console.log({result});
+		checkAuthToken(result);
 	} catch (err) {
 		console.log(err);
 	}

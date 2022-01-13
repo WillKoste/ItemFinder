@@ -1,6 +1,7 @@
 import {Request, Response, NextFunction} from 'express';
 
 export const checkAuth = (req: Request, res: Response, next: NextFunction) => {
+	console.log({req, yo: req.session, hi: req.session.cookie});
 	if (!req.session.userId) {
 		return res.status(401).json({success: false, data: 'Authorization Denied'});
 	}

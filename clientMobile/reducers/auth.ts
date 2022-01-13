@@ -1,5 +1,5 @@
 import {REGISTER_FAIL, REGISTER_SUCCESS, LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT, AUTH_ERROR, GET_CURRENT_USER} from '../actions/types';
-import {UserReducer} from '../types/redux';
+import {Action, UserReducer} from '../types/redux';
 
 const initialState: UserReducer = {
 	isAuthenticated: null,
@@ -8,7 +8,7 @@ const initialState: UserReducer = {
 	error: null
 };
 
-export default function (state = initialState, action: any): UserReducer {
+export default function (state = initialState, action: Action): UserReducer {
 	const {type, payload} = action;
 
 	switch (type) {

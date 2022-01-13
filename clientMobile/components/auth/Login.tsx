@@ -22,9 +22,9 @@ const Login: React.FC<LoginProps> = ({login}) => {
 	});
 
 	useEffect(() => {
-		// getSessionToken('w7id');
+		getSessionToken('w7id');
 		// deleteToken('w7id');
-		getAllTokens();
+		// getAllTokens();
 	}, []);
 
 	const {email, password} = formData;

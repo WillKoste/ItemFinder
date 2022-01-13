@@ -9,6 +9,7 @@ import {clearCartItems} from './cartItems';
 export const getCurrentUser = () => async (dispatch: any) => {
 	try {
 		const res: AxiosResponse<{user: User}> = await customAxios.get('/api/v1/users/me');
+		console.log({CLIENT: res});
 		dispatch({
 			type: GET_CURRENT_USER,
 			payload: res.data.user

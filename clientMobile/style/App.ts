@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {aCenter, jCenter, lightColor, primaryColor} from './fragments/config';
+import {aCenter, borderRadius, jCenter, lightColor, primaryColor} from './fragments/config';
 
 export const styles = StyleSheet.create({
 	authHeader: {
@@ -7,19 +7,21 @@ export const styles = StyleSheet.create({
 		marginBottom: 165,
 		marginTop: 100,
 		paddingVertical: 10,
+		paddingTop: 48,
 		paddingHorizontal: 6,
 		alignSelf: 'flex-start',
 		justifyContent: 'flex-start',
 		width: '100%',
 		color: lightColor,
 		flex: 4,
-		backgroundColor: primaryColor
+		backgroundColor: primaryColor,
+		borderRadius
 	},
 	splashHeader: {
 		fontSize: 52,
 		marginBottom: 200,
 		paddingVertical: 10,
-		alignSelf: 'flex-start',
+		alignSelf: 'center',
 		justifyContent: jCenter,
 		color: lightColor
 	},
