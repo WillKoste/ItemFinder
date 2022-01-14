@@ -7,24 +7,27 @@ import {deleteToken, getAllTokens, getSessionToken} from '../../utils/sessionUti
 import {styles} from '../../style/App';
 import {utils} from '../../style/fragments/utils';
 import {formStyles} from '../../style/fragments/form';
+import {getProducts} from '../../actions/products';
 const {authHeader} = styles;
 const {innerContainer, scrollOuterContainer, contentContainer, btnTextLight, textLight, btnSecondary} = utils;
 const {form, formGroup, formLabel, formControl} = formStyles;
 
-interface LoginProps {
+interface LoginComponentProps {
 	login: (formData: AuthDataProps) => void;
+	getProducts: () => void;
 }
 
-const Login: React.FC<LoginProps> = ({login}) => {
+const LoginComponent: React.FC<LoginComponentProps> = ({login, getProducts}) => {
 	const [formData, setFormData] = useState({
 		email: '',
 		password: ''
 	});
 
 	useEffect(() => {
-		getSessionToken('w7id');
+		// getSessionToken('w7id');
 		// deleteToken('w7id');
 		// getAllTokens();
+		getProducts();
 	}, []);
 
 	const {email, password} = formData;
@@ -37,7 +40,6 @@ const Login: React.FC<LoginProps> = ({login}) => {
 			Alert.alert('Data required', 'Please provide your valid email and password');
 		} else {
 			login(formData);
-			// console.log('No issues yet');
 		}
 	};
 
@@ -63,4 +65,4 @@ const Login: React.FC<LoginProps> = ({login}) => {
 	);
 };
 
-export default connect(null, {login})(Login);
+export default connect(null, {login, getProducts})(LoginComponent);

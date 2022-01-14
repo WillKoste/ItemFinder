@@ -1,4 +1,4 @@
-import {GET_PRODUCTS} from '../actions/types';
+import {GET_PRODUCTS, PRODUCTS_ERROR} from '../actions/types';
 import {Action, ProductsReducer} from '../types/redux';
 
 const initialState: ProductsReducer = {
@@ -11,6 +11,21 @@ const initialState: ProductsReducer = {
 export default function (state = initialState, action: Action): ProductsReducer {
 	const {payload, type} = action;
 	switch (type) {
+		case GET_PRODUCTS:
+			return {
+				...state,
+				loading: false,
+				error: null,
+				products: payload
+			};
+		case PRODUCTS_ERROR:
+			return {
+				...state,
+				loading: false,
+				error: payload,
+				product: null,
+				products: []
+			};
 		default:
 			return state;
 	}

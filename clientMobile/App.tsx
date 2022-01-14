@@ -8,7 +8,10 @@ interface AppProps {}
 const App: React.FC<AppProps> = () => {
 	return (
 		<Provider store={store}>
-			<Routes store={store} />
+			{/* <PersistGate persistor={persistor}>
+				<Routes />
+			</PersistGate> */}
+			<Routes />
 		</Provider>
 	);
 };

@@ -10,6 +10,8 @@ declare namespace NodeJS {
 		PG_PASSWORD: string;
 		PG_USER: string;
 		SESSION_SECRET: string;
+		JWT_SECRET: string;
+		JWT_EXPIRES_IN: string;
 		COOKIE_NAME: string;
 		REDIS_PORT: string;
 		REDIS_URL: string;

@@ -36,6 +36,7 @@ declare global {
 			isAdmin?: boolean | undefined;
 			isPartner?: boolean | undefined;
 			isPremium?: boolean | undefined;
+			user?: User;
 		}
 	}
 }

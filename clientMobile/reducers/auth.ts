@@ -4,21 +4,30 @@ import {Action, UserReducer} from '../types/redux';
 const initialState: UserReducer = {
 	isAuthenticated: null,
 	loading: true,
+	token: null,
 	user: null,
 	error: null
 };
 
-export default function (state = initialState, action: Action): UserReducer {
+export default function (state = initialState, action: Action) {
 	const {type, payload} = action;
 
 	switch (type) {
-		case LOGIN_SUCCESS:
-		case REGISTER_SUCCESS:
 		case GET_CURRENT_USER:
 			return {
 				...state,
 				loading: false,
 				user: payload,
+				isAuthenticated: true,
+				error: null
+			};
+		case LOGIN_SUCCESS:
+		case REGISTER_SUCCESS:
+			console.log('LOGIN_SUCCESS');
+			return {
+				...state,
+				loading: false,
+				token: payload,
 				isAuthenticated: true,
 				error: null
 			};

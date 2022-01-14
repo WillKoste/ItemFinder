@@ -6,13 +6,13 @@ export type RootStackParamList = {
 	Favorites: undefined;
 	Trends: undefined;
 	Splash: undefined;
-	Login: undefined;
-	Register: undefined;
+	LoginComponent: undefined;
+	RegisterComponent: undefined;
 };
 
 export type splashNavProps = StackNavigationProp<RootStackParamList, 'Splash'>;
-export type loginNavProps = StackNavigationProp<RootStackParamList, 'Login'>;
-export type registerNavProps = StackNavigationProp<RootStackParamList, 'Register'>;
+export type loginNavProps = StackNavigationProp<RootStackParamList, 'LoginComponent'>;
+export type registerNavProps = StackNavigationProp<RootStackParamList, 'RegisterComponent'>;
 export type homeNavProps = StackNavigationProp<RootStackParamList, 'Home'>;
 export type accountNavProps = StackNavigationProp<RootStackParamList, 'Account'>;
 export type favoritesNavProps = StackNavigationProp<RootStackParamList, 'Favorites'>;

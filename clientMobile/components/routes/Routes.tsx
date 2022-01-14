@@ -7,15 +7,15 @@ import {ProductsReducer, UserReducer} from '../../types/redux';
 import Navbar from '../layout/Navbar';
 import AuthStack from '../stacks/AuthStack';
 import {getCurrentUser} from '../../actions/auth';
+import store from '../../store';
 
 interface RoutesProps {
-	store: Store;
 	authRed: UserReducer;
 	productsRed: ProductsReducer;
 	getCurrentUser: () => void;
 }
 
-const Routes: React.FC<RoutesProps> = ({store, authRed, productsRed, getCurrentUser}) => {
+const Routes: React.FC<RoutesProps> = ({authRed, productsRed, getCurrentUser}) => {
 	useEffect(() => {
 		getCurrentUser();
 	}, []);
@@ -25,6 +25,7 @@ const Routes: React.FC<RoutesProps> = ({store, authRed, productsRed, getCurrentU
 	}, [authRed, productsRed]);
 
 	return <NavigationContainer>{authRed.loading ? <Text>Loading...</Text> : authRed.isAuthenticated ? <Navbar /> : <AuthStack />}</NavigationContainer>;
+	// return <NavigationContainer>{authRed.loading ? <Text>Loading...</Text> : <Navbar />}</NavigationContainer>;
 };
 
 const mapStateToProps = (state: any) => ({

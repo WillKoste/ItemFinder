@@ -34,6 +34,7 @@ export interface Product {
 export interface UserReducer {
 	user: User | null;
 	isAuthenticated: boolean | null;
+	token: string | null;
 	loading: boolean;
 	error: any;
 }

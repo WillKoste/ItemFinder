@@ -20,10 +20,10 @@ const Splash: React.FC<SplashProps> = ({}) => {
 				<View style={innerContainer}>
 					<Text style={splashHeader}>ItemFinder</Text>
 					<View style={{width: '100%', paddingBottom: 100}}>
-						<TouchableOpacity style={btnHighlight} activeOpacity={0.9} onPress={() => navigation.navigate('Register')}>
+						<TouchableOpacity style={btnHighlight} activeOpacity={0.9} onPress={() => navigation.navigate('RegisterComponent')}>
 							<Text style={btnTextDark}>Register</Text>
 						</TouchableOpacity>
-						<TouchableOpacity style={btnLight} activeOpacity={0.9} onPress={() => navigation.navigate('Login')}>
+						<TouchableOpacity style={btnLight} activeOpacity={0.9} onPress={() => navigation.navigate('LoginComponent')}>
 							<Text style={btnTextDark}>Login</Text>
 						</TouchableOpacity>
 					</View>
