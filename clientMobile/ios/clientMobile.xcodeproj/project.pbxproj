@@ -109,6 +109,7 @@
 				00E356EF1AD99517003FC87E /* clientMobileTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
+				6E176949510349379143A7C0 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -123,6 +124,14 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
+		};
+		6E176949510349379143A7C0 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 

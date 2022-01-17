@@ -3,10 +3,10 @@ import {Contact} from '../types/general';
 import {GET_CONTACTS, GET_CONTACT, CONTACTS_CLEAR, CONTACTS_ERROR, CREATE_CONTACT, UPDATE_CONTACT, DELETE_CONTACT, CREATE_REVIEW} from './types';
 
 export const getContacts =
-	(limit: number = 10, offset: number = 0) =>
+	(originId: number, limit: number = 10, offset: number = 0) =>
 	async (dispatch: any) => {
 		try {
-			const res: AxiosResponse<{contacts: Contact[]}> = await axios.get(`/api/v1/contacts?limit=${limit}&offset=${offset}`);
+			const res: AxiosResponse<{contacts: Contact[]}> = await axios.get(`/api/v1/contacts?limit=${limit}&offset=${offset}&originId=${originId}`);
 			dispatch({
 				type: GET_CONTACTS,
 				payload: res.data.contacts

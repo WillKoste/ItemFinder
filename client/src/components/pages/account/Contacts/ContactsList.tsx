@@ -2,14 +2,15 @@ import React, {useState, useEffect, useMemo, useCallback} from 'react';
 import {connect} from 'react-redux';
 import {getContacts} from '../../../../actions/contacts';
 import Table from '../../../../Reusable/Table';
-import {ContactsReducer} from '../../../../types/general';
+import {ContactsReducer, UserReducer} from '../../../../types/general';
 
 interface ContactsListProps {
-	getContacts: (limit?: number, offset?: number) => void;
+	getContacts: (originId: number, limit?: number, offset?: number) => void;
 	contactsRed: ContactsReducer;
+	authRed: UserReducer;
 }
 
-const ContactsList: React.FC<ContactsListProps> = ({getContacts, contactsRed: {contacts}}) => {
+const ContactsList: React.FC<ContactsListProps> = ({getContacts, contactsRed: {contacts}, authRed: {user}}) => {
 	const [contactsData, setContactsData] = useState([]);
 	const [offsetState, setOffsetState] = useState(0);
 
@@ -24,7 +25,9 @@ const ContactsList: React.FC<ContactsListProps> = ({getContacts, contactsRed: {c
 		}
 	}, [offsetState]);
 	useEffect(() => {
-		getContacts(10, offsetState);
+		if (user) {
+			getContacts(user.id, 10, offsetState);
+		}
 	}, [offsetState]);
 	useEffect(() => {
 		setContactsData(contacts as any);
@@ -72,7 +75,8 @@ const ContactsList: React.FC<ContactsListProps> = ({getContacts, contactsRed: {c
 };
 
 const mapStateToProps = (state: any) => ({
-	contactsRed: state.contactsRed
+	contactsRed: state.contactsRed,
+	authRed: state.authRed
 });
 
 export default connect(mapStateToProps, {getContacts})(ContactsList);

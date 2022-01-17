@@ -8,7 +8,7 @@ import {clearCartItems} from './cartItems';
 
 export const getCurrentUser = () => async (dispatch: any) => {
 	try {
-		const res: AxiosResponse<{user: User}> = await customAxios.get('/api/v1/users/me');
+		const res: AxiosResponse<{user: User}> = await customAxios.get('/api/v1/users/web/me');
 		console.log({CLIENT: res});
 		dispatch({
 			type: GET_CURRENT_USER,
@@ -32,7 +32,7 @@ export const loginUser = (formData: AuthFormDataTypes) => async (dispatch: any) 
 	const body = JSON.stringify(formData);
 
 	try {
-		const res: AxiosResponse<{user: User}> = await customAxios.post('/api/v1/users/login', body, config);
+		const res: AxiosResponse<{user: User}> = await customAxios.post('/api/v1/users/web/login', body, config);
 		dispatch({
 			type: LOGIN_SUCCESS,
 			payload: res.data.user
@@ -55,7 +55,7 @@ export const registerUser = (formData: AuthFormDataTypes) => async (dispatch: an
 	const body = JSON.stringify(formData);
 
 	try {
-		const res: AxiosResponse<{user: User}> = await customAxios.post('/api/v1/users/register', body, config);
+		const res: AxiosResponse<{user: User}> = await customAxios.post('/api/v1/users/web/register', body, config);
 		dispatch({
 			type: REGISTER_SUCCESS,
 			payload: res.data.user

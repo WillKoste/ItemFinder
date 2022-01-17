@@ -32,19 +32,13 @@ router.get('/', [checkAuth, checkRole], async (_: any, res: Response): Promise<R
  * @name Get Current User (Web)
  */
 router.get('/web/me', [checkAuth], async (req: Request, res: Response) => {
-	console.log({WILLIE: req.session, headie: req.headers});
 	console.log('hey');
 
 	try {
 		if (!req.session.userId) {
 			return res.status(401).json({success: false, data: 'Authorization Denied'});
 		}
-
-		console.log(req.session);
-
 		const user = await pool.query(`SELECT id, email, phone, image, is_admin, is_partner, is_premium, partner_code FROM users WHERE id = $1`, [req.session.userId]);
-
-		console.log({res});
 
 		return res.json({success: true, user: user.rows[0]});
 	} catch (err) {
@@ -56,9 +50,10 @@ router.get('/web/me', [checkAuth], async (req: Request, res: Response) => {
 /**
  * @name Get Current User (Mobile)
  */
-router.get('/mobile/me/', [checkJWTAuth], async (req: Request, res: Response) => {
+router.get('/mobile/me', [checkJWTAuth], async (req: Request, res: Response) => {
 	try {
-		const user = await pool.query(`SELECT id, email, phone, image, is_admin, is_partner, is_premium, partner_code FROM users WHERE id = $1`, [req.session.userId]);
+		const user = await pool.query(`SELECT id, email, phone, image, is_admin, is_partner, is_premium, partner_code FROM users WHERE id = $1`, [(req.user as any).id]);
+		console.log({WILL: user.rows[0]});
 		return res.json({success: true, user: user.rows[0]});
 	} catch (err) {
 		return res.status(500).json({success: false, data: 'Server Error'});

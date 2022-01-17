@@ -13,6 +13,8 @@ interface TableProps {
 const Table: React.FC<TableProps> = ({data, columns, onClickNext, onClickPrev}) => {
 	const validFields = columns.map((col) => col.accessor);
 
+	console.log(moment('nv 17').isValid());
+
 	return (
 		<Fragment>
 			<table className='table'>
@@ -47,11 +49,7 @@ const Table: React.FC<TableProps> = ({data, columns, onClickNext, onClickPrev}) 
 								style={{background: i % 2 === 0 ? '#ccc' : 'inherit'}}
 							>
 								{keysArr.map((key, end) => {
-									const isDescKey = key === 'description';
-									return (
-										// <td style={{background: key === 'description' ? 'lightBlue' : ''}}>
-										<td style={columns[end].style}>{d[key].toString().match(/^(\d{4})(?:-?W(\d+)(?:-?(\d+)D?)?|(?:-(\d+))?-(\d+))(?:[T ](\d+):(\d+)(?::(\d+)(?:\.(\d+))?)?)?(?:Z(-?\d*))?$/) ? moment(d[key]).format('MM-DD-YYYY') : d[key]}</td>
-									);
+									return <td style={columns[end].style}>{moment(d[key]).isValid() ? moment(d[key]).format('l') : d[key]}</td>;
 								})}
 							</tr>
 						);

@@ -30,5 +30,20 @@ export const styles = StyleSheet.create({
 		height: '100%',
 		justifyContent: jCenter,
 		alignItems: aCenter
+	},
+
+	// CONTACTS
+	contactItem: {
+		display: 'flex',
+		flexDirection: 'row',
+		borderBottomColor: '#999',
+		borderBottomWidth: 1,
+		borderStyle: 'solid',
+		paddingVertical: 25,
+		paddingHorizontal: 8,
+		width: '100%'
+	},
+	contactItemText: {
+		fontSize: 18
 	}
 });

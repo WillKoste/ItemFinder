@@ -84,10 +84,10 @@ export interface Partner {
 export interface Contact {
 	id?: number;
 	name?: string;
-	firstName?: string;
-	lastName?: string;
+	first_name?: string;
+	last_name?: string;
 	address?: string;
-	creditCard?: string;
+	credit_card?: string;
 }
 
 export interface Review {

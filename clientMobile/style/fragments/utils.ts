@@ -3,7 +3,7 @@ import {aCenter, jCenter, innerWidth, borderRadius, lightColor, darkColor, prima
 
 export const utils = StyleSheet.create({
 	outerContainer: {
-		flex: 1,
+		// flex: 1,
 		alignItems: aCenter,
 		justifyContent: jCenter,
 		backgroundColor: '#f4f4f4'
@@ -100,5 +100,22 @@ export const utils = StyleSheet.create({
 	scrollOuterContainer: {
 		flex: 1,
 		backgroundColor: '#f4f4f4'
+	},
+	searchContainer: {
+		width: '100%',
+		paddingHorizontal: 3,
+		height: 40,
+		backgroundColor: '#fff',
+		color: darkColor,
+		borderRadius: 8,
+		borderWidth: 1,
+		borderColor: '#888',
+		borderStyle: 'solid',
+		textDecorationStyle: 'none',
+		marginVertical: 14
+	},
+	moduleScrollOuterContainer: {
+		backgroundColor: '#fff',
+		width: '100%'
 	}
 });

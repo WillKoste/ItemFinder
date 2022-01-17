@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
-import Favorites from '../pages/favorites/Favorites';
+import Favorites from '../pages/account/MyFavorites/MyFavorites';
 const Stack = createStackNavigator();
 
 interface FavoritesStackProps {}

@@ -10,12 +10,10 @@ import CardStack from '../../../Reusable/Cards/ProductCardStack';
 interface HomeProps {
 	getLocations: () => void;
 	getPartners: () => void;
-	getReviews: () => void;
-	getContacts: () => void;
 	clearProduct: () => void;
 }
 
-const Home: React.FC<HomeProps> = ({getLocations, getPartners, getContacts, getReviews, clearProduct}) => {
+const Home: React.FC<HomeProps> = ({getLocations, getPartners, clearProduct}) => {
 	useEffect(() => {
 		clearProduct();
 	}, []);
@@ -36,4 +34,4 @@ const Home: React.FC<HomeProps> = ({getLocations, getPartners, getContacts, getR
 	);
 };
 
-export default connect(null, {getLocations, getPartners, getContacts, getReviews, clearProduct})(Home);
+export default connect(null, {getLocations, getPartners, clearProduct})(Home);

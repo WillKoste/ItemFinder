@@ -9,7 +9,7 @@ const router = express.Router();
  */
 router.get('/', async (req: Request, res: Response) => {
 	try {
-		const contacts = await pool.query(`SELECT id, first_name, last_name, contact_type, address, created_at FROM contacts order by first_name, id limit $1 offset $2`, [req.query.limit, req.query.offset]);
+		const contacts = await pool.query(`SELECT id, first_name, last_name, contact_type, address, created_at FROM contacts WHERE origin_id = $1 order by first_name, id limit $2 offset $3`, [req.query.originId, req.query.limit, req.query.offset]);
 		if (contacts.rowCount === 0) {
 			return res.status(404).json({success: false, data: `Contacts not found`});
 		}

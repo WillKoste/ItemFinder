@@ -1,13 +1,13 @@
 import customAxios from '../utils/customAxios';
 import {AxiosResponse} from 'axios';
 import {User} from '../types/redux';
-import {saveSession} from '../utils/sessionUtils';
+import {getSessionToken, saveSession} from '../utils/sessionUtils';
 import {REGISTER_SUCCESS, REGISTER_FAIL, LOGOUT, LOGIN_SUCCESS, LOGIN_FAIL, AUTH_ERROR, GET_CURRENT_USER} from './types';
 import {AuthDataProps} from '../types/general';
 import {SESSION_NAME} from '../utils/constants';
+import {checkAuthToken} from '../utils/setAuthToken';
 
 export const getCurrentUser = () => async (dispatch: any) => {
-	console.log('Tried to get user');
 	try {
 		const res: AxiosResponse<{user: User}> = await customAxios.get('/api/v1/users/mobile/me');
 		dispatch({
