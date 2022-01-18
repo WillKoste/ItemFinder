@@ -37,6 +37,8 @@ declare global {
 			isPartner?: boolean | undefined;
 			isPremium?: boolean | undefined;
 			user?: User;
+			searchQuery?: string | undefined;
+			queryArray?: any[];
 		}
 	}
 }

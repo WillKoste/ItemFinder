@@ -1,12 +1,17 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import {Chart, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend} from 'chart.js';
 import {Line} from 'react-chartjs-2';
+import ChartCards from './ChartCards';
+import {ProductsReducer} from '../../types/general';
 
-interface ChartSectionProps {}
+interface ChartSectionProps {
+	productsRed: ProductsReducer;
+}
 
-const ChartSection: React.FC<ChartSectionProps> = () => {
+const ChartSection: React.FC<ChartSectionProps> = ({productsRed: {loading, products}}) => {
 	Chart.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+
 	const options = {
 		responsive: true,
 		plugins: {
@@ -45,9 +50,15 @@ const ChartSection: React.FC<ChartSectionProps> = () => {
 			<div className='graph-left'>
 				<Line options={options} data={data} />
 			</div>
-			<div className='graph-right'>Hello</div>
+			<div className='graph-right'>
+				<ChartCards category='west' />
+			</div>
 		</div>
 	);
 };
 
-export default connect(null, {})(ChartSection);
+const mapStateToProps = (state: any) => ({
+	productsRed: state.productsRed
+});
+
+export default connect(mapStateToProps, {})(ChartSection);

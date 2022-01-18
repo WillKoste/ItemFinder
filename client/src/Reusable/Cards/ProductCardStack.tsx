@@ -3,11 +3,12 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {getProducts} from '../../actions/products';
 import {ProductsReducer} from '../../types/general';
+import {ProductsOptions} from '../../types/redux';
 import Card1 from '../Card1';
 
 interface CardStackProps {
 	productsRed: ProductsReducer;
-	getProducts: (limit?: number, offset?: number) => void;
+	getProducts: (options: ProductsOptions) => void;
 	right?: string;
 	left?: string;
 	top?: string;
@@ -18,8 +19,7 @@ const CardStack: React.FC<CardStackProps> = ({productsRed: {loading, products}, 
 	const [offsetState, setOffsetState] = useState(0);
 
 	useEffect(() => {
-		console.log({offsetState});
-		getProducts(limitState, offsetState);
+		getProducts({limit: 5, offset: offsetState});
 	}, [limitState, offsetState]);
 
 	const onClickLeftArrow = useCallback(() => {

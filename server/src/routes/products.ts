@@ -2,19 +2,20 @@ import express, {Request, Response} from 'express';
 import {Product} from '../types/routes';
 import {pool} from '../config/pg';
 import {QueryResult} from 'pg';
+import {searchQueries} from '../middleware/searchQueries';
 const router = express.Router();
 
 /**
  * @name Get All Products
  */
-router.get('/', async (req: Request, res: Response) => {
+router.get('/', [searchQueries], async (req: Request, res: Response) => {
 	console.log({req: req.query});
 	try {
-		const products: QueryResult<Product[]> = await pool.query(`SELECT * FROM products p limit $1 offset $2`, [req.query.limit, req.query.offset]);
+		const products: QueryResult<Product[]> = await pool.query(`SELECT * FROM products p ${req.searchQuery}`, req.queryArray);
 		if (products.rowCount === 0) {
 			return res.status(404).json({success: false, data: 'Products could not be found'});
 		}
-		console.log({products: products.rowCount});
+		console.log({WILLIAM: req.searchQuery, woahh: req.queryArray});
 
 		return res.json({success: true, count: products.rowCount, products: products.rows});
 	} catch (err) {

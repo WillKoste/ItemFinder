@@ -10,3 +10,9 @@ export interface Action {
 	newRating?: number;
 	voteTypeVal?: number;
 }
+
+export interface ProductsOptions {
+	limit: number;
+	offset?: number;
+	category?: string;
+}

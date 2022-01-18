@@ -1,15 +1,15 @@
-import React, {useEffect, useMemo, useState} from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
 import {clearProduct, getProducts} from '../../../actions/products';
 import CategoryCardStack from '../../../Reusable/Cards/CategoryCardStack';
-import CardStack from '../../../Reusable/Cards/ProductCardStack';
 import ChartSection from '../../../Reusable/Chart/ChartSection';
-import {Product, ProductsHistoryReducer, ProductsReducer} from '../../../types/general';
+import {ProductsHistoryReducer, ProductsReducer} from '../../../types/general';
+import {ProductsOptions} from '../../../types/redux';
 
 interface TrendsProps {
 	productsHistoryRed: ProductsHistoryReducer;
 	productsRed: ProductsReducer;
-	getProducts: () => void;
+	getProducts: (options: ProductsOptions) => void;
 	clearProduct: () => void;
 }
 
@@ -18,7 +18,6 @@ const Trends: React.FC<TrendsProps> = ({productsHistoryRed, productsRed, product
 		<div className='trends'>
 			<div className='container'>
 				<h1 className='mb-3'>Choose a Category</h1>
-				{/* <CardStack /> */}
 				<CategoryCardStack />
 				<ChartSection />
 			</div>

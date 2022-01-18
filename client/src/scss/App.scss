@@ -373,3 +373,71 @@
 		margin-bottom: 0.6rem;
 	}
 }
+
+.chart-products-container {
+	height: 450px;
+	display: flex;
+	flex-direction: column;
+	.chart-products {
+		flex: 13;
+		overflow-y: scroll;
+
+		.chart-product {
+			display: flex;
+			margin-bottom: 0.4rem;
+			font-size: 0.2rem;
+			padding: 0.4rem;
+			box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.05);
+
+			img {
+				flex: 0.8;
+			}
+			> div {
+				display: flex;
+				flex-direction: column;
+				justify-content: flex-start;
+				align-items: flex-start;
+				margin-left: 0.5rem;
+				text-align: left;
+				flex: 2.3;
+
+				p {
+					font-size: 0.7rem;
+					margin-bottom: 0.3rem;
+
+					&:first-of-type {
+						font-size: 0.8rem;
+					}
+				}
+			}
+
+			&:hover {
+				cursor: pointer;
+				background: darken(#f4f4f4, 5%);
+			}
+		}
+	}
+
+	.chart-buttons {
+		flex: 0.5;
+		padding: 0.5rem 0;
+
+		button {
+			background: $dark-color;
+			padding: 0.25rem 1rem;
+			border: none;
+			border-radius: $border-radius;
+			i {
+				color: $light-color;
+			}
+
+			&:first-child {
+				margin-right: 1.7rem;
+			}
+
+			&:hover {
+				cursor: pointer;
+			}
+		}
+	}
+}
