@@ -161,7 +161,15 @@ const ProductPage: React.FC<ProductPageProps> = ({
 							>
 								Buy Now
 							</Link>
-							<button className='btn btn-light btn-block' onClick={() => user && product && addFavorite(user.id, product?.id)}>
+							<button
+								className='btn btn-light btn-block'
+								onClick={() => {
+									if (user && product) {
+										addFavorite(user.id, product?.id);
+										swal({text: 'Item has been added to favorites'});
+									}
+								}}
+							>
 								<i className='fas fa-heart mr-1'></i> Favorite this item
 							</button>
 						</div>

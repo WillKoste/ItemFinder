@@ -3,6 +3,8 @@ import {NavLink, Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {logout} from '../../actions/auth';
 import {CartReducer, UserReducer} from '../../types/general';
+import NavbarSearch from './NavbarSearch';
+import NavbarToggle from 'react-bootstrap/esm/NavbarToggle';
 
 interface NavbarProps {
 	logout: () => void;
@@ -18,6 +20,7 @@ const Navbar: React.FC<NavbarProps> = ({logout, authRed: {isAuthenticated}, cart
 					<h1>ItemFinder</h1>
 				</Link>
 			</div>
+			<NavbarSearch />
 			<ul className='navbar-links'>
 				{!isAuthenticated ? (
 					<Fragment>

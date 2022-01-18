@@ -139,6 +139,7 @@ router.post('/downvote', async (req: Request, res: Response) => {
 		if (voteExists.rowCount > 0) {
 			if (voteTypeVal && +voteTypeVal === voteExists.rows[0].vote_type) {
 				// USER HAS CLICKED DOWNVOTE AFTER PREVIOUSLY SELECTING DOWNVOTE - CANCELS THE VOTE OUT
+				console.log('yepyep');
 				await pool.query('UPDATE reviews SET rating = $1 WHERE id = $2', [reviewTotalRating + 1, reviewId]);
 				await pool.query(`DELETE FROM review_votes WHERE review_id = $1 AND user_id = $2`, [reviewId, userId]);
 				return res.json({success: true, data: `Review vote updated`, newRating: reviewTotalRating + 1});

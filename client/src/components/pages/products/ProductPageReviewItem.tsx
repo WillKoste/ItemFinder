@@ -48,11 +48,7 @@ const ProductPageReviewItem: React.FC<ProductPageReviewItemProps> = ({rev, authR
 					className={`fas fa-chevron-down ${rev.vote_type === -1 ? 'selected' : ''}`}
 					onClick={() => {
 						if (user) {
-							if (rev.vote_type === -1) {
-								voteReview(rev.id, user.id, 'null');
-							} else {
-								voteReview(rev.id, user.id, 'downvote');
-							}
+							voteReview(rev.id, user.id, 'downvote');
 							setVoteReload(true);
 						}
 					}}

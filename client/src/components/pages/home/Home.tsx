@@ -6,6 +6,7 @@ import {getPartners} from '../../../actions/partners';
 import {clearProduct} from '../../../actions/products';
 import {getReviews} from '../../../actions/reviews';
 import CardStack from '../../../Reusable/Cards/ProductCardStack';
+import HeroSection from './HeroSection';
 
 interface HomeProps {
 	getLocations: () => void;
@@ -21,15 +22,10 @@ const Home: React.FC<HomeProps> = ({getLocations, getPartners, clearProduct}) =>
 	return (
 		<div>
 			<div className='container'>
-				<h1 className='text-l mb-4'>Featured</h1>
+				<h1 className='text-l mb-5 mt-2'>Featured Products</h1>
 				<CardStack />
-				<button className='btn btn-dark mr-2' onClick={getLocations}>
-					Get Locations
-				</button>
-				<button className='btn btn-dark mr-2' onClick={getPartners}>
-					Get Partners
-				</button>
 			</div>
+			<HeroSection />
 		</div>
 	);
 };

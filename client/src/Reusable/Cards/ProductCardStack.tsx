@@ -14,7 +14,7 @@ interface CardStackProps {
 	top?: string;
 }
 
-const CardStack: React.FC<CardStackProps> = ({productsRed: {loading, products}, getProducts, right = '-70px', top = '40%', left = '-70px'}) => {
+const CardStack: React.FC<CardStackProps> = ({productsRed: {loading, products}, getProducts, right = '-80px', top = '35%', left = '-80px'}) => {
 	const [limitState, setLimitState] = useState(5);
 	const [offsetState, setOffsetState] = useState(0);
 
@@ -31,12 +31,12 @@ const CardStack: React.FC<CardStackProps> = ({productsRed: {loading, products}, 
 	}, []);
 
 	return (
-		<div>
+		<div className='product-card-stack'>
 			{loading ? (
 				<h4>Loading...</h4>
 			) : products.length > 0 ? (
 				<Fragment>
-					<div className='cards-grid mb-4 arrows-container'>
+					<div className='cards-grid arrows-container'>
 						<button className='arrow-left' onClick={onClickLeftArrow} disabled={offsetState === 0} style={{left, top}}>
 							<i className='fas fa-chevron-left'></i>
 						</button>
@@ -44,19 +44,19 @@ const CardStack: React.FC<CardStackProps> = ({productsRed: {loading, products}, 
 							<i className='fas fa-chevron-right'></i>
 						</button>
 						{products.map((prod) => (
-							<Link key={prod.id} to={`/product/info/${prod.id}`}>
+							<Link className='product-card-thing' key={prod.id} to={`/product/info/${prod.id}`}>
 								<Card1 data={prod} />
 							</Link>
 						))}
 					</div>
-					<div className='limit-selector-section'>
+					{/* <div className='limit-selector-section'>
 						<select name='limitSelector' className='limit-selector mb-2' onChange={(e) => setLimitState(+e.target.value)}>
 							<option value={5}>5</option>
 							<option value={10}>10</option>
 							<option value={15}>15</option>
 							<option value={20}>20</option>
 						</select>
-					</div>
+					</div> */}
 				</Fragment>
 			) : (
 				<p>No products found</p>

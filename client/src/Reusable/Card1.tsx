@@ -10,24 +10,26 @@ const Card1: React.FC<Card1Props> = ({data}) => {
 
 	return (
 		<div className='card'>
-			<div className='card-header'>
-				<div className='card-title'>{name}</div>
-			</div>
 			<div className='card-body'>
+				<div className='card-title'>
+					<p>{name}</p>
+				</div>
+				<span></span>
 				<img src={image} alt='Default product' className='card-img' />
-				{/* <div className='card-content'>{description}</div> */}
 			</div>
 			<div className='card-footer'>
-				<button
-					onClick={(e) => {
-						e.preventDefault();
-						alert('hey');
-					}}
-					className='btn btn-block btn-dark btn-slim my-2'
-				>
-					View More
-				</button>
-				<button className='btn btn-block btn-light btn-slim my-2'>Compare</button>
+				<div>
+					<button
+						onClick={(e) => {
+							e.preventDefault();
+							alert('hey');
+						}}
+						className='btn btn-block btn-dark btn-slim my-2'
+					>
+						View More
+					</button>
+					<button className='btn btn-block btn-light btn-slim my-2'>Compare</button>
+				</div>
 			</div>
 		</div>
 	);

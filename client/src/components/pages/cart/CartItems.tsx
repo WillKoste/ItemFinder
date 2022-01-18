@@ -1,6 +1,7 @@
 import React, {Fragment, useEffect} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
+import swal from 'sweetalert';
 import {removeItemFromCart, updateCartQty} from '../../../actions/cartItems';
 import {addFavorite} from '../../../actions/favorites';
 import {clearProduct} from '../../../actions/products';
@@ -62,7 +63,15 @@ const CartItems: React.FC<CartItemsProps> = ({cartItemsRed: {items, total}, clea
 									<Link to={`/reviews/${item.id}`} className='btn btn-slim btn-dark text-center'>
 										Reviews
 									</Link>
-									<button className='btn btn-slim btn-dark' onClick={() => user && addFavorite(user.id, item.id)}>
+									<button
+										className='btn btn-slim btn-dark'
+										onClick={() => {
+											if (user) {
+												addFavorite(user.id, item.id);
+												swal({text: 'Item has been added to favorites'});
+											}
+										}}
+									>
 										Favorite
 									</button>
 									<button className='btn btn-slim btn-danger' onClick={() => removeItemFromCart(item.id)}>

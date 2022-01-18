@@ -1,17 +1,22 @@
-import moment from 'moment';
-import React, {useEffect} from 'react';
+import React, {Fragment, useEffect} from 'react';
 import {connect} from 'react-redux';
-import {RouteComponentProps} from 'react-router-dom';
+import {Link, RouteComponentProps} from 'react-router-dom';
+import {getProduct} from '../../../actions/products';
 import {getReviewByProductId} from '../../../actions/reviews';
-import {ReviewsReducer, UserReducer} from '../../../types/general';
+import RatingStars from '../../../Reusable/Products/RatingStars';
+import {ProductsReducer, ReviewsReducer, UserReducer} from '../../../types/general';
+import SpinnerCustom from '../../layout/SpinnerCustom';
+import ProductPageReviewItem from '../products/ProductPageReviewItem';
 
 interface ReviewsProps extends RouteComponentProps<{productId: string}> {
 	reviewsRed: ReviewsReducer;
 	authRed: UserReducer;
+	productsRed: ProductsReducer;
 	getReviewByProductId: (productId: number, userId?: number) => void;
+	getProduct: (productId: number) => void;
 }
 
-const Reviews: React.FC<ReviewsProps> = ({reviewsRed: {reviews}, getReviewByProductId, match, authRed: {user}}) => {
+const Reviews: React.FC<ReviewsProps> = ({reviewsRed: {reviews, loadingReviews}, getReviewByProductId, match, authRed: {user}, getProduct, productsRed: {product, loadingProduct}}) => {
 	useEffect(() => {
 		if (user) {
 			getReviewByProductId(+match.params.productId, +user.id);
@@ -19,42 +24,44 @@ const Reviews: React.FC<ReviewsProps> = ({reviewsRed: {reviews}, getReviewByProd
 			getReviewByProductId(+match.params.productId);
 		}
 	}, [user]);
-
-	console.log({reviews});
+	useEffect(() => {
+		getProduct(+match.params.productId);
+	}, []);
 
 	return (
 		<div className='reviews-page'>
-			<div className='container'>
-				<h2>Reviews</h2>
-				<div className='reviews'>
-					{reviews.map((rev) => (
-						<div className='review'>
-							<div>
-								<div className='review-title'>
-									<p>
-										<strong>{rev.title}</strong> <small>Created on: {moment(rev.created_at).format('l')}</small>
-									</p>
-								</div>
-								<div className='review-body'>
-									<p>{rev.body}</p>
-								</div>
-							</div>
-							<div className='vote-btns'>
-								<i className='fas fa-chevron-up selected'></i>
-								<div className='rating'>{rev.rating}</div>
-								<i className='fas fa-chevron-down'></i>
-							</div>
+			{loadingProduct || loadingReviews ? (
+				<Fragment>
+					<SpinnerCustom />
+				</Fragment>
+			) : (
+				<div className='container'>
+					<Fragment>
+						<div className='reviews-head mb-3'>
+							<h2 className='mb-1'>
+								Reviews:{' '}
+								<Link className='text-secondary' to={`/product/info/${product?.id}`}>
+									{product?.name}
+								</Link>
+							</h2>
+							<RatingStars rating={product?.rating} />
 						</div>
-					))}
+						<div className='reviews'>
+							{reviews.map((rev) => (
+								<ProductPageReviewItem rev={rev} key={rev.id} />
+							))}
+						</div>
+					</Fragment>
 				</div>
-			</div>
+			)}
 		</div>
 	);
 };
 
 const mapStateToProps = (state: any) => ({
 	reviewsRed: state.reviewsRed,
-	authRed: state.authRed
+	authRed: state.authRed,
+	productsRed: state.productsRed
 });
 
-export default connect(mapStateToProps, {getReviewByProductId})(Reviews);
+export default connect(mapStateToProps, {getReviewByProductId, getProduct})(Reviews);
