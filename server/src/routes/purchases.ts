@@ -3,14 +3,15 @@ import {pool} from '../config/pg';
 const router = express.Router();
 import {v4 as uuidv4} from 'uuid';
 import argon2 from 'argon2';
+import {searchQueries} from '../middleware/searchQueries';
 
 /**
  * @name Get All Purchases
  */
-router.get('/', async (req: Request, res: Response) => {
+router.get('/', [searchQueries], async (req: Request, res: Response) => {
 	console.log({query: req.query});
 	try {
-		const purchases = await pool.query(`SELECT * FROM purchases`);
+		const purchases = await pool.query(`SELECT id, items, shipping_address, billing_address, gift, confirmation_code, created_at, user_id, order_total FROM purchases ${req.searchQuery}`, req.queryArray);
 		if (purchases.rowCount === 0) {
 			return res.status(404).json({success: false, data: 'Purchases not found'});
 		}

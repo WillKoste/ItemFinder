@@ -16,3 +16,7 @@ export interface ProductsOptions {
 	offset?: number;
 	category?: string;
 }
+
+export interface PurchasesOptions {
+	userId?: number;
+}

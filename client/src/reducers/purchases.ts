@@ -1,4 +1,4 @@
-import {PURCHASES_ERROR, ADD_PURCHASE, GET_PURCHASE, GET_PURCHASES, CLEAR_PURCHASE, REMOVE_PURCHASE} from '../actions/types';
+import {PURCHASES_ERROR, ADD_PURCHASE, GET_PURCHASE, GET_PURCHASES, CLEAR_PURCHASE, REMOVE_PURCHASE, LOGOUT} from '../actions/types';
 import {PurchasesReducer} from '../types/general';
 import {Action} from '../types/redux';
 
@@ -48,6 +48,7 @@ export default function (state = initialState, action: Action) {
 				error: payload
 			};
 		case CLEAR_PURCHASE:
+		case LOGOUT:
 			return {
 				...state,
 				purchases: [],

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 import {connect} from 'react-redux';
 import {CartProduct, CartReducer, Product, UserReducer} from '../../../types/general';
 import AddressInformation from './AddressInformation';
@@ -8,6 +8,7 @@ import ThankYou from './ThankYou';
 import {v4 as uuidv4} from 'uuid';
 import {createPurchase} from '../../../actions/purchases';
 import {CheckoutForm} from '../../../types/forms';
+import {formatExpiration} from '../../../utils/randomUtils';
 
 interface CheckoutProps {
 	cartItemsRed: CartReducer;
@@ -101,6 +102,10 @@ const Checkout: React.FC<CheckoutProps> = ({cartItemsRed: {items, total}, create
 		setFormData({...formData, billingSameAsShipping: billingSameAsShipping === 'no' ? 'yes' : 'no'});
 	};
 
+	// const onChangeExpirationDate = (e: ChangeEvent<HTMLInputElement>) => {
+	// 	setFormData({...formData, expirationDate: formatExpiration(e.target.value)})
+	// }
+
 	const onSubmit = (e: any) => {
 		e.preventDefault();
 		createPurchase(formData, items, user ? user.id : 0);
@@ -120,7 +125,7 @@ const Checkout: React.FC<CheckoutProps> = ({cartItemsRed: {items, total}, create
 						);
 					})}
 				</div>
-				{phase === 1 && <PaymentDetails setPhase={setPhase} phase={phase} formData={phase1State} onChange={onChange as any} saveToLocalStorage={saveToLocalStorage} />}
+				{phase === 1 && <PaymentDetails setPhase={setPhase} phase={phase} formData={phase1State} onChange={onChange as any} saveToLocalStorage={saveToLocalStorage} setFormData={setFormData} />}
 				{phase === 2 && <AddressInformation setPhase={setPhase} phase={phase} onChange={onChange as any} formData={phase2State} checkBillingAddress={checkBillingAddress} saveToLocalStorage={saveToLocalStorage} />}
 				{phase === 3 && <Confirmation setPhase={setPhase} phase={phase} onChange={onChange as any} formData={phase3State} saveToLocalStorage={saveToLocalStorage} onSubmit={onSubmit} toggleGift={toggleGift} />}
 				{phase === 4 && <ThankYou setPhase={setPhase} />}

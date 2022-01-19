@@ -17,11 +17,13 @@ export const searchQueries = (req: Request, _: Response, next: NextFunction) => 
 		// valueIndex = valueIndex + 1;
 	}
 	if (keysArr.includes('category')) {
-		// queryArr.push(`WHERE category ILIKE '%('||$${valueIndex}||')%'`);
-		// queryArr.push(`WHERE category ILIKE '%$${valueIndex}%'`);
 		queryArr.push(`WHERE category ILIKE $${valueIndex}`);
-		// valueArray.push(`('||:${req.query.category}||')`);
 		valueArray.push(`%${req.query.category}%`);
+		valueIndex = valueIndex + 1;
+	}
+	if (keysArr.includes('user_id')) {
+		queryArr.push(`WHERE user_id = $${valueIndex}`);
+		valueArray.push(req.query.user_id);
 		valueIndex = valueIndex + 1;
 	}
 	if (keysArr.includes('limit')) {

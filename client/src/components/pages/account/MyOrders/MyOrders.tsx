@@ -1,13 +1,36 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import {connect} from 'react-redux';
+import {getPurchases} from '../../../../actions/purchases';
+import {PurchasesReducer, UserReducer} from '../../../../types/general';
+import {PurchasesOptions} from '../../../../types/redux';
+import {shared} from '../../../../utils/sharedData';
+import SpinnerCustom from '../../../layout/SpinnerCustom';
+import OrderItem from './OrderItem';
 
-interface MyOrdersProps {}
+interface MyOrdersProps {
+	purchasesRed: PurchasesReducer;
+	authRed: UserReducer;
+	getPurchases: (options?: PurchasesOptions) => void;
+}
 
-const MyOrders: React.FC<MyOrdersProps> = () => {
+const MyOrders: React.FC<MyOrdersProps> = ({purchasesRed: {loadingPurchases, purchases}, authRed: {user}, getPurchases}) => {
+	useEffect(() => {
+		if (user) {
+			getPurchases({userId: user.id});
+		}
+	}, [user]);
+
 	return (
 		<div>
-			<h2>These are my orders:D</h2>
+			<h2 className='mb-3'>My Orders</h2>
+			<div className='account-purchases'>{loadingPurchases ? <SpinnerCustom /> : purchases.length <= 0 ? <h3>{shared.noPurchases}</h3> : purchases.map((purch) => <OrderItem key={purch.id} purchase={purch} />)}</div>
 		</div>
 	);
 };
 
-export default MyOrders;
+const mapStateToProps = (state: any) => ({
+	purchasesRed: state.purchasesRed,
+	authRed: state.authRed
+});
+
+export default connect(mapStateToProps, {getPurchases})(MyOrders);

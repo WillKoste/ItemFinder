@@ -3,10 +3,13 @@ import {customAxios} from '../utils/customAxios';
 import {AxiosResponse} from 'axios';
 import {CartProduct, Product, Purchase} from '../types/general';
 import {CheckoutForm} from '../types/forms';
+import {PurchasesOptions} from '../types/redux';
 
-export const getPurchases = () => async (dispatch: any) => {
+export const getPurchases = (options?: PurchasesOptions) => async (dispatch: any) => {
+	const hasUserId = options && options.userId ? `?user_id=${options.userId}` : ``;
+
 	try {
-		const res: AxiosResponse<{purchases: Purchase[]}> = await customAxios.get('/api/v1/purchases');
+		const res: AxiosResponse<{purchases: Purchase[]}> = await customAxios.get(`/api/v1/purchases${hasUserId}`);
 		dispatch({
 			type: GET_PURCHASES,
 			payload: res.data.purchases

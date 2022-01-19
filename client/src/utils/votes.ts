@@ -1,4 +1,3 @@
-import {AxiosResponse} from 'axios';
 import {customAxios} from './customAxios';
 
 export const voteReview = async (reviewId: number, userId: number, voteType: string) => {
@@ -11,8 +10,7 @@ export const voteReview = async (reviewId: number, userId: number, voteType: str
 	}
 
 	try {
-		const res: AxiosResponse = await customAxios.post(`/api/v1/reviews/${voteType}?reviewId=${reviewId}&userId=${userId}&voteTypeVal=${voteTypeVal}`);
-		console.log({hiWill: res.data});
+		await customAxios.post(`/api/v1/reviews/${voteType}?reviewId=${reviewId}&userId=${userId}&voteTypeVal=${voteTypeVal}`);
 		return;
 	} catch (err) {
 		console.error(err);

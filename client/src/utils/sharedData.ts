@@ -1,3 +1,14 @@
+export const shared = {
+	productAdded: 'Product added to cart!',
+	itemAddedToFavorites: 'Item has been added to favorites',
+	seeDeals: 'See Deals',
+	todaysNews: "Today's News",
+	noPurchases: 'No purchases have been made. Future purchase details will appear here.',
+	viewOrderDetails: 'View Order Details',
+	leaveFeedback: 'Leave Feedback',
+	returnRefund: 'Return/Refund'
+};
+
 export const stateAbbreviations = [
 	'AL',
 	'AK',

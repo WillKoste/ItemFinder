@@ -7,6 +7,7 @@ import {addFavorite} from '../../../actions/favorites';
 import {clearProduct} from '../../../actions/products';
 import {CartReducer, UserReducer} from '../../../types/general';
 import {formatCurrency} from '../../../utils/randomUtils';
+import {shared} from '../../../utils/sharedData';
 
 interface CartItemsProps {
 	cartItemsRed: CartReducer;
@@ -68,7 +69,7 @@ const CartItems: React.FC<CartItemsProps> = ({cartItemsRed: {items, total}, clea
 										onClick={() => {
 											if (user) {
 												addFavorite(user.id, item.id);
-												swal({text: 'Item has been added to favorites'});
+												swal({text: shared.itemAddedToFavorites});
 											}
 										}}
 									>

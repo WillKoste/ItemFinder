@@ -1,4 +1,5 @@
 import React from 'react';
+import {shared} from '../../../utils/sharedData';
 
 interface HeroSectionProps {}
 
@@ -13,8 +14,8 @@ const HeroSection: React.FC<HeroSectionProps> = () => {
 						ipsum fuga facilis! Temporibus laborum distinctio velit.
 					</p>
 					<div className='home-hero-buttons'>
-						<button className='btn btn-highlight'>See Deals</button>
-						<button className='btn btn-light'>Today's News</button>
+						<button className='btn btn-highlight'>{shared.seeDeals}</button>
+						<button className='btn btn-light'>{shared.todaysNews}</button>
 					</div>
 				</div>
 			</div>

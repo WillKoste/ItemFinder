@@ -13,8 +13,6 @@ interface TableProps {
 const Table: React.FC<TableProps> = ({data, columns, onClickNext, onClickPrev}) => {
 	const validFields = columns.map((col) => col.accessor);
 
-	console.log(moment('nv 17').isValid());
-
 	return (
 		<Fragment>
 			<table className='table'>
