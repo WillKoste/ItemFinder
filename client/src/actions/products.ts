@@ -1,6 +1,7 @@
 import {AxiosResponse} from 'axios';
 import {Product} from '../types/general';
 import {ProductsOptions} from '../types/redux';
+import {clientQueryOptions} from '../utils/clientQueryOptions';
 import {customAxios} from '../utils/customAxios';
 import {PRODUCTS_ERROR, GET_PRODUCTS, GET_PRODUCT, CREATE_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT, PRODUCT_CLEAR} from './types';
 
@@ -8,7 +9,7 @@ export const getProducts = (options: ProductsOptions) => async (dispatch: any) =
 	const {category, limit, offset} = options;
 	const categoryExists = category ? `&category=${category} ` : '';
 	try {
-		const res: AxiosResponse<{products: Product[]}> = await customAxios.get(`/api/v1/products?limit=${limit}&offset=${offset}${categoryExists}`);
+		const res: AxiosResponse<{products: Product[]}> = await customAxios.get(`/api/v1/products${options && clientQueryOptions(options)}`);
 		console.log({res});
 		dispatch({
 			type: GET_PRODUCTS,

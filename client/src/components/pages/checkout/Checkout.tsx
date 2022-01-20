@@ -25,6 +25,7 @@ const Checkout: React.FC<CheckoutProps> = ({cartItemsRed: {items, total}, create
 		cardNumber: '',
 		expirationDate: '',
 		securityCode: '',
+		saveCard: 'false',
 		shippingAddress: '',
 		shippingCity: '',
 		shippingState: '',
@@ -44,6 +45,7 @@ const Checkout: React.FC<CheckoutProps> = ({cartItemsRed: {items, total}, create
 		cardNumber,
 		expirationDate,
 		securityCode,
+		saveCard,
 		shippingAddress,
 		shippingCity,
 		shippingState,
@@ -62,7 +64,8 @@ const Checkout: React.FC<CheckoutProps> = ({cartItemsRed: {items, total}, create
 		cardLastName,
 		cardNumber,
 		expirationDate,
-		securityCode
+		securityCode,
+		saveCard
 	};
 	const phase2State = {
 		shippingAddress,
@@ -101,10 +104,6 @@ const Checkout: React.FC<CheckoutProps> = ({cartItemsRed: {items, total}, create
 	const checkBillingAddress = () => {
 		setFormData({...formData, billingSameAsShipping: billingSameAsShipping === 'no' ? 'yes' : 'no'});
 	};
-
-	// const onChangeExpirationDate = (e: ChangeEvent<HTMLInputElement>) => {
-	// 	setFormData({...formData, expirationDate: formatExpiration(e.target.value)})
-	// }
 
 	const onSubmit = (e: any) => {
 		e.preventDefault();

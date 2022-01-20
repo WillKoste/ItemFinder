@@ -18,5 +18,7 @@ export interface ProductsOptions {
 }
 
 export interface PurchasesOptions {
-	userId?: number;
+	user_id?: number;
+	order_by?: 'asc' | 'desc';
+	limit?: number;
 }

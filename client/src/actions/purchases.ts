@@ -4,12 +4,11 @@ import {AxiosResponse} from 'axios';
 import {CartProduct, Product, Purchase} from '../types/general';
 import {CheckoutForm} from '../types/forms';
 import {PurchasesOptions} from '../types/redux';
+import {clientQueryOptions} from '../utils/clientQueryOptions';
 
 export const getPurchases = (options?: PurchasesOptions) => async (dispatch: any) => {
-	const hasUserId = options && options.userId ? `?user_id=${options.userId}` : ``;
-
 	try {
-		const res: AxiosResponse<{purchases: Purchase[]}> = await customAxios.get(`/api/v1/purchases${hasUserId}`);
+		const res: AxiosResponse<{purchases: Purchase[]}> = await customAxios.get(`/api/v1/purchases${options && clientQueryOptions(options)}`);
 		dispatch({
 			type: GET_PURCHASES,
 			payload: res.data.purchases

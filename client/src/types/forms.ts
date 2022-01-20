@@ -4,6 +4,7 @@ export interface CheckoutForm {
 	cardNumber?: string;
 	expirationDate?: string;
 	securityCode?: string;
+	saveCard?: 'true' | 'false' | string;
 	shippingAddress?: string;
 	shippingCity?: string;
 	shippingState?: string;

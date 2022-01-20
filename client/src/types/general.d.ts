@@ -29,17 +29,6 @@ export interface Product {
 	recorded_on?: string;
 }
 
-export interface Purchase {
-	id: number;
-	items: Product[];
-	shipping_address: string;
-	billing_address: string;
-	gift: boolean;
-	customer_status: string;
-	confirmation_code?: string;
-	shipping_method: string;
-}
-
 export interface CartProduct {
 	id: number;
 	name: string;
@@ -55,6 +44,18 @@ export interface CartProduct {
 	recorded_on?: string;
 	cart_qty: number;
 	cart_subtotal: number;
+}
+
+export interface Purchase {
+	id: number;
+	items: CartProduct[];
+	shipping_address: string;
+	billing_address: string;
+	gift: boolean;
+	customer_status: string;
+	confirmation_code?: string;
+	shipping_method: string;
+	order_total: number;
 }
 
 export interface ProductHistory {
@@ -83,11 +84,26 @@ export interface Partner {
 
 export interface Contact {
 	id?: number;
-	name?: string;
 	first_name?: string;
 	last_name?: string;
-	address?: string;
-	credit_card?: string;
+	street_address?: string;
+	city?: string;
+	state?: string;
+	zipCode?: string;
+	owner_id?: number;
+}
+
+export interface CreditCard {
+	id?: number;
+	first_name: string;
+	last_name: string;
+	card_number: string;
+	exp_date: string;
+	security_code: string;
+	last_four_digits: string;
+	use_as_default?: boolean;
+	user_id: number;
+	created_at?: string;
 }
 
 export interface Review {

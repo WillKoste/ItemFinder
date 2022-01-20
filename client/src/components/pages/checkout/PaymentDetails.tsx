@@ -14,7 +14,7 @@ interface PaymentDetailsProps {
 }
 
 const PaymentDetails: React.FC<PaymentDetailsProps> = ({setPhase, phase, formData, onChange, saveToLocalStorage, setFormData}) => {
-	const {cardNumber, cardFirstName, cardLastName, expirationDate, securityCode} = formData;
+	const {cardNumber, cardFirstName, cardLastName, expirationDate, securityCode, saveCard} = formData;
 
 	return (
 		<div>
@@ -38,6 +38,10 @@ const PaymentDetails: React.FC<PaymentDetailsProps> = ({setPhase, phase, formDat
 				<div className='form-group'>
 					<label htmlFor='securityCode'>Security Code</label>
 					<input type='text' className='form-control' name='securityCode' value={securityCode} maxLength={3} onChange={onChange} />
+				</div>
+				<div className='form-group'>
+					<input type='checkbox' name='saveCard' value={saveCard} checked={saveCard === 'true'} onChange={(e) => setFormData({...formData, saveCard: saveCard === 'false' ? 'true' : 'false'})} />
+					<label htmlFor='saveCard'>Save card on file?</label>
 				</div>
 			</form>
 			<PrevNext

@@ -14,7 +14,7 @@ import RatingStars from '../../../Reusable/Products/RatingStars';
 import {addFavorite} from '../../../actions/favorites';
 import ProductPageReviews from './ProductPageReviews';
 import {getReviewByProductId} from '../../../actions/reviews';
-import swal from 'sweetalert';
+import swal2 from 'sweetalert2';
 import {shared} from '../../../utils/sharedData';
 
 interface ProductPageProps extends RouteComponentProps<{productId: string}> {
@@ -105,7 +105,14 @@ const ProductPage: React.FC<ProductPageProps> = ({
 		if (product) {
 			addItemToCart(product, items, qtyData);
 			if (e.target.name === 'add-to-cart-btn') {
-				swal({text: shared.productAdded});
+				swal2.fire({
+					text: shared.productAdded,
+					toast: false,
+					buttonsStyling: false,
+					customClass: {
+						confirmButton: 'btn btn-highlight'
+					}
+				});
 			}
 		}
 	};
@@ -167,7 +174,14 @@ const ProductPage: React.FC<ProductPageProps> = ({
 								onClick={() => {
 									if (user && product) {
 										addFavorite(user.id, product?.id);
-										swal({text: shared.itemAddedToFavorites});
+										swal2.fire({
+											text: shared.itemAddedToFavorites,
+											toast: false,
+											buttonsStyling: false,
+											customClass: {
+												confirmButton: 'btn btn-highlight'
+											}
+										});
 									}
 								}}
 							>

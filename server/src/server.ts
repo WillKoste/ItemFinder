@@ -21,6 +21,7 @@ import productsHistoryRoutes from './routes/productsHistory';
 import categoriesRoutes from './routes/categories';
 import favoritesRoutes from './routes/favorites';
 import purchasesRoutes from './routes/purchases';
+import financeRoutes from './routes/finance';
 
 connectDB();
 const RedisStore = connectRedis(session);
@@ -59,6 +60,7 @@ app.use('/api/v1/locations', locationsRoutes);
 app.use('/api/v1/contacts', contactsRoutes);
 app.use('/api/v1/categories', categoriesRoutes);
 app.use('/api/v1/favorites', favoritesRoutes);
+app.use('/api/v1/finance', financeRoutes);
 
 app.use('/api/v1/public', express.static(path.join(__dirname, 'public', 'images')));
 if (process.env.NODE_ENV === 'production') {

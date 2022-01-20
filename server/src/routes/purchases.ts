@@ -9,8 +9,8 @@ import {searchQueries} from '../middleware/searchQueries';
  * @name Get All Purchases
  */
 router.get('/', [searchQueries], async (req: Request, res: Response) => {
-	console.log({query: req.query});
 	try {
+		console.log({fuckIt: `SELECT id, items, shipping_address, billing_address, gift, confirmation_code, created_at, user_id, order_total FROM purchases ${req.searchQuery}`, arrrrrr: req.queryArray});
 		const purchases = await pool.query(`SELECT id, items, shipping_address, billing_address, gift, confirmation_code, created_at, user_id, order_total FROM purchases ${req.searchQuery}`, req.queryArray);
 		if (purchases.rowCount === 0) {
 			return res.status(404).json({success: false, data: 'Purchases not found'});
@@ -31,7 +31,6 @@ router.post('/', async (req: Request, res: Response) => {
 	const secureCC = await argon2.hash(ccDig);
 	const isGift = gift === 'yes';
 
-	console.log('YAYAYA');
 	try {
 		const newPurchase = await pool.query(
 			`INSERT INTO purchases (items, shipping_address, billing_address, cc_dig, gift, customer_status, confirmation_code, shipping_method, order_total, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *`,

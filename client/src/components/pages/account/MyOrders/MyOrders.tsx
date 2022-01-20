@@ -16,14 +16,14 @@ interface MyOrdersProps {
 const MyOrders: React.FC<MyOrdersProps> = ({purchasesRed: {loadingPurchases, purchases}, authRed: {user}, getPurchases}) => {
 	useEffect(() => {
 		if (user) {
-			getPurchases({userId: user.id});
+			getPurchases({user_id: user.id, order_by: 'asc'});
 		}
 	}, [user]);
 
 	return (
 		<div>
 			<h2 className='mb-3'>My Orders</h2>
-			<div className='account-purchases'>{loadingPurchases ? <SpinnerCustom /> : purchases.length <= 0 ? <h3>{shared.noPurchases}</h3> : purchases.map((purch) => <OrderItem key={purch.id} purchase={purch} />)}</div>
+			<div className='account-purchases'>{loadingPurchases ? <SpinnerCustom /> : purchases.length <= 0 ? <h3 style={{color: '#fff'}}>{shared.noPurchases}</h3> : purchases.map((purch) => <OrderItem key={purch.id} purchase={purch} />)}</div>
 		</div>
 	);
 };

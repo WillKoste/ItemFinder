@@ -22,9 +22,34 @@ export const searchQueries = (req: Request, _: Response, next: NextFunction) => 
 		valueIndex = valueIndex + 1;
 	}
 	if (keysArr.includes('user_id')) {
-		queryArr.push(`WHERE user_id = $${valueIndex}`);
+		const notFirst = keysArr.includes('category');
+		if (notFirst) {
+			queryArr.push(`AND user_id = $${valueIndex}`);
+		} else {
+			queryArr.push(`WHERE user_id = $${valueIndex}`);
+		}
+		// queryArr.push(`WHERE user_id = $${valueIndex}`);
 		valueArray.push(req.query.user_id);
 		valueIndex = valueIndex + 1;
+	}
+	if (keysArr.includes('order_by')) {
+		// queryArr.push(`ORDER BY created_at $${valueIndex}`);
+
+		if (req.query.order_by?.toString().toLowerCase() === 'asc') {
+			console.log('ASC');
+			queryArr.push(`ORDER BY created_at asc`);
+		} else if (req.query.order_by?.toString().toLowerCase() === 'desc') {
+			console.log('DESC');
+			queryArr.push(`ORDER BY created_at desc`);
+		}
+
+		// const str1 = 'desc';
+		// console.log(req.query.order_by, str1);
+		// console.log(typeof req.query.order_by, typeof str1);
+		// queryArr.push(`ORDER BY created_at ${str1}`);
+
+		// valueArray.push(req.query.order_by);
+		// valueIndex = valueIndex + 1;
 	}
 	if (keysArr.includes('limit')) {
 		queryArr.push(`LIMIT $${valueIndex}`);
@@ -39,8 +64,6 @@ export const searchQueries = (req: Request, _: Response, next: NextFunction) => 
 
 	req.searchQuery = queryArr.join(' ');
 	req.queryArray = valueArray;
-	console.log({wtf: typeof req.query.category});
 	console.log({keysArr, queryCount, queryArr, valueArray});
-	// console.log({QUERIES: req.query, keysArr, uhhhh: keysArr.indexOf('offset')});
 	next();
 };

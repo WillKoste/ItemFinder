@@ -1,10 +1,10 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {Product} from '../../../../types/general';
+import {CartProduct} from '../../../../types/general';
 import {formatCurrency} from '../../../../utils/randomUtils';
 
 interface PurchaseItemProps {
-	item: Product;
+	item: CartProduct;
 }
 
 const PurchaseItem: React.FC<PurchaseItemProps> = ({item}) => {
@@ -21,7 +21,7 @@ const PurchaseItem: React.FC<PurchaseItemProps> = ({item}) => {
 					<strong>Price:</strong> {formatCurrency(item.price)}
 				</p>
 				<p>
-					<strong>Quantity:</strong> {item.qty}
+					<strong>Quantity:</strong> {item.cart_qty}
 				</p>
 			</div>
 		</div>

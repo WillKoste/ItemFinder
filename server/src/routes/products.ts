@@ -9,7 +9,6 @@ const router = express.Router();
  * @name Get All Products
  */
 router.get('/', [searchQueries], async (req: Request, res: Response) => {
-	console.log({req: req.query});
 	try {
 		const products: QueryResult<Product[]> = await pool.query(`SELECT * FROM products p ${req.searchQuery}`, req.queryArray);
 		if (products.rowCount === 0) {

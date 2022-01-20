@@ -2,7 +2,7 @@ import {CartProduct, Product} from '../types/general';
 import {ADD_CART, CLEAR_CART, REMOVE_CART, SET_CART, UPDATE_CART_QTY} from './types';
 
 export const addItemToCart = (item: Product, cartItems: CartProduct[], qty: number) => async (dispatch: any) => {
-	console.log({cartItems});
+	console.log({cartItems, item, qty});
 	const parsedCart: CartProduct[] = JSON.parse(localStorage.getItem('cart') as any);
 	const indexIWant = parsedCart.findIndex((f) => f.id === item.id);
 	console.log({indexIWant});
