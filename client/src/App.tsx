@@ -1,8 +1,8 @@
+import 'react-datepicker/dist/react-datepicker.css';
 import './App.min.css';
 import {Provider} from 'react-redux';
 import store from './store';
 import {CookiesProvider, withCookies} from 'react-cookie';
-
 import Routes from './components/routes/RoutesOrigin';
 
 const App = () => {

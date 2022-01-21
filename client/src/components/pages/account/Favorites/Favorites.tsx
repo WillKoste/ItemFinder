@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useMemo, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {connect} from 'react-redux';
 import {getFavorites} from '../../../../actions/favorites';
 import Table from '../../../../Reusable/Table';

@@ -82,4 +82,21 @@
 		grid-template-columns: repeat(3, 1fr);
 		gap: 1rem;
 	}
+
+	&.modal-form {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 0 1.2rem;
+		margin: 0.2rem 0;
+
+		.form-group {
+			&.form-group-spread {
+				grid-column: 1 / span 2;
+			}
+
+			.form-control {
+				border: solid 1px #d1d1d1;
+			}
+		}
+	}
 }

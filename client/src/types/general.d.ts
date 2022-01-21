@@ -229,6 +229,15 @@ export interface FavoritesReducer {
 	success: boolean | null;
 }
 
+export interface CreditCardsReducer {
+	cards: CreditCard[];
+	card: CreditCard | null;
+	loadingCards: boolean;
+	loadingCard: boolean;
+	error: any;
+	success: boolean | null;
+}
+
 export interface RootRedTypes {
 	authRed?: UserReducer;
 	productsRed?: ProductsReducer;
@@ -239,6 +248,7 @@ export interface RootRedTypes {
 	favoritesRed?: FavoritesReducer;
 	productCategoriesRed?: CategoryReducer;
 	reviewsRed?: ReviewsReducer;
+	creditCardsRed?: CreditCardsReducer;
 }
 
 export interface AuthFormDataTypes {

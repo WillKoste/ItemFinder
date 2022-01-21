@@ -4,6 +4,7 @@ import AddContactForm from './Contacts/AddContactForm';
 import ContactsList from './Contacts/ContactsList';
 import Partners from './Partners/Partners';
 import MyOrders from './MyOrders/MyOrders';
+import CreditCards from './CreditCards/CreditCards';
 
 interface AccountRightProps {
 	section: number;
@@ -15,7 +16,8 @@ const AccountRight: React.FC<AccountRightProps> = ({section}) => {
 			{section === 1 && <ContactsList />}
 			{section === 2 && <Partners />}
 			{section === 3 && <Favorites />}
-			{section === 4 && <MyOrders />}
+			{section === 4 && <CreditCards />}
+			{section === 5 && <MyOrders />}
 		</div>
 	);
 };

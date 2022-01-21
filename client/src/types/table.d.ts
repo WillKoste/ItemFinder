@@ -1,4 +1,5 @@
 import React from 'react';
+import {CreditCard} from './general';
 
 export interface ContactArrData {
 	id: number;
@@ -7,6 +8,12 @@ export interface ContactArrData {
 	address: string;
 	contact_type: string;
 	created_at: string;
+}
+
+export interface CreditCardsArrData {
+	id: number;
+	first_name: string;
+	last_name: string;
 }
 
 export interface Column {
@@ -19,8 +26,8 @@ export interface Column {
 
 export interface TableData {
 	id?: string | number;
-	fields?: ContactArrData;
-	[d: string]: string;
+	fields?: ContactArrData | CreditCardsArrData;
+	[d: string]: string | any;
 }
 
 export type Styling = React.CSSProperties;

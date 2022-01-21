@@ -10,7 +10,8 @@ const AccountLeft: React.FC<AccountLeftProps> = ({setSection, section}) => {
 		{id: 1, name: 'Contacts'},
 		{id: 2, name: 'Partners'},
 		{id: 3, name: 'Favorites'},
-		{id: 4, name: 'My Orders'}
+		{id: 4, name: 'Credit Cards'},
+		{id: 5, name: 'My Orders'}
 	]);
 
 	return (

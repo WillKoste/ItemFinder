@@ -8,10 +8,15 @@ interface TableProps {
 	columns: Column[];
 	onClickNext?: () => void;
 	onClickPrev?: () => void;
+	prevButtonDisabled?: boolean;
+	nextButtonDisabled?: boolean;
+	checkBoolean?: (value: any) => void;
 }
 
-const Table: React.FC<TableProps> = ({data, columns, onClickNext, onClickPrev}) => {
+const Table: React.FC<TableProps> = ({data, columns, onClickNext, onClickPrev, prevButtonDisabled, nextButtonDisabled, checkBoolean}) => {
 	const validFields = columns.map((col) => col.accessor);
+	const validTypes = validFields.map((col) => col);
+	console.log({validTypes, data, columns});
 
 	return (
 		<Fragment>
@@ -47,14 +52,26 @@ const Table: React.FC<TableProps> = ({data, columns, onClickNext, onClickPrev}) 
 								style={{background: i % 2 === 0 ? '#ccc' : 'inherit'}}
 							>
 								{keysArr.map((key, end) => {
-									return <td style={columns[end].style}>{moment(d[key]).isValid() ? moment(d[key]).format('l') : d[key]}</td>;
+									// console.log(typeof d['use_as_default']);
+									return (
+										<td style={columns[end].style}>
+											{typeof d[key] === 'boolean' ? (
+												// <input type='checkbox' checked={d[key]} onChange={(e) => console.log(d[key])} style={{width: '18px', height: '18px'}} />
+												<input type='checkbox' checked={d[key]} onChange={() => (checkBoolean as any)(d)} style={{width: '18px', height: '18px'}} />
+											) : moment(d[key], 'YYYY-MM-DDTHH:mm:ss.SSSZ', true).isValid() ? (
+												moment(d[key]).format('l')
+											) : (
+												d[key]
+											)}
+										</td>
+									);
 								})}
 							</tr>
 						);
 					})}
 				</tbody>
 			</table>
-			<TablePagination onClickNext={onClickNext} onClickPrev={onClickPrev} />
+			<TablePagination nextDisabled={nextButtonDisabled} prevDisabled={prevButtonDisabled} onClickNext={onClickNext} onClickPrev={onClickPrev} />
 		</Fragment>
 	);
 };

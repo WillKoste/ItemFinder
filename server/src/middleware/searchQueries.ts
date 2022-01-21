@@ -1,40 +1,33 @@
 import {Request, Response, NextFunction} from 'express';
 
-// interface QueryFormat {
-// 	queryKey: string;
-// 	queryVal: string;
-// }
+const whereOrAnd = (isFirst: boolean) => (isFirst ? 'WHERE' : 'AND');
 
 export const searchQueries = (req: Request, _: Response, next: NextFunction) => {
 	let queryArr: String[] = [];
 	let valueIndex = 1;
 	let valueArray = [];
+	let isFirstVal = true;
 	const keysArr = Object.keys(req.query);
 	const queryCount = keysArr.map((_, i) => `$${i + 1}`);
-	if (keysArr.includes('search_q')) {
-		// queryArr.push(`ILIKE $${valueIndex}%`);
-		// valueArray.push(req.query.search_q);
-		// valueIndex = valueIndex + 1;
+	if (req.passedAuth) {
+		queryArr.push(`${whereOrAnd(isFirstVal)} user_id = $${valueIndex}`);
+		isFirstVal = false;
+		valueArray.push(req.session.userId);
+		valueIndex = valueIndex + 1;
 	}
 	if (keysArr.includes('category')) {
-		queryArr.push(`WHERE category ILIKE $${valueIndex}`);
+		queryArr.push(`${whereOrAnd(isFirstVal)} category ILIKE $${valueIndex}`);
+		isFirstVal = false;
 		valueArray.push(`%${req.query.category}%`);
 		valueIndex = valueIndex + 1;
 	}
 	if (keysArr.includes('user_id')) {
-		const notFirst = keysArr.includes('category');
-		if (notFirst) {
-			queryArr.push(`AND user_id = $${valueIndex}`);
-		} else {
-			queryArr.push(`WHERE user_id = $${valueIndex}`);
-		}
-		// queryArr.push(`WHERE user_id = $${valueIndex}`);
+		queryArr.push(`${whereOrAnd(isFirstVal)} user_id = $${valueIndex}`);
+		isFirstVal = false;
 		valueArray.push(req.query.user_id);
 		valueIndex = valueIndex + 1;
 	}
 	if (keysArr.includes('order_by')) {
-		// queryArr.push(`ORDER BY created_at $${valueIndex}`);
-
 		if (req.query.order_by?.toString().toLowerCase() === 'asc') {
 			console.log('ASC');
 			queryArr.push(`ORDER BY created_at asc`);
@@ -42,14 +35,6 @@ export const searchQueries = (req: Request, _: Response, next: NextFunction) => 
 			console.log('DESC');
 			queryArr.push(`ORDER BY created_at desc`);
 		}
-
-		// const str1 = 'desc';
-		// console.log(req.query.order_by, str1);
-		// console.log(typeof req.query.order_by, typeof str1);
-		// queryArr.push(`ORDER BY created_at ${str1}`);
-
-		// valueArray.push(req.query.order_by);
-		// valueIndex = valueIndex + 1;
 	}
 	if (keysArr.includes('limit')) {
 		queryArr.push(`LIMIT $${valueIndex}`);

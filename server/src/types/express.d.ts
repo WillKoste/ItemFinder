@@ -39,6 +39,7 @@ declare global {
 			user?: User;
 			searchQuery?: string | undefined;
 			queryArray?: any[];
+			passedAuth?: boolean | null | undefined;
 		}
 	}
 }

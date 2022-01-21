@@ -18,3 +18,11 @@ export interface CheckoutForm {
 	shippingNotes?: string;
 	gift?: string;
 }
+
+export interface CreditCardForm {
+	first_name: string;
+	last_name: string;
+	card_number: string;
+	exp_date: string;
+	security_code: string;
+}
