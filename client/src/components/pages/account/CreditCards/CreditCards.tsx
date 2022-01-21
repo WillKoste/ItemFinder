@@ -1,4 +1,5 @@
 import React, {useEffect, useCallback, useState} from 'react';
+import {Spinner} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import {getCards, updateDefaultCard} from '../../../../actions/cards';
 import MyModal from '../../../../Reusable/Modals/MyModal';
@@ -65,7 +66,15 @@ const CreditCards: React.FC<CreditCardsProps> = ({creditCardsRed: {cards, loadin
 			<button className='btn btn-secondary mb-2' onClick={() => setModalOpen(true)}>
 				Add Credit Card
 			</button>
-			<Table prevButtonDisabled={offsetState === 0} columns={columns} data={cards} onClickNext={onClickNext} onClickPrev={onClickPrev} checkBoolean={onChangeDefault} />
+			<div>
+				{loadingCards ? (
+					<Spinner animation='border' />
+				) : cards.length > 0 ? (
+					<Table prevButtonDisabled={offsetState === 0} nextButtonDisabled={cards.length < 5} columns={columns} data={cards} onClickNext={onClickNext} onClickPrev={onClickPrev} checkBoolean={onChangeDefault} />
+				) : (
+					<p>You do not have any cards saved!</p>
+				)}
+			</div>
 			<MyModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
 		</div>
 	);

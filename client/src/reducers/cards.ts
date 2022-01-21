@@ -52,11 +52,18 @@ export default function (state = initialState, action: Action) {
 			const originDefaultCard = state.cards.find((a) => a.use_as_default === true);
 			const newDefaultCard = state.cards.find((b) => b.id === cardId);
 
-			const originIndex = state.cards.findIndex((c) => c.use_as_default === true);
-			return {
-				...state,
-				cards: [...state.cards, ((originDefaultCard as any).use_as_default = false), ((newDefaultCard as any).use_as_default = true)]
-			};
+			console.log({originDefaultCard});
+			if (originDefaultCard) {
+				return {
+					...state,
+					cards: [...state.cards, ((originDefaultCard as any).use_as_default = false), ((newDefaultCard as any).use_as_default = true)]
+				};
+			} else {
+				return {
+					...state,
+					cards: [...state.cards, ((newDefaultCard as any).use_as_default = true)]
+				};
+			}
 		case CARDS_ERROR:
 			return {
 				...state,

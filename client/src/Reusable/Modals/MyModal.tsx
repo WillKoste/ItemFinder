@@ -1,6 +1,6 @@
 import React, {ChangeEvent, Dispatch, FormEvent, SetStateAction, useState} from 'react';
 import {connect} from 'react-redux';
-import {Dialog, DialogActions, DialogTitle, DialogContent, DialogContentText, FormLabel, Input, InputLabel} from '@mui/material';
+import {Dialog, DialogActions, DialogTitle, DialogContent, DialogContentText, FormLabel, Input, InputLabel, dividerClasses} from '@mui/material';
 import {addNewCard} from '../../actions/cards';
 import {CreditCardForm} from '../../types/forms';
 import swal2 from 'sweetalert2';
@@ -15,14 +15,14 @@ interface MyModalProps {
 
 const MyModal: React.FC<MyModalProps> = ({modalOpen, setModalOpen, addNewCard}) => {
 	const [formData, setFormData] = useState({
-		firstName: '',
-		lastName: '',
-		cardNumber: '',
-		expDate: '',
-		securityCode: ''
+		first_name: '',
+		last_name: '',
+		card_number: '',
+		exp_date: '',
+		security_code: ''
 	});
 
-	const {firstName, lastName, cardNumber, expDate, securityCode} = formData;
+	const {first_name, last_name, card_number, exp_date, security_code} = formData;
 
 	const onChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setFormData({...formData, [e.target.name]: e.target.value});
@@ -31,49 +31,69 @@ const MyModal: React.FC<MyModalProps> = ({modalOpen, setModalOpen, addNewCard}) 
 
 	const onSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		swal2.fire({text: JSON.stringify(formData)});
+		addNewCard(formData);
+		setFormData({
+			first_name: '',
+			last_name: '',
+			card_number: '',
+			exp_date: '',
+			security_code: ''
+		});
 	};
 
 	const onSubmitButton = () => {
-		// swal2.fire({text: 'button was clicked', confirmButtonText: 'WTF', cancelButtonText: 'YOLO', showCancelButton: true});
-		swal2.fire({text: 'Button was clicked'});
+		addNewCard(formData);
+		setFormData({
+			first_name: '',
+			last_name: '',
+			card_number: '',
+			exp_date: '',
+			security_code: ''
+		});
+	};
+
+	const onCloseModal = () => {
+		setModalOpen(false);
+		setFormData({
+			first_name: '',
+			last_name: '',
+			card_number: '',
+			exp_date: '',
+			security_code: ''
+		});
 	};
 
 	return (
-		<Dialog PaperProps={{style: {maxWidth: '1000px', width: '1000px', height: '700px'}}} open={modalOpen} onClose={() => setModalOpen(false)} aria-describedby='alert-dialog-slide-description' className='modal'>
+		<Dialog PaperProps={{style: {maxWidth: '1000px', width: '1000px', height: '700px'}}} open={modalOpen} onClose={onCloseModal} aria-describedby='alert-dialog-slide-description' className='modal'>
 			<DialogTitle>New Card Details</DialogTitle>
 			<DialogContent style={{paddingBlock: '0'}}>
 				<form className='form mt-3 modal-form' onSubmit={onSubmit}>
 					<div className='form-group'>
 						<InputLabel htmlFor='IDK'>First Name</InputLabel>
-						<input type='text' className='form-control' name='firstName' value={firstName} onChange={onChange} />
+						<input type='text' className='form-control' name='first_name' value={first_name} onChange={onChange} />
 					</div>
 					<div className='form-group'>
 						<InputLabel>Last Name</InputLabel>
-						<input type='text' className='form-control' name='lastName' value={lastName} onChange={onChange} />
+						<input type='text' className='form-control' name='last_name' value={last_name} onChange={onChange} />
 					</div>
 					<div className='form-group form-group-spread'>
 						<InputLabel>Credit Card Number</InputLabel>
-						<input type='text' className='form-control' maxLength={19} name='cardNumber' value={formatCreditCard(cardNumber)} onChange={onChange} />
+						<input type='text' className='form-control' maxLength={19} name='card_number' value={formatCreditCard(card_number)} onChange={onChange} />
 					</div>
 					<div className='form-group'>
 						<InputLabel>Expiration Date</InputLabel>
-						{/* <input type='text' className='form-control' /> */}
-						{/* <Input inputProps={{}} type='date' className='form-control' /> */}
-						{/* <DatePicker
-							// value={expDate}
-							// className='form-control'
-							// dateFormat={'MM-YY'}
-							onChange={(date) => {
-								setFormData({...formData, expDate: date?.getDate() as any});
-								console.log({formData});
-							}}
-						/> */}
-						<DatePicker className='form-control' selected={expDate === '' ? null : (expDate as any)} value={expDate === '' ? null : (expDate as any)} onChange={(date) => setFormData({...formData, expDate: date as any})} />
+						<DatePicker
+							className='form-control'
+							dateFormat={'MM/yy'}
+							showMonthYearPicker
+							selected={exp_date === '' ? null : (exp_date as any)}
+							value={exp_date === '' ? null : (exp_date as any)}
+							onChange={(date) => setFormData({...formData, exp_date: date as any})}
+						/>
 					</div>
 					<div className='form-group'>
 						<InputLabel>Security Code</InputLabel>
-						<input type='text' className='form-control' />
+						<input type='text' className='form-control' name='security_code' value={security_code} onChange={onChange} maxLength={3} />
 					</div>
 					<div className='form-group'></div>
 				</form>
@@ -82,7 +102,7 @@ const MyModal: React.FC<MyModalProps> = ({modalOpen, setModalOpen, addNewCard}) 
 				<button onClick={onSubmitButton} className='btn btn-dark'>
 					Save
 				</button>
-				<button className='btn btn-danger' onClick={() => setModalOpen(false)}>
+				<button className='btn btn-danger' onClick={onCloseModal}>
 					Cancel
 				</button>
 			</DialogActions>
