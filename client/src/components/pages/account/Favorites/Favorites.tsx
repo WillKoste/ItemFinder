@@ -1,10 +1,10 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {Spinner} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import {getFavorites} from '../../../../actions/favorites';
 import Table from '../../../../Reusable/Table';
 import {FavoritesReducer, UserReducer} from '../../../../types/general';
 import {Column} from '../../../../types/table';
+import SpinnerCustom from '../../../layout/SpinnerCustom';
 
 interface FavoritesProps {
 	favoritesRed: FavoritesReducer;
@@ -69,7 +69,7 @@ const Favorites: React.FC<FavoritesProps> = ({favoritesRed: {favorites, loadingF
 	return (
 		<div>
 			<h2 className='account-header'>Favorites</h2>
-			{loadingFavorites ? <Spinner animation='border' /> : favorites.length > 0 ? <Table data={favoritesData} columns={columns} onClickNext={onClickNext} onClickPrev={onClickPrev} /> : <p>You do not have any recorded favorites!</p>}
+			{loadingFavorites ? <SpinnerCustom /> : favorites.length > 0 ? <Table data={favoritesData} columns={columns} onClickNext={onClickNext} onClickPrev={onClickPrev} /> : <p>You do not have any recorded favorites!</p>}
 		</div>
 	);
 };

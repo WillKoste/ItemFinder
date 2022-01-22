@@ -33,3 +33,10 @@ export interface TableData {
 export type Styling = React.CSSProperties;
 
 export type RemovedFields = 'first_name' | 'last_name' | 'credit_card' | 'address' | 'created_at' | 'contact_type' | 'id';
+
+export interface Tabs {
+	id: number;
+	title: string;
+	path: string;
+	action?: () => void;
+}

@@ -53,4 +53,32 @@
 			color: $highlight-color;
 		}
 	}
+
+	.dropdown-li {
+		position: relative;
+
+		.dropdown-ul {
+			position: absolute;
+			top: 40px;
+			background: lighten($primary-color, 12%);
+			text-align: center;
+
+			li {
+				border-radius: 0;
+				padding: 0;
+				margin: 0;
+
+				a {
+					display: block;
+					margin: 0 !important;
+					padding: 0.7rem 0;
+					border-bottom: 1px solid #7e7e7e;
+					border-radius: 0;
+					&:hover {
+						background: darken($highlight-color, 50%);
+					}
+				}
+			}
+		}
+	}
 }

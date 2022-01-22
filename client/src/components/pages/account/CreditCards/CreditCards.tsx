@@ -1,5 +1,4 @@
 import React, {useEffect, useCallback, useState} from 'react';
-import {Spinner} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import {getCards, updateDefaultCard} from '../../../../actions/cards';
 import MyModal from '../../../../Reusable/Modals/MyModal';
@@ -7,6 +6,7 @@ import Table from '../../../../Reusable/Table';
 import {CreditCard, CreditCardsReducer} from '../../../../types/general';
 import {CreditCardsOptions} from '../../../../types/redux';
 import {Column} from '../../../../types/table';
+import SpinnerCustom from '../../../layout/SpinnerCustom';
 
 interface CreditCardsProps {
 	creditCardsRed: CreditCardsReducer;
@@ -68,7 +68,7 @@ const CreditCards: React.FC<CreditCardsProps> = ({creditCardsRed: {cards, loadin
 			</button>
 			<div>
 				{loadingCards ? (
-					<Spinner animation='border' />
+					<SpinnerCustom />
 				) : cards.length > 0 ? (
 					<Table prevButtonDisabled={offsetState === 0} nextButtonDisabled={cards.length < 5} columns={columns} data={cards} onClickNext={onClickNext} onClickPrev={onClickPrev} checkBoolean={onChangeDefault} />
 				) : (

@@ -14,6 +14,7 @@ import Locate from '../pages/locate/Locate';
 import NotFound from '../pages/notFound/NotFound';
 import ProductPage from '../pages/products/ProductPage';
 import Reviews from '../pages/reviews/Reviews';
+import AccountSettings from '../pages/settings/AccountSettings';
 import Trends from '../pages/trends/Trends';
 import PrivateRoute from './PrivateRoute';
 
@@ -41,6 +42,7 @@ const Routes: React.FC<RoutesProps> = ({location, reviewsClear}) => {
 			<Route exact path='/checkout' component={Checkout} />
 			<Route exact path='/product/info/:productId' component={ProductPage} />
 			<PrivateRoute exact path='/account' component={Account} />
+			<PrivateRoute exact path='/account/settings' component={AccountSettings} />
 			<Route exact path='/trends' component={Trends} />
 			<Route component={NotFound} />
 		</Switch>
