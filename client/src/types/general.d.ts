@@ -195,6 +195,7 @@ export interface PartnersReducer {
 export interface ContactsReducer {
 	contacts: Contact[];
 	contact: Contact | null;
+	totalContacts: number | null;
 	loadingContacts: boolean;
 	loadingContact: boolean;
 	error: any;

@@ -7,6 +7,7 @@ import Login from '../auth/Login';
 import Register from '../auth/Register';
 import Splash from '../auth/Splash';
 import Account from '../pages/account/Account';
+import ContactPage from '../pages/account/Contacts/ContactPage';
 import Favorites from '../pages/account/Favorites/Favorites';
 import MyOrders from '../pages/account/MyOrders/MyOrders';
 import Cart from '../pages/cart/Cart';
@@ -45,6 +46,7 @@ const Routes: React.FC<RoutesProps> = ({location, reviewsClear}) => {
 			<PrivateRoute exact path='/account/settings' component={Account} />
 			<PrivateRoute exact path='/account/favorites' component={Favorites} />
 			<PrivateRoute exact path='/account/orders' component={MyOrders} />
+			<PrivateRoute exact path='/contacts/:contactId' component={ContactPage} />
 			<Route exact path='/trends' component={Trends} />
 			<Route component={NotFound} />
 		</Switch>

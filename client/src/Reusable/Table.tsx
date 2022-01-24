@@ -2,8 +2,10 @@ import React, {Fragment} from 'react';
 import {Column, TableData} from '../types/table';
 import moment from 'moment';
 import TablePagination from './Buttons/TablePagination';
+import {RouteComponentProps} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 
-interface TableProps {
+interface TableProps extends RouteComponentProps {
 	data: TableData[];
 	columns: Column[];
 	onClickNext?: () => void;
@@ -11,9 +13,11 @@ interface TableProps {
 	prevButtonDisabled?: boolean;
 	nextButtonDisabled?: boolean;
 	checkBoolean?: (value: any) => void;
+	clickable?: boolean;
+	clickablePath?: string;
 }
 
-const Table: React.FC<TableProps> = ({data, columns, onClickNext, onClickPrev, prevButtonDisabled, nextButtonDisabled, checkBoolean}) => {
+const Table: React.FC<TableProps> = ({data, columns, onClickNext, onClickPrev, prevButtonDisabled, nextButtonDisabled, checkBoolean, clickable = false, history, clickablePath}) => {
 	const validFields = columns.map((col) => col.accessor);
 	const validTypes = validFields.map((col) => col);
 	console.log({validTypes, data, columns});
@@ -50,6 +54,11 @@ const Table: React.FC<TableProps> = ({data, columns, onClickNext, onClickPrev, p
 									e.currentTarget.style.cursor = 'default';
 								}}
 								style={{background: i % 2 === 0 ? '#ccc' : 'inherit'}}
+								onClick={() => {
+									if (clickable && clickablePath) {
+										history.push(`${clickablePath}/${d.id}`);
+									}
+								}}
 							>
 								{keysArr.map((key, end) => {
 									// console.log(typeof d['use_as_default']);
@@ -76,4 +85,4 @@ const Table: React.FC<TableProps> = ({data, columns, onClickNext, onClickPrev, p
 	);
 };
 
-export default Table;
+export default withRouter(Table);

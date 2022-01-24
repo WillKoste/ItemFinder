@@ -5,28 +5,29 @@ import Table from '../../../../Reusable/Table';
 import {ContactsReducer, UserReducer} from '../../../../types/general';
 
 interface ContactsListProps {
-	getContacts: (originId: number, limit?: number, offset?: number) => void;
+	getContacts: (limit?: number, offset?: number) => void;
 	contactsRed: ContactsReducer;
 	authRed: UserReducer;
 }
 
-const ContactsList: React.FC<ContactsListProps> = ({getContacts, contactsRed: {contacts}, authRed: {user}}) => {
+const ContactsList: React.FC<ContactsListProps> = ({getContacts, contactsRed: {contacts, totalContacts}, authRed: {user}}) => {
 	const [contactsData, setContactsData] = useState([]);
 	const [offsetState, setOffsetState] = useState(0);
+	const limitAmt = 10;
 
 	const onClickNext = useCallback(() => {
-		setOffsetState(offsetState + 10);
+		setOffsetState(offsetState + limitAmt);
 	}, [offsetState]);
 	const onClickPrev = useCallback(() => {
 		if (offsetState !== 0) {
-			setOffsetState(offsetState - 10);
+			setOffsetState(offsetState - limitAmt);
 		} else {
 			return;
 		}
 	}, [offsetState]);
 	useEffect(() => {
 		if (user) {
-			getContacts(user.id, 10, offsetState);
+			getContacts(limitAmt, offsetState);
 		}
 	}, [offsetState]);
 	useEffect(() => {
@@ -69,7 +70,16 @@ const ContactsList: React.FC<ContactsListProps> = ({getContacts, contactsRed: {c
 	return (
 		<div>
 			<h2 className='account-header'>Contacts</h2>
-			<Table data={data} columns={columns} onClickPrev={onClickPrev} onClickNext={onClickNext} />
+			<Table
+				data={data}
+				columns={columns}
+				onClickPrev={onClickPrev}
+				onClickNext={onClickNext}
+				clickable={true}
+				clickablePath='/contacts'
+				prevButtonDisabled={offsetState + limitAmt <= 0}
+				nextButtonDisabled={totalContacts !== null ? offsetState + limitAmt >= totalContacts : false}
+			/>
 		</div>
 	);
 };

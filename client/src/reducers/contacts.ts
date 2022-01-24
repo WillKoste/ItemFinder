@@ -5,6 +5,7 @@ import {GET_CONTACTS, GET_CONTACT, CONTACTS_CLEAR, CONTACTS_ERROR, CREATE_CONTAC
 const inititalState: ContactsReducer = {
 	contacts: [],
 	contact: null,
+	totalContacts: null,
 	loadingContact: true,
 	loadingContacts: true,
 	error: null,
@@ -12,7 +13,7 @@ const inititalState: ContactsReducer = {
 };
 
 export default function (state = inititalState, action: Action) {
-	const {type, payload} = action;
+	const {type, payload, total} = action;
 	switch (type) {
 		case GET_CONTACTS:
 			return {
@@ -20,7 +21,8 @@ export default function (state = inititalState, action: Action) {
 				contacts: payload,
 				loadingContacts: false,
 				error: null,
-				success: true
+				success: true,
+				totalContacts: total
 			};
 		case GET_CONTACT:
 			return {
