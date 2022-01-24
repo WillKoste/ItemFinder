@@ -30,6 +30,24 @@
 	text-align: right;
 }
 
+.header {
+	&-1 {
+		font-size: 2.5rem;
+	}
+	&-2 {
+		font-size: 2rem;
+	}
+	&-3 {
+		font-size: 1.65rem;
+	}
+}
+
+.save-card {
+	display: flex;
+	flex-direction: row !important;
+	align-items: center !important;
+}
+
 .display-flex-center {
 	display: flex;
 	justify-content: center;

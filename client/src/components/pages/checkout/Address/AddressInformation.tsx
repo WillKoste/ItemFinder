@@ -1,7 +1,7 @@
 import React, {Dispatch, Fragment, SetStateAction, useState} from 'react';
-import PrevNext from '../../../Reusable/Buttons/PrevNext';
-import {CheckoutForm} from '../../../types/forms';
-import {stateAbbreviations} from '../../../utils/sharedData';
+import PrevNext from '../../../../Reusable/Buttons/PrevNext';
+import {CheckoutForm} from '../../../../types/forms';
+import {stateAbbreviations} from '../../../../utils/sharedData';
 
 interface AddressInformationProps {
 	setPhase: Dispatch<SetStateAction<number>>;

@@ -21,8 +21,8 @@ const MyOrders: React.FC<MyOrdersProps> = ({purchasesRed: {loadingPurchases, pur
 	}, [user]);
 
 	return (
-		<div>
-			<h2 className='mb-3'>My Orders</h2>
+		<div className='container'>
+			<h2 className='mb-3 header-2'>My Orders</h2>
 			<div className='account-purchases'>{loadingPurchases ? <SpinnerCustom /> : purchases.length <= 0 ? <h3 style={{color: '#fff'}}>{shared.noPurchases}</h3> : purchases.map((purch) => <OrderItem key={purch.id} purchase={purch} />)}</div>
 		</div>
 	);

@@ -6,7 +6,7 @@ import {CreditCardForm} from '../types/forms';
 import {CreditCardsOptions} from '../types/redux';
 import {clientQueryOptions} from '../utils/clientQueryOptions';
 
-export const getCards = (options?: CreditCardsOptions) => async (dispatch: any) => {
+export const getCards = (options?: CreditCardsOptions | undefined) => async (dispatch: any) => {
 	try {
 		const res: AxiosResponse<{cards: CreditCard[]}> = await customAxios.get(`/api/v1/finance/secure/cards${options ? clientQueryOptions(options) : ''}`);
 		dispatch({

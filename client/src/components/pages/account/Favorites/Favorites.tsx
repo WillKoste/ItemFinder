@@ -67,8 +67,8 @@ const Favorites: React.FC<FavoritesProps> = ({favoritesRed: {favorites, loadingF
 	];
 
 	return (
-		<div>
-			<h2 className='account-header'>Favorites</h2>
+		<div className='container'>
+			<h2 className='header-2 mb-4'>My Favorites</h2>
 			{loadingFavorites ? <SpinnerCustom /> : favorites.length > 0 ? <Table data={favoritesData} columns={columns} onClickNext={onClickNext} onClickPrev={onClickPrev} /> : <p>You do not have any recorded favorites!</p>}
 		</div>
 	);

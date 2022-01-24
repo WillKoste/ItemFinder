@@ -4,11 +4,13 @@ export const formatCurrency = (amount: any) => {
 };
 
 export const formatExpiration = (value: string) => {
-	let newValue = value.replace(/[^\d]/, '');
+	if (typeof value === 'string') {
+		let newValue = value.replace(/[^\d]/, '');
 
-	if (newValue.length === 4) {
-		console.log({hmm: newValue.replace(/(\d{2})(\d{2})/, '$1-$2')});
-		return newValue.replace(/(\d{2})(\d{2})/, '$1/$2');
+		if (newValue.length === 4) {
+			console.log({hmm: newValue.replace(/(\d{2})(\d{2})/, '$1-$2')});
+			return newValue.replace(/(\d{2})(\d{2})/, '$1/$2');
+		}
 	}
 };
 

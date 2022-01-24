@@ -66,7 +66,7 @@ router.post(
 			const fourDigits = card_number.slice(card_number.length - 4, card_number.length);
 			const finalFourDigits = `**** **** **** ${fourDigits}`;
 
-			await pool.query(`INSERT INTO credit_cards (first_name, last_name, card_number, exp_date, security_code, last_four_digits, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7)`, [
+			await pool.query(`INSERT INTO credit_cards (first_name, last_name, card_number, exp_date, security_code, last_four_digits, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id, first_name, last_four_digits, exp_date, use_as_default`, [
 				first_name,
 				last_name,
 				hashedCard,

@@ -1,6 +1,6 @@
 import React, {Dispatch, SetStateAction, useState} from 'react';
-import PrevNext from '../../../Reusable/Buttons/PrevNext';
-import {CheckoutForm} from '../../../types/forms';
+import PrevNext from '../../../../Reusable/Buttons/PrevNext';
+import {CheckoutForm} from '../../../../types/forms';
 
 interface ConfirmationProps {
 	setPhase: Dispatch<SetStateAction<number>>;

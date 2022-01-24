@@ -335,6 +335,30 @@
 		gap: 7.5rem;
 		margin: 2rem 0;
 	}
+	.select-card {
+		border: 1px solid rgb(46, 46, 46);
+		border-radius: $border-radius;
+		padding: 1rem 0.6rem;
+
+		h2 {
+			margin-bottom: 1rem;
+		}
+		.card-selection {
+			.card-selection-option {
+				margin-bottom: 0.5rem;
+
+				input {
+					margin-right: 1rem;
+				}
+
+				label {
+					span {
+						margin-right: 1rem;
+					}
+				}
+			}
+		}
+	}
 }
 
 // REVIEW

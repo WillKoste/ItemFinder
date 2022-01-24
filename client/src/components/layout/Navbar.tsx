@@ -16,22 +16,22 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({logout, authRed: {isAuthenticated}, cartItemsRed: {items}}) => {
 	const dropdownTabs: Tabs[] = [
 		{
-			id: 4,
-			title: 'Account',
-			path: '/account'
-		},
-		{
 			id: 1,
-			title: 'Account Settings',
-			path: '/account/settings'
+			title: 'My Orders',
+			path: '/account/orders'
 		},
 		{
 			id: 2,
-			title: 'Favorites',
-			path: '/favorites'
+			title: 'My Account',
+			path: '/account/settings'
 		},
 		{
 			id: 3,
+			title: 'Favorites',
+			path: '/account/favorites'
+		},
+		{
+			id: 4,
 			title: 'Logout',
 			path: '/login',
 			action: () => logout()

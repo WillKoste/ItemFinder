@@ -7,6 +7,8 @@ import Login from '../auth/Login';
 import Register from '../auth/Register';
 import Splash from '../auth/Splash';
 import Account from '../pages/account/Account';
+import Favorites from '../pages/account/Favorites/Favorites';
+import MyOrders from '../pages/account/MyOrders/MyOrders';
 import Cart from '../pages/cart/Cart';
 import Checkout from '../pages/checkout/Checkout';
 import Home from '../pages/home/Home';
@@ -14,7 +16,6 @@ import Locate from '../pages/locate/Locate';
 import NotFound from '../pages/notFound/NotFound';
 import ProductPage from '../pages/products/ProductPage';
 import Reviews from '../pages/reviews/Reviews';
-import AccountSettings from '../pages/settings/AccountSettings';
 import Trends from '../pages/trends/Trends';
 import PrivateRoute from './PrivateRoute';
 
@@ -41,8 +42,9 @@ const Routes: React.FC<RoutesProps> = ({location, reviewsClear}) => {
 			<Route exact path='/locate/:productId' component={Locate} />
 			<Route exact path='/checkout' component={Checkout} />
 			<Route exact path='/product/info/:productId' component={ProductPage} />
-			<PrivateRoute exact path='/account' component={Account} />
-			<PrivateRoute exact path='/account/settings' component={AccountSettings} />
+			<PrivateRoute exact path='/account/settings' component={Account} />
+			<PrivateRoute exact path='/account/favorites' component={Favorites} />
+			<PrivateRoute exact path='/account/orders' component={MyOrders} />
 			<Route exact path='/trends' component={Trends} />
 			<Route component={NotFound} />
 		</Switch>

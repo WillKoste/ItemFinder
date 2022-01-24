@@ -4,7 +4,7 @@ import {Dialog, DialogActions, DialogTitle, DialogContent, DialogContentText, Fo
 import {addNewCard} from '../../actions/cards';
 import {CreditCardForm} from '../../types/forms';
 import swal2 from 'sweetalert2';
-import {formatCreditCard} from '../../utils/randomUtils';
+import {formatCreditCard, formatExpiration} from '../../utils/randomUtils';
 import DatePicker from 'react-datepicker';
 
 interface MyModalProps {
@@ -42,7 +42,13 @@ const MyModal: React.FC<MyModalProps> = ({modalOpen, setModalOpen, addNewCard}) 
 	};
 
 	const onSubmitButton = () => {
-		addNewCard(formData);
+		addNewCard({
+			first_name,
+			last_name,
+			card_number,
+			exp_date: formatExpiration(exp_date),
+			security_code
+		});
 		setFormData({
 			first_name: '',
 			last_name: '',

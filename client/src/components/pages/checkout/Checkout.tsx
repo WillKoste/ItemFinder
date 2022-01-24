@@ -1,14 +1,13 @@
-import React, {ChangeEvent, useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {connect} from 'react-redux';
-import {CartProduct, CartReducer, Product, UserReducer} from '../../../types/general';
-import AddressInformation from './AddressInformation';
-import Confirmation from './Confirmation';
-import PaymentDetails from './PaymentDetails';
+import {CartProduct, CartReducer, UserReducer} from '../../../types/general';
+import AddressInformation from './Address/AddressInformation';
+import Confirmation from './Confirmation/Confirmation';
+import PaymentDetails from './Payment/PaymentDetails';
 import ThankYou from './ThankYou';
 import {v4 as uuidv4} from 'uuid';
 import {createPurchase} from '../../../actions/purchases';
 import {CheckoutForm} from '../../../types/forms';
-import {formatExpiration} from '../../../utils/randomUtils';
 
 interface CheckoutProps {
 	cartItemsRed: CartReducer;
@@ -39,50 +38,8 @@ const Checkout: React.FC<CheckoutProps> = ({cartItemsRed: {items, total}, create
 		shippingNotes: '',
 		gift: 'no'
 	});
-	const {
-		cardFirstName,
-		cardLastName,
-		cardNumber,
-		expirationDate,
-		securityCode,
-		saveCard,
-		shippingAddress,
-		shippingCity,
-		shippingState,
-		shippingZipcode,
-		billingAddress,
-		billingCity,
-		billingState,
-		billingZipcode,
-		billingSameAsShipping,
-		shippingNotes,
-		shippingOption,
-		gift
-	} = formData;
-	const phase1State = {
-		cardFirstName,
-		cardLastName,
-		cardNumber,
-		expirationDate,
-		securityCode,
-		saveCard
-	};
-	const phase2State = {
-		shippingAddress,
-		shippingCity,
-		shippingState,
-		shippingZipcode,
-		billingAddress,
-		billingCity,
-		billingState,
-		billingZipcode,
-		billingSameAsShipping
-	};
-	const phase3State = {
-		shippingNotes,
-		shippingOption,
-		gift
-	};
+	const {billingSameAsShipping, gift} = formData;
+	const [needCardInfo, setNeedCardInfo] = useState(false);
 	const toggleGift = () => setFormData({...formData, gift: gift === 'yes' ? 'no' : 'yes'});
 	console.log(formData);
 	const [numSteps, setNumSteps] = useState([
@@ -124,9 +81,11 @@ const Checkout: React.FC<CheckoutProps> = ({cartItemsRed: {items, total}, create
 						);
 					})}
 				</div>
-				{phase === 1 && <PaymentDetails setPhase={setPhase} phase={phase} formData={phase1State} onChange={onChange as any} saveToLocalStorage={saveToLocalStorage} setFormData={setFormData} />}
-				{phase === 2 && <AddressInformation setPhase={setPhase} phase={phase} onChange={onChange as any} formData={phase2State} checkBillingAddress={checkBillingAddress} saveToLocalStorage={saveToLocalStorage} />}
-				{phase === 3 && <Confirmation setPhase={setPhase} phase={phase} onChange={onChange as any} formData={phase3State} saveToLocalStorage={saveToLocalStorage} onSubmit={onSubmit} toggleGift={toggleGift} />}
+				{phase === 1 && (
+					<PaymentDetails setPhase={setPhase} phase={phase} formData={formData} onChange={onChange as any} saveToLocalStorage={saveToLocalStorage} setFormData={setFormData} setNeedCardInfo={setNeedCardInfo} needCardInfo={needCardInfo} />
+				)}
+				{phase === 2 && <AddressInformation setPhase={setPhase} phase={phase} onChange={onChange as any} formData={formData} checkBillingAddress={checkBillingAddress} saveToLocalStorage={saveToLocalStorage} />}
+				{phase === 3 && <Confirmation setPhase={setPhase} phase={phase} onChange={onChange as any} formData={formData} saveToLocalStorage={saveToLocalStorage} onSubmit={onSubmit} toggleGift={toggleGift} />}
 				{phase === 4 && <ThankYou setPhase={setPhase} />}
 			</div>
 		</div>

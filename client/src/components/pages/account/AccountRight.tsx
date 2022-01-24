@@ -15,9 +15,7 @@ const AccountRight: React.FC<AccountRightProps> = ({section}) => {
 		<div className='account-right'>
 			{section === 1 && <ContactsList />}
 			{section === 2 && <Partners />}
-			{section === 3 && <Favorites />}
-			{section === 4 && <CreditCards />}
-			{section === 5 && <MyOrders />}
+			{section === 3 && <CreditCards />}
 		</div>
 	);
 };
