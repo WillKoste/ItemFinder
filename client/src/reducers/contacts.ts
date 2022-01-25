@@ -32,6 +32,14 @@ export default function (state = inititalState, action: Action) {
 				error: null,
 				success: true
 			};
+		case CREATE_CONTACT:
+			return {
+				...state,
+				contacts: [...state.contacts, payload].filter((a, b) => a - b),
+				error: null,
+				success: true,
+				loadingContact: false
+			};
 		case CONTACTS_ERROR:
 			return {
 				...state,

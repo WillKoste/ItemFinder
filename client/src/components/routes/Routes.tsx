@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import {Switch, Route, withRouter, RouteComponentProps} from 'react-router-dom';
 import {reviewsClear} from '../../actions/reviews';
@@ -7,6 +7,7 @@ import Login from '../auth/Login';
 import Register from '../auth/Register';
 import Splash from '../auth/Splash';
 import Account from '../pages/account/Account';
+import AddContactForm from '../pages/account/Contacts/AddContactForm';
 import ContactPage from '../pages/account/Contacts/ContactPage';
 import Favorites from '../pages/account/Favorites/Favorites';
 import MyOrders from '../pages/account/MyOrders/MyOrders';
@@ -47,6 +48,7 @@ const Routes: React.FC<RoutesProps> = ({location, reviewsClear}) => {
 			<PrivateRoute exact path='/account/favorites' component={Favorites} />
 			<PrivateRoute exact path='/account/orders' component={MyOrders} />
 			<PrivateRoute exact path='/contacts/:contactId' component={ContactPage} />
+			<PrivateRoute exact path='/new-contact' component={AddContactForm} />
 			<Route exact path='/trends' component={Trends} />
 			<Route component={NotFound} />
 		</Switch>

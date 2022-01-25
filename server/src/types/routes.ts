@@ -32,11 +32,24 @@ export interface Location {
 
 export interface Contact {
 	id: number;
-	firstName: string;
-	lastName: string;
-	address: string;
-	creditCard?: string;
-	contactType: string;
+	firstName?: string;
+	middleInitial?: string;
+	lastName?: string;
+	phone?: string;
+	email?: string;
+	relation?: string;
+	streetAddress?: string;
+	city?: string;
+	state?: string;
+	zip?: string;
+	companyName?: string;
+	companyTitle?: string;
+	companyMemberType?: string;
+	companyStreetAddress?: string;
+	companyCity?: string;
+	companyState?: string;
+	companyZip?: string;
+	contactType?: string;
 }
 
 export interface Review {

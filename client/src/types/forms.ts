@@ -26,3 +26,24 @@ export interface CreditCardForm {
 	exp_date: string | undefined;
 	security_code: string;
 }
+
+export interface NewContactForm {
+	firstName?: string;
+	middleInitial?: string;
+	lastName?: string;
+	phone?: string;
+	email?: string;
+	relation?: string;
+	streetAddress?: string;
+	city?: string;
+	state?: string;
+	zip?: string;
+	companyName?: string;
+	companyTitle?: string;
+	companyMemberType?: string;
+	companyStreetAddress?: string;
+	companyCity?: string;
+	companyState?: string;
+	companyZip?: string;
+	contactType?: string;
+}

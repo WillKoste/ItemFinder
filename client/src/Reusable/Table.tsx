@@ -20,7 +20,6 @@ interface TableProps extends RouteComponentProps {
 const Table: React.FC<TableProps> = ({data, columns, onClickNext, onClickPrev, prevButtonDisabled, nextButtonDisabled, checkBoolean, clickable = false, history, clickablePath}) => {
 	const validFields = columns.map((col) => col.accessor);
 	const validTypes = validFields.map((col) => col);
-	console.log({validTypes, data, columns});
 
 	return (
 		<Fragment>

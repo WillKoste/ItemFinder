@@ -1,4 +1,5 @@
 import axios, {AxiosResponse} from 'axios';
+import {NewContactForm} from '../types/forms';
 import {Contact} from '../types/general';
 import {GET_CONTACTS, GET_CONTACT, CONTACTS_CLEAR, CONTACTS_ERROR, CREATE_CONTACT, UPDATE_CONTACT, DELETE_CONTACT, CREATE_REVIEW} from './types';
 
@@ -37,7 +38,7 @@ export const getContact = (contactId: string) => async (dispatch: any) => {
 	}
 };
 
-export const createContact = (formData: Contact) => async (dispatch: any) => {
+export const createContact = (formData: NewContactForm) => async (dispatch: any) => {
 	const config = {
 		headers: {
 			'Content-Type': 'application/json'

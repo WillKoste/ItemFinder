@@ -85,12 +85,25 @@ export interface Partner {
 export interface Contact {
 	id?: number;
 	first_name?: string;
+	middle_initial?: string;
 	last_name?: string;
+	phone?: string;
+	email?: string;
+	relation?: string;
 	street_address?: string;
 	city?: string;
 	state?: string;
-	zipCode?: string;
-	owner_id?: number;
+	zip?: string;
+	origin_id?: number;
+	company_name: string;
+	company_title: string;
+	company_member_type: string;
+	company_street_address: string;
+	company_city: string;
+	company_state: string;
+	company_zip: string;
+	created_at?: string;
+	contact_type?: string;
 }
 
 export interface CreditCard {

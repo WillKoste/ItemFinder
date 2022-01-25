@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useMemo, useCallback} from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import {getContacts} from '../../../../actions/contacts';
 import Table from '../../../../Reusable/Table';
 import {ContactsReducer, UserReducer} from '../../../../types/general';
@@ -51,7 +52,7 @@ const ContactsList: React.FC<ContactsListProps> = ({getContacts, contactsRed: {c
 			{
 				id: 3,
 				header: 'Address',
-				accessor: 'address'
+				accessor: 'street_address'
 			},
 			{
 				id: 4,
@@ -70,6 +71,11 @@ const ContactsList: React.FC<ContactsListProps> = ({getContacts, contactsRed: {c
 	return (
 		<div>
 			<h2 className='account-header'>Contacts</h2>
+			<div className='mb-3'>
+				<Link to={`/new-contact`} className='btn btn-secondary'>
+					New Contact
+				</Link>
+			</div>
 			<Table
 				data={data}
 				columns={columns}

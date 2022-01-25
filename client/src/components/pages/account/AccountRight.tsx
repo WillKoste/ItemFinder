@@ -1,9 +1,6 @@
 import React from 'react';
-import Favorites from './Favorites/Favorites';
-import AddContactForm from './Contacts/AddContactForm';
 import ContactsList from './Contacts/ContactsList';
 import Partners from './Partners/Partners';
-import MyOrders from './MyOrders/MyOrders';
 import CreditCards from './CreditCards/CreditCards';
 
 interface AccountRightProps {
