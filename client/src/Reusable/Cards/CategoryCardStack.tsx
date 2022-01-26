@@ -26,21 +26,25 @@ const CategoryCardStack: React.FC<CategoryCardStackProps> = ({getCategories, pro
 	}, []);
 
 	return (
-		<div className='cards-grid mb-4 arrows-container'>
-			<button className='arrow-left' onClick={onClickLeftArrow} disabled={offsetState === 0}>
-				<i className='fas fa-chevron-left'></i>
-			</button>
-			<button className='arrow-right' onClick={onClickRightArrow}>
-				<i className='fas fa-chevron-right'></i>
-			</button>
+		<div>
 			{loadingCategories ? (
 				<h4>Loading...</h4>
 			) : categories.length > 0 ? (
-				categories.map((cat) => (
-					<button className='btn btn-primary' key={cat.id}>
-						{cat.category_name}
+				<div className='product-stack-container' style={{width: '100%'}}>
+					<button className='arrow-left' onClick={onClickLeftArrow} disabled={offsetState === 0}>
+						<i className='fas fa-chevron-left'></i>
 					</button>
-				))
+					<div className='cards-grid'>
+						{categories.map((cat) => (
+							<button className='btn btn-primary' key={cat.id}>
+								{cat.category_name}
+							</button>
+						))}
+					</div>
+					<button className='arrow-right' onClick={onClickRightArrow}>
+						<i className='fas fa-chevron-right'></i>
+					</button>
+				</div>
 			) : (
 				<p>No categories found</p>
 			)}

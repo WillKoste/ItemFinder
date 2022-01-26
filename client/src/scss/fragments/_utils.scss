@@ -220,43 +220,35 @@
 	}
 }
 
-.cards-grid {
-	gap: 0 1rem;
-	display: grid;
-	grid-template-columns: repeat(5, 1fr);
+.product-stack-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 1rem;
 
-	&.arrows-container {
-		position: relative;
+	.arrow-left,
+	.arrow-right {
+		font-size: 3rem;
+		border: none;
+		height: 130px;
+		color: $light-color;
+		background: $dark-color;
+		border-radius: 6px;
+		padding: 1.5rem 0.7rem;
 
-		.arrow-left {
-			position: absolute;
-			left: -70px;
-			top: 40%;
+		&:active {
+			transform: scale(0.98);
+			transition: transform 0.2s ease;
 		}
-
-		.arrow-right {
-			position: absolute;
-			right: -70px;
-			top: 40%;
+		&:hover {
+			background: lighten($dark-color, 10%);
 		}
-
-		.arrow-left,
-		.arrow-right {
-			font-size: 3rem;
-			border: none;
-			color: $light-color;
-			background: $dark-color;
-			border-radius: 6px;
-			padding: 1.5rem 0.7rem;
-
-			&:active {
-				transform: scale(0.98);
-				transition: transform 0.2s ease;
-			}
-			&:hover {
-				background: lighten($dark-color, 10%);
-			}
-		}
+	}
+	.cards-grid {
+		gap: 0 1rem;
+		display: grid;
+		grid-template-columns: repeat(5, 1fr);
+		width: 100%;
 	}
 }
 

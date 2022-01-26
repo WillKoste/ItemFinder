@@ -5,6 +5,7 @@ import {getLocations} from '../../../actions/locations';
 import {getPartners} from '../../../actions/partners';
 import {clearProduct} from '../../../actions/products';
 import {getReviews} from '../../../actions/reviews';
+import NewProductCardStack from '../../../Reusable/Cards/NewProductCardStack';
 import CardStack from '../../../Reusable/Cards/ProductCardStack';
 import HeroSection from './HeroSection';
 
@@ -23,7 +24,8 @@ const Home: React.FC<HomeProps> = ({getLocations, getPartners, clearProduct}) =>
 		<div>
 			<div className='container'>
 				<h1 className='text-l mb-5 mt-2'>Featured Products</h1>
-				<CardStack />
+				{/* <CardStack /> */}
+				<NewProductCardStack />
 			</div>
 			<HeroSection />
 		</div>

@@ -1,0 +1,39 @@
+.fade-enter .btn {
+	opacity: 0;
+	transform: translateX(-100%);
+}
+.fade-enter-active .btn {
+	opacity: 1;
+	transform: translateX(0%);
+}
+.fade-exit .btn {
+	opacity: 1;
+	transform: translateX(0%);
+}
+.fade-exit-active .btn {
+	opacity: 0;
+	transform: translateX(100%);
+}
+.fade-enter-active .btn,
+.fade-exit-active .btn {
+	transition: opacity 1ms, transform 1ms;
+}
+
+.remove-btn {
+	margin-right: 0.5rem;
+}
+
+.item-enter {
+	opacity: 0;
+}
+.item-enter-active {
+	opacity: 1;
+	transition: opacity 20000ms ease-in;
+}
+.item-exit {
+	opacity: 1;
+}
+.item-exit-active {
+	opacity: 0;
+	transition: opacity 500ms ease-in;
+}
