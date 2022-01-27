@@ -46,7 +46,7 @@ const Login: React.FC<LoginProps> = ({loginUser, authRed: {isAuthenticated}, loc
 				<form className='form wrapper-lg m-auto' onSubmit={onSubmit}>
 					<div className='form-group'>
 						<label htmlFor='email'>Email</label>
-						<input type='text' className='form-control' name='email' value={email} onChange={onChange} />
+						<input data-testid='email' type='text' className='form-control' name='email' value={email} onChange={onChange} />
 					</div>
 					<div className='form-group'>
 						<label htmlFor='password'>Password</label>
