@@ -39,12 +39,14 @@ export const getCard = (cardId: number) => async (dispatch: any) => {
 };
 
 export const addNewCard = (formData: CreditCardForm) => async (dispatch: any) => {
+	console.log('hey dude');
 	const config = {
 		headers: {
 			'Content-Type': 'application/json'
 		}
 	};
 	const body = JSON.stringify(formData);
+	console.log({body});
 	try {
 		const res: AxiosResponse<{data: string}> = await customAxios.post(`/api/v1/finance/secure/new-card`, body, config);
 		dispatch({

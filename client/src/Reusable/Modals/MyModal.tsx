@@ -31,7 +31,13 @@ const MyModal: React.FC<MyModalProps> = ({modalOpen, setModalOpen, addNewCard}) 
 
 	const onSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		addNewCard(formData);
+		addNewCard({
+			card_number,
+			exp_date,
+			first_name,
+			last_name,
+			security_code
+		});
 		setFormData({
 			first_name: '',
 			last_name: '',
@@ -46,7 +52,7 @@ const MyModal: React.FC<MyModalProps> = ({modalOpen, setModalOpen, addNewCard}) 
 			first_name,
 			last_name,
 			card_number,
-			exp_date: formatExpiration(exp_date),
+			exp_date,
 			security_code
 		});
 		setFormData({
@@ -88,14 +94,7 @@ const MyModal: React.FC<MyModalProps> = ({modalOpen, setModalOpen, addNewCard}) 
 					</div>
 					<div className='form-group'>
 						<InputLabel>Expiration Date</InputLabel>
-						<DatePicker
-							className='form-control'
-							dateFormat={'MM/yy'}
-							showMonthYearPicker
-							selected={exp_date === '' ? null : (exp_date as any)}
-							value={exp_date === '' ? null : (exp_date as any)}
-							onChange={(date) => setFormData({...formData, exp_date: date as any})}
-						/>
+						<DatePicker className='form-control' dateFormat={'MM/yy'} name='exp_date' showMonthYearPicker selected={exp_date as any} value={exp_date} onChange={(date) => setFormData({...formData, exp_date: date as any})} />
 					</div>
 					<div className='form-group'>
 						<InputLabel>Security Code</InputLabel>

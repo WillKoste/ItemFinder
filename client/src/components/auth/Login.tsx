@@ -50,9 +50,9 @@ const Login: React.FC<LoginProps> = ({loginUser, authRed: {isAuthenticated}, loc
 					</div>
 					<div className='form-group'>
 						<label htmlFor='password'>Password</label>
-						<input type='password' className='form-control' name='password' value={password} onChange={onChange} />
+						<input data-testid='password' type='password' className='form-control' name='password' value={password} onChange={onChange} />
 					</div>
-					<input type='submit' value='Confirm' className='btn btn-dark' />
+					<input data-testid='confirm' type='submit' value='Confirm' className='btn btn-dark' />
 				</form>
 				<p>
 					Don't have an account?{' '}

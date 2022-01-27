@@ -51,12 +51,12 @@ router.post(
 		check('first_name', 'First name is required').not().isEmpty(),
 		check('last_name', 'Last name is required').not().isEmpty(),
 		check('card_number', 'Card number is required').not().isEmpty(),
-		check('exp_date', 'Expiration date is required').not().isEmpty(),
 		check('security_code', 'Security code is required').not().isEmpty()
 	],
 	async (req: Request, res: Response) => {
 		const {first_name, last_name, card_number, exp_date, security_code} = req.body;
 		const errors = validationResult(req);
+		console.log({FUCK: req.body});
 
 		if (!errors.isEmpty()) {
 			return res.status(400).json({errors: errors.array()});

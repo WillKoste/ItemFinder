@@ -1,17 +1,12 @@
 import renderComponent from '../renderComponent';
-import {screen} from '@testing-library/react';
+import {getByRole, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Login from '../../components/auth/Login';
 
 describe('Login', () => {
-	const {getByLabelText, getByRole, getByTestId} = renderComponent(<Login />);
-	it('should have a link', () => {
-		userEvent.type(getByTestId(/email/gi));
-
-		expect(
-			getByRole('link', {
-				name: /Click here /gi
-			})
-		).toBeDefined();
+	test('has an email input', () => {
+		const {getByTestId} = renderComponent(<Login />);
+		userEvent.type(getByTestId(/email/i), 'doobiekoste@gmail.com');
+		expect(getByTestId(/email/i)).toHaveValue('doobiekoste@gmail.com');
 	});
 });
