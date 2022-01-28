@@ -1,11 +1,33 @@
 export interface Dispatch {
 	type: string;
-	payload: any;
+	payload?: any;
 }
-
 export interface Action {
 	type: string;
-	payload: any;
+	payload?: any;
+	total?: number;
+	revId?: number;
+	cardId?: string;
+	newRating?: number;
+	voteTypeVal?: number;
+}
+
+export interface ProductsOptions {
+	limit: number;
+	offset?: number;
+	category?: string;
+}
+
+export interface CreditCardsOptions {
+	limit?: number;
+	offset?: number;
+	order_by?: 'asc' | 'desc';
+}
+
+export interface PurchasesOptions {
+	user_id?: number;
+	order_by?: 'asc' | 'desc';
+	limit?: number;
 }
 
 export interface User {
@@ -34,17 +56,6 @@ export interface Product {
 	recorded_on?: string;
 }
 
-export interface Purchase {
-	id: number;
-	items: Product[];
-	shipping_address: string;
-	billing_address: string;
-	gift: boolean;
-	customer_status: string;
-	confirmation_code?: string;
-	shipping_method: string;
-}
-
 export interface CartProduct {
 	id: number;
 	name: string;
@@ -62,6 +73,18 @@ export interface CartProduct {
 	cart_subtotal: number;
 }
 
+export interface Purchase {
+	id: number;
+	items: CartProduct[];
+	shipping_address: string;
+	billing_address: string;
+	gift: boolean;
+	customer_status: string;
+	confirmation_code?: string;
+	shipping_method: string;
+	order_total: number;
+}
+
 export interface ProductHistory {
 	id: number;
 	product_id: number;
@@ -74,7 +97,7 @@ export interface ProductHistory {
 
 export interface Location {
 	id: number;
-	partner_id: number;
+	partnerId: number;
 	image?: string;
 	address?: string;
 	rating?: number;
@@ -83,16 +106,44 @@ export interface Location {
 export interface Partner {
 	id: number;
 	name: string;
-	partner_code: string;
+	partnerCode: string;
 }
 
 export interface Contact {
 	id?: number;
-	name?: string;
 	first_name?: string;
+	middle_initial?: string;
 	last_name?: string;
-	address?: string;
-	credit_card?: string;
+	phone?: string;
+	email?: string;
+	relation?: string;
+	street_address?: string;
+	city?: string;
+	state?: string;
+	zip?: string;
+	origin_id?: number;
+	company_name: string;
+	company_title: string;
+	company_member_type: string;
+	company_street_address: string;
+	company_city: string;
+	company_state: string;
+	company_zip: string;
+	created_at?: string;
+	contact_type?: string;
+}
+
+export interface CreditCard {
+	id?: number;
+	first_name: string;
+	last_name: string;
+	card_number: string;
+	exp_date: string;
+	security_code: string;
+	last_four_digits: string;
+	use_as_default?: boolean;
+	user_id: number;
+	created_at?: string;
 }
 
 export interface Review {
@@ -114,8 +165,8 @@ export interface Category {
 
 export interface Favorite {
 	id?: number;
-	user_id: number;
-	product_id: number;
+	userId: number;
+	productId: number;
 	tag?: string;
 	name: string;
 	sku?: string;
@@ -133,16 +184,19 @@ export interface Favorite {
 export interface UserReducer {
 	user: User | null;
 	isAuthenticated: boolean | null;
-	token: string | null;
 	loading: boolean;
 	error: any;
+	success?: boolean | null;
+	token?: string | null;
 }
 
 export interface ProductsReducer {
-	products: Product[];
+	products: Product[] | [];
 	product: Product | null;
 	loading: boolean;
+	loadingProduct: boolean;
 	error: any;
+	success?: boolean | null;
 }
 
 export interface PurchasesReducer {
@@ -182,6 +236,7 @@ export interface PartnersReducer {
 export interface ContactsReducer {
 	contacts: Contact[];
 	contact: Contact | null;
+	totalContacts: number | null;
 	loadingContacts: boolean;
 	loadingContact: boolean;
 	error: any;
@@ -216,6 +271,15 @@ export interface FavoritesReducer {
 	success: boolean | null;
 }
 
+export interface CreditCardsReducer {
+	cards: CreditCard[];
+	card: CreditCard | null;
+	loadingCards: boolean;
+	loadingCard: boolean;
+	error: any;
+	success: boolean | null;
+}
+
 export interface RootRedTypes {
 	authRed?: UserReducer;
 	productsRed?: ProductsReducer;
@@ -226,6 +290,12 @@ export interface RootRedTypes {
 	favoritesRed?: FavoritesReducer;
 	productCategoriesRed?: CategoryReducer;
 	reviewsRed?: ReviewsReducer;
-	purchasesRed?: PurchasesReducer;
-	productsHistoryRed?: ProductsHistoryReducer;
+	creditCardsRed?: CreditCardsReducer;
+}
+
+export interface AuthFormDataTypes {
+	email?: string | undefined;
+	password?: string | undefined;
+	password2?: string | undefined;
+	phone?: string | undefined;
 }

@@ -6,7 +6,7 @@ import {utils} from '../../style/fragments/utils';
 import {useNavigation} from '@react-navigation/native';
 const SplashImage = require('../../images/splash-img.jpg');
 const {splashHeader, splashImage} = styles;
-const {innerContainer, btnLight, outerContainer, btnTextLight, btnTextDark, btnDark, btnHighlight, btnPrimary, btnSecondary, btnDanger, btnSuccess} = utils;
+const {fullWidth, btnLight, container, btnTextLight, btnTextDark, btnDark, btnHighlight, btnPrimary, btnSecondary, btnDanger, btnSuccess} = utils;
 
 interface SplashProps {}
 
@@ -15,9 +15,9 @@ const Splash: React.FC<SplashProps> = ({}) => {
 	navigation.navigate('Splash');
 
 	return (
-		<View style={outerContainer}>
+		<View>
 			<ImageBackground source={SplashImage} resizeMode='cover' style={splashImage}>
-				<View style={innerContainer}>
+				<View style={fullWidth}>
 					<Text style={splashHeader}>ItemFinder</Text>
 					<View style={{width: '100%', paddingBottom: 100}}>
 						<TouchableOpacity style={btnHighlight} activeOpacity={0.9} onPress={() => navigation.navigate('RegisterComponent')}>

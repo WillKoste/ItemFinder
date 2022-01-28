@@ -6,7 +6,7 @@ import {formStyles} from '../../style/fragments/form';
 import {utils} from '../../style/fragments/utils';
 import {register} from '../../actions/auth';
 const {form, formLabel, formGroup, formControl} = formStyles;
-const {innerContainer, scrollOuterContainer, contentContainer, btnSecondary, btnTextLight} = utils;
+const {fullWidth, scrollcontainer, contentContainer, btnSecondary, btnTextLight} = utils;
 const {authHeader} = styles;
 
 interface FormDataProps {
@@ -43,8 +43,8 @@ const Register: React.FC<RegisterProps> = ({register}) => {
 	};
 
 	return (
-		<ScrollView style={scrollOuterContainer} contentContainerStyle={contentContainer}>
-			<View style={innerContainer}>
+		<ScrollView style={scrollcontainer} contentContainerStyle={contentContainer}>
+			<View style={fullWidth}>
 				<Text style={authHeader}>Register</Text>
 				<View style={form}>
 					<View style={formGroup}>

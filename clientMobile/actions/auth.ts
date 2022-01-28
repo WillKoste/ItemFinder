@@ -1,15 +1,13 @@
 import customAxios from '../utils/customAxios';
 import {AxiosResponse} from 'axios';
-import {User} from '../types/redux';
-import {getSessionToken, saveSession} from '../utils/sessionUtils';
-import {REGISTER_SUCCESS, REGISTER_FAIL, LOGOUT, LOGIN_SUCCESS, LOGIN_FAIL, AUTH_ERROR, GET_CURRENT_USER} from './types';
-import {AuthDataProps} from '../types/general';
-import {SESSION_NAME} from '../utils/constants';
-import {checkAuthToken} from '../utils/setAuthToken';
+import {LOGIN_SUCCESS, LOGIN_FAIL, REGISTER_SUCCESS, REGISTER_FAIL, AUTH_ERROR, GET_CURRENT_USER, LOGOUT} from './types';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {AuthFormDataTypes, User} from '../types/redux';
 
 export const getCurrentUser = () => async (dispatch: any) => {
 	try {
-		const res: AxiosResponse<{user: User}> = await customAxios.get('/api/v1/users/mobile/me');
+		const res: AxiosResponse<{user: User}> = await customAxios.get('/api/v1/users/web/me');
+		console.log({CLIENT: res});
 		dispatch({
 			type: GET_CURRENT_USER,
 			payload: res.data.user
@@ -23,26 +21,22 @@ export const getCurrentUser = () => async (dispatch: any) => {
 	}
 };
 
-export const login = (formData: AuthDataProps) => async (dispatch: any) => {
+export const loginUser = (formData: AuthFormDataTypes) => async (dispatch: any) => {
 	const config = {
 		headers: {
 			'Content-Type': 'application/json'
 		}
 	};
 	const body = JSON.stringify(formData);
-	console.log('LOGIN ACTION IS RUNNING');
 
 	try {
-		const res: AxiosResponse<{token: string}> = await customAxios.post('/api/v1/users/mobile/login', body, config);
-		// console.log({res});
-		// saveSession(SESSION_NAME, res.data.token);
+		const res: AxiosResponse<{user: User}> = await customAxios.post('/api/v1/users/web/login', body, config);
 		dispatch({
 			type: LOGIN_SUCCESS,
-			payload: res.data.token
+			payload: res.data.user
 		});
 	} catch (err: any) {
-		console.error({err});
-		console.log('couldnt do it sorry');
+		console.error(err);
 		dispatch({
 			type: LOGIN_FAIL,
 			payload: err.response
@@ -50,19 +44,16 @@ export const login = (formData: AuthDataProps) => async (dispatch: any) => {
 	}
 };
 
-export const register = (formData: any) => async (dispatch: any) => {
+export const registerUser = (formData: AuthFormDataTypes) => async (dispatch: any) => {
 	const config = {
 		headers: {
 			'Content-Type': 'application/json'
 		}
 	};
 	const body = JSON.stringify(formData);
-	dispatch;
-	console.log('tf');
 
 	try {
-		const res: AxiosResponse<{user: User; session: string}> = await customAxios.post('/api/v1/users/mobile/register', body, config);
-		console.log({res});
+		const res: AxiosResponse<{user: User}> = await customAxios.post('/api/v1/users/web/register', body, config);
 		dispatch({
 			type: REGISTER_SUCCESS,
 			payload: res.data.user
@@ -77,7 +68,18 @@ export const register = (formData: any) => async (dispatch: any) => {
 };
 
 export const logout = () => async (dispatch: any) => {
-	dispatch({
-		type: LOGOUT
-	});
+	try {
+		await customAxios.post('/api/v1/users/logout');
+		await AsyncStorage.removeItem('cart');
+		await AsyncStorage.removeItem('cartTotal');
+		dispatch({
+			type: LOGOUT
+		});
+	} catch (err) {
+		console.error(err);
+		dispatch({
+			type: AUTH_ERROR,
+			payload: err
+		});
+	}
 };

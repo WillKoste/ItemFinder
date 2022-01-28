@@ -1,10 +1,36 @@
-import {Action} from '../types/redux';
+import {ADD_CART, REMOVE_CART, CLEAR_CART, SET_CART, LOGOUT, UPDATE_CART_QTY} from '../actions/types';
+import {Action, CartReducer} from '../types/redux';
 
-const initialState = {};
+const inititalState: CartReducer = {
+	items: [],
+	total: 0
+};
 
-export default function (state = initialState, action: Action) {
-	const {payload, type} = action;
+export default function (state = inititalState, action: Action) {
+	const {type, payload, total} = action;
+
 	switch (type) {
+		case ADD_CART:
+		case SET_CART:
+		case UPDATE_CART_QTY:
+			return {
+				...state,
+				items: payload,
+				total
+			};
+		case REMOVE_CART:
+			return {
+				...state,
+				items: payload,
+				total
+			};
+		case CLEAR_CART:
+		case LOGOUT:
+			return {
+				...state,
+				items: [],
+				total: 0
+			};
 		default:
 			return state;
 	}

@@ -1,14 +1,15 @@
 import {GET_CATEGORIES, CATEGORIES_ERROR} from './types';
 import customAxios from '../utils/customAxios';
+import {AxiosResponse} from 'axios';
 
 export const getCategories =
 	(limit: number, offset: number = 0) =>
 	async (dispatch: any) => {
 		try {
-			const res = await customAxios.get(`/api/v1/categories?limit=${limit}&offset=${offset}`);
+			const res: AxiosResponse<{categories: string[]}> = await customAxios.get(`/api/v1/categories?limit=${limit}&offset=${offset}`);
 			dispatch({
 				type: GET_CATEGORIES,
-				payload: res.data
+				payload: res.data.categories
 			});
 		} catch (err) {
 			console.error(err);

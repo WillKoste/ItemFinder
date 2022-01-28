@@ -45,5 +45,14 @@ export const styles = StyleSheet.create({
 	},
 	contactItemText: {
 		fontSize: 18
+	},
+
+	// HOME
+	block1Background: {
+		backgroundColor: primaryColor,
+		height: '100%'
+	},
+	blockItem: {
+		backgroundColor: '#fff'
 	}
 });

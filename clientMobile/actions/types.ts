@@ -85,3 +85,12 @@ export const ADD_PURCHASE = 'ADD_PURCHASE';
 export const REMOVE_PURCHASE = 'REMOVE_PURCHASE';
 export const CLEAR_PURCHASE = 'CLEAR_PURCHASE';
 export const PURCHASES_ERROR = 'PURCHASES_ERROR';
+
+// CREIDT CARDS
+export const GET_CARDS = 'GET_CARDS';
+export const GET_CARD = 'GET_CARD';
+export const ADD_CARD = 'ADD_CARD';
+export const UPDATE_DEFAULT_CARD = 'UPDATE_DEFAULT_CARD';
+export const REMOVE_CARD = 'REMOVE_CARD';
+export const CLEAR_CARDS = 'CLEAR_CARDS';
+export const CARDS_ERROR = 'CARDS_ERROR';

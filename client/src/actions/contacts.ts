@@ -1,13 +1,14 @@
-import axios, {AxiosResponse} from 'axios';
+import {AxiosResponse} from 'axios';
 import {NewContactForm} from '../types/forms';
 import {Contact} from '../types/general';
+import {customAxios} from '../utils/customAxios';
 import {GET_CONTACTS, GET_CONTACT, CONTACTS_CLEAR, CONTACTS_ERROR, CREATE_CONTACT, UPDATE_CONTACT, DELETE_CONTACT, CREATE_REVIEW} from './types';
 
 export const getContacts =
 	(limit: number = 10, offset: number = 0) =>
 	async (dispatch: any) => {
 		try {
-			const res: AxiosResponse<{contacts: Contact[]; total: number}> = await axios.get(`/api/v1/contacts?limit=${limit}&offset=${offset}`);
+			const res: AxiosResponse<{contacts: Contact[]; total: number}> = await customAxios.get(`/api/v1/contacts?limit=${limit}&offset=${offset}`);
 			dispatch({
 				type: GET_CONTACTS,
 				payload: res.data.contacts,
@@ -24,7 +25,7 @@ export const getContacts =
 
 export const getContact = (contactId: string) => async (dispatch: any) => {
 	try {
-		const res: AxiosResponse<{contact: Contact}> = await axios.get(`/api/v1/contacts/${contactId}`);
+		const res: AxiosResponse<{contact: Contact}> = await customAxios.get(`/api/v1/contacts/${contactId}`);
 		dispatch({
 			type: GET_CONTACT,
 			payload: res.data.contact
@@ -47,7 +48,7 @@ export const createContact = (formData: NewContactForm) => async (dispatch: any)
 	const body = JSON.stringify(formData);
 
 	try {
-		const res: AxiosResponse<{contact: Contact}> = await axios.post(`/api/v1/contacts`, body, config);
+		const res: AxiosResponse<{contact: Contact}> = await customAxios.post(`/api/v1/contacts`, body, config);
 		dispatch({
 			type: CREATE_REVIEW,
 			payload: res.data.contact
@@ -69,7 +70,7 @@ export const updateContact = (formData: Contact) => async (dispatch: any) => {
 	};
 	const body = JSON.stringify(formData);
 	try {
-		const res: AxiosResponse<{contact: Contact}> = await axios.put(`/api/v1/contacts/${formData.id}`, body, config);
+		const res: AxiosResponse<{contact: Contact}> = await customAxios.put(`/api/v1/contacts/${formData.id}`, body, config);
 		dispatch({
 			type: UPDATE_CONTACT,
 			payload: res.data.contact
@@ -85,7 +86,7 @@ export const updateContact = (formData: Contact) => async (dispatch: any) => {
 
 export const deleteContact = (contactId: string) => async (dispatch: any) => {
 	try {
-		const res = await axios.delete(`/api/v1/contacts/${contactId}`);
+		const res = await customAxios.delete(`/api/v1/contacts/${contactId}`);
 	} catch (err) {
 		console.error(err);
 	}

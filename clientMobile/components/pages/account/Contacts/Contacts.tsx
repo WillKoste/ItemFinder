@@ -6,7 +6,7 @@ import {getContacts} from '../../../../actions/contacts';
 import ContactItem from './ContactItem';
 import SearchBar from '../../../reusable/SearchBar';
 import {utils} from '../../../../style/fragments/utils';
-const {innerContainer, outerContainer, contentContainer, moduleScrollOuterContainer} = utils;
+const {fullWidth, container, contentContainer, moduleScrollcontainer} = utils;
 
 interface ContactsProps {
 	contactsRed: ContactsReducer;
@@ -22,10 +22,10 @@ const Contacts: React.FC<ContactsProps> = ({contactsRed: {contacts, loadingConta
 	}, []);
 
 	return (
-		<View style={outerContainer}>
-			<View style={innerContainer}>
+		<View style={container}>
+			<View style={fullWidth}>
 				<SearchBar />
-				<ScrollView contentContainerStyle={contentContainer} style={{...moduleScrollOuterContainer, maxHeight: '90%'}}>
+				<ScrollView contentContainerStyle={contentContainer} style={{...moduleScrollcontainer, maxHeight: '90%'}}>
 					{loadingContacts ? <Text>Loading...</Text> : contacts.length > 0 ? contacts.map((con) => <ContactItem contact={con} />) : null}
 				</ScrollView>
 			</View>

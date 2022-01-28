@@ -1,30 +1,53 @@
-import {GET_PRODUCTS, PRODUCTS_ERROR} from '../actions/types';
 import {Action, ProductsReducer} from '../types/redux';
+import {PRODUCTS_ERROR, GET_PRODUCTS, GET_PRODUCT, CREATE_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT, PRODUCT_CLEAR} from '../actions/types';
 
 const initialState: ProductsReducer = {
 	products: [],
 	product: null,
 	loading: true,
+	loadingProduct: true,
 	error: null
 };
 
 export default function (state = initialState, action: Action): ProductsReducer {
-	const {payload, type} = action;
+	const {type, payload} = action;
+
 	switch (type) {
 		case GET_PRODUCTS:
 			return {
 				...state,
 				loading: false,
-				error: null,
-				products: payload
+				products: payload,
+				error: null
+			};
+		case GET_PRODUCT:
+			return {
+				...state,
+				loadingProduct: false,
+				product: payload,
+				error: null
+			};
+		case CREATE_PRODUCT:
+			return {
+				...state,
+				loading: false,
+				product: payload,
+				success: true,
+				error: null
+			};
+		case PRODUCT_CLEAR:
+			return {
+				...state,
+				loadingProduct: true,
+				product: null
 			};
 		case PRODUCTS_ERROR:
 			return {
 				...state,
 				loading: false,
-				error: payload,
 				product: null,
-				products: []
+				products: [],
+				error: payload
 			};
 		default:
 			return state;

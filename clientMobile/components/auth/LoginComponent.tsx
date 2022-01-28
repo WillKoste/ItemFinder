@@ -9,7 +9,7 @@ import {utils} from '../../style/fragments/utils';
 import {formStyles} from '../../style/fragments/form';
 import {getProducts} from '../../actions/products';
 const {authHeader} = styles;
-const {innerContainer, scrollOuterContainer, contentContainer, btnTextLight, textLight, btnSecondary} = utils;
+const {fullWidth, scrollcontainer, contentContainer, btnTextLight, textLight, btnSecondary} = utils;
 const {form, formGroup, formLabel, formControl} = formStyles;
 
 interface LoginComponentProps {
@@ -44,9 +44,9 @@ const LoginComponent: React.FC<LoginComponentProps> = ({login, getProducts}) => 
 	};
 
 	return (
-		<ScrollView style={scrollOuterContainer} contentContainerStyle={contentContainer}>
-			<View style={innerContainer}>
-				<Text style={authHeader}>Login Page</Text>
+		<ScrollView style={scrollcontainer} contentContainerStyle={contentContainer}>
+			<Text style={authHeader}>Login Page</Text>
+			<View style={fullWidth}>
 				<View style={form}>
 					<View style={formGroup}>
 						<Text style={formLabel}>Email</Text>

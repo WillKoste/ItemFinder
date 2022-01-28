@@ -23,7 +23,6 @@ export default function (state = initialState, action: Action) {
 			};
 		case LOGIN_SUCCESS:
 		case REGISTER_SUCCESS:
-			console.log('LOGIN_SUCCESS');
 			return {
 				...state,
 				loading: false,
@@ -34,11 +33,14 @@ export default function (state = initialState, action: Action) {
 		case LOGIN_FAIL:
 		case REGISTER_FAIL:
 		case AUTH_ERROR:
+		case LOGOUT:
 			return {
 				...state,
+				user: null,
+				isAuthenticated: null,
 				loading: false,
 				error: payload,
-				isAuthenticated: null
+				token: null
 			};
 		default:
 			return state;
