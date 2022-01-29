@@ -21,7 +21,7 @@ export const getCurrentUser = () => async (dispatch: any) => {
 	}
 };
 
-export const loginUser = (formData: AuthFormDataTypes) => async (dispatch: any) => {
+export const login = (formData: AuthFormDataTypes) => async (dispatch: any) => {
 	const config = {
 		headers: {
 			'Content-Type': 'application/json'
@@ -44,7 +44,7 @@ export const loginUser = (formData: AuthFormDataTypes) => async (dispatch: any) 
 	}
 };
 
-export const registerUser = (formData: AuthFormDataTypes) => async (dispatch: any) => {
+export const register = (formData: AuthFormDataTypes) => async (dispatch: any) => {
 	const config = {
 		headers: {
 			'Content-Type': 'application/json'

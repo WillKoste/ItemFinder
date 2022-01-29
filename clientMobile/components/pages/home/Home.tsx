@@ -1,27 +1,51 @@
-import React, {Fragment, useEffect} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
+import {connect} from 'react-redux';
 import {View, Text, ScrollView} from 'react-native';
-import {getAllTokens} from '../../../utils/sessionUtils';
-import Block2 from './Block2';
 import {utils} from '../../../style/fragments/utils';
-import {styles} from '../../../style/App';
-// const {} = styles
-const {headerMd, container, bgPrimary, textLight, p1, py3} = utils;
+import ProductsBlock from '../../reusable/ProductsBlock';
+import {getProducts} from '../../../actions/products';
+import {Product, ProductsOptions, ProductsReducer} from '../../../types/redux';
+import SpinnerCustom from '../../layout/SpinnerCustom';
+import Banner from '../../reusable/Banner';
+import SearchBar from '../../reusable/SearchBar';
+const {headerMd, bgPrimary, bgHighlight, textDark, p1, py3, mx2, px2} = utils;
 
-interface HomeProps {}
+interface HomeProps {
+	getProducts: (options: ProductsOptions) => void;
+	productsRed: ProductsReducer;
+}
 
-const Home: React.FC<HomeProps> = () => {
+const Home: React.FC<HomeProps> = ({getProducts, productsRed: {loading, products}}) => {
+	const [offsetState, setOffsetState] = useState(0);
+	const [limitState, setLimitState] = useState(12);
+
 	useEffect(() => {
-		getAllTokens();
-	});
+		getProducts({limit: limitState, offset: offsetState});
+	}, []);
 
 	return (
-		<ScrollView style={{flex: 1}}>
-			<View style={{paddingHorizontal: 10, ...bgPrimary}}>
-				<Text style={[headerMd, textLight, py3]}>Things to check out</Text>
+		<ScrollView style={{flex: 1}} stickyHeaderIndices={[0]}>
+			<View style={[px2, bgPrimary]}>
+				<SearchBar />
 			</View>
-			<Block2 />
+			<View style={[bgHighlight, {paddingHorizontal: 10}]}>
+				<Text style={[headerMd, textDark, py3]}>Things to check out</Text>
+			</View>
+			{loading ? (
+				<SpinnerCustom />
+			) : products.length > 0 ? (
+				<View>
+					<ProductsBlock blockProducts={products.slice(0, 4)} />
+					<Banner />
+					<ProductsBlock blockProducts={products.slice(0, 4)} />
+				</View>
+			) : null}
 		</ScrollView>
 	);
 };
 
-export default Home;
+const mapStateToProps = (state: any) => ({
+	productsRed: state.productsRed
+});
+
+export default connect(mapStateToProps, {getProducts})(Home);
