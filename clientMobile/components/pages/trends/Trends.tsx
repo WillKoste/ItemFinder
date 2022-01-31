@@ -6,7 +6,7 @@ interface TrendsProps {}
 const Trends: React.FC<TrendsProps> = () => {
 	return (
 		<View>
-			<Text>Trans Page</Text>
+			<Text>Trends Page</Text>
 		</View>
 	);
 };

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, TextInput} from 'react-native';
+import {View, TextInput} from 'react-native';
 import {utils} from '../../style/fragments/utils';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 const {searchContainer, searchIcon} = utils;

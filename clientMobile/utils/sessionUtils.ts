@@ -23,8 +23,6 @@ export const getSessionToken = async (key: string) => {
 export const getAllTokens = async () => {
 	try {
 		const results = await AsyncStorage.getAllKeys();
-		// await AsyncStorage.removeItem('token');
-
 		if (results) {
 			console.log({results2: results});
 		} else {

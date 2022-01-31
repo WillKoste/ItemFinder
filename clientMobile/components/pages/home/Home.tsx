@@ -1,10 +1,10 @@
-import React, {Fragment, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
 import {View, Text, ScrollView} from 'react-native';
 import {utils} from '../../../style/fragments/utils';
 import ProductsBlock from '../../reusable/ProductsBlock';
 import {getProducts} from '../../../actions/products';
-import {Product, ProductsOptions, ProductsReducer} from '../../../types/redux';
+import {ProductsOptions, ProductsReducer} from '../../../types/redux';
 import SpinnerCustom from '../../layout/SpinnerCustom';
 import Banner from '../../reusable/Banner';
 import SearchBar from '../../reusable/SearchBar';

@@ -2,7 +2,6 @@ import React, {useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {Text} from 'react-native';
 import {connect} from 'react-redux';
-import {Store} from 'redux';
 import {ContactsReducer, ProductsReducer, UserReducer} from '../../types/redux';
 import Navbar from '../layout/Navbar';
 import AuthStack from '../stacks/AuthStack';
