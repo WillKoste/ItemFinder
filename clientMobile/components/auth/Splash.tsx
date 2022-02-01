@@ -1,18 +1,16 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, ImageBackground} from 'react-native';
-import {splashNavProps} from '../../types/navigation';
 import {styles} from '../../style/App';
 import {utils} from '../../style/fragments/utils';
 import {useNavigation} from '@react-navigation/native';
 const SplashImage = require('../../images/splash-img.jpg');
 const {splashHeader, splashImage} = styles;
-const {fullWidth, btnLight, container, btnTextLight, btnTextDark, btnDark, btnHighlight, btnPrimary, btnSecondary, btnDanger, btnSuccess} = utils;
+const {fullWidth, btnLight, btnTextDark, btnHighlight} = utils;
 
 interface SplashProps {}
 
-const Splash: React.FC<SplashProps> = ({}) => {
-	const navigation = useNavigation<splashNavProps>();
-	navigation.navigate('Splash');
+const Splash = ({}) => {
+	const {navigate} = useNavigation();
 
 	return (
 		<View>
@@ -20,10 +18,10 @@ const Splash: React.FC<SplashProps> = ({}) => {
 				<View style={fullWidth}>
 					<Text style={splashHeader}>ItemFinder</Text>
 					<View style={{width: '100%', paddingBottom: 100}}>
-						<TouchableOpacity style={btnHighlight} activeOpacity={0.9} onPress={() => navigation.navigate('RegisterComponent')}>
+						<TouchableOpacity style={btnHighlight} activeOpacity={0.9} onPress={() => navigate('RegisterPage')}>
 							<Text style={btnTextDark}>Register</Text>
 						</TouchableOpacity>
-						<TouchableOpacity style={btnLight} activeOpacity={0.9} onPress={() => navigation.navigate('LoginComponent')}>
+						<TouchableOpacity style={btnLight} activeOpacity={0.9} onPress={() => navigate('LoginPage')}>
 							<Text style={btnTextDark}>Login</Text>
 						</TouchableOpacity>
 					</View>

@@ -1,35 +1,24 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {connect} from 'react-redux';
 import {View, Text, ScrollView, TextInput, TouchableOpacity, Alert} from 'react-native';
 import {login} from '../../actions/auth';
 import {AuthDataProps} from '../../types/general';
-import {deleteToken, getAllTokens, getSessionToken} from '../../utils/sessionUtils';
 import {styles} from '../../style/App';
 import {utils} from '../../style/fragments/utils';
 import {formStyles} from '../../style/fragments/form';
-import {getProducts} from '../../actions/products';
 const {authHeader} = styles;
-const {fullWidth, scrollcontainer, contentContainer, btnTextLight, textLight, btnSecondary} = utils;
+const {fullWidth, scrollcontainer, contentContainer, btnTextLight, btnSecondary} = utils;
 const {form, formGroup, formLabel, formControl} = formStyles;
 
 interface LoginComponentProps {
 	login: (formData: AuthDataProps) => void;
-	getProducts: () => void;
 }
 
-const LoginComponent: React.FC<LoginComponentProps> = ({login, getProducts}) => {
+const LoginComponent: React.FC<LoginComponentProps> = ({login}) => {
 	const [formData, setFormData] = useState({
 		email: '',
 		password: ''
 	});
-
-	useEffect(() => {
-		// getSessionToken('w7id');
-		// deleteToken('w7id');
-		// getAllTokens();
-		getProducts();
-	}, []);
-
 	const {email, password} = formData;
 
 	const onSubmit = (e: any) => {
@@ -65,4 +54,4 @@ const LoginComponent: React.FC<LoginComponentProps> = ({login, getProducts}) => 
 	);
 };
 
-export default connect(null, {login, getProducts})(LoginComponent);
+export default connect(null, {login})(LoginComponent);

@@ -1,7 +1,8 @@
-import {StackNavigationProp} from '@react-navigation/stack';
+import {AuthParamList, HomeParamList, AccountParamList, CartParamList, TrendsParamList} from './paramList';
 
 export type RootStackParamList = {
-	Home: undefined;
+	Home: {hey: string} | undefined;
+	Product: undefined;
 	Account: undefined;
 	Favorites: undefined;
 	Trends: undefined;
@@ -10,10 +11,12 @@ export type RootStackParamList = {
 	RegisterComponent: undefined;
 };
 
-export type splashNavProps = StackNavigationProp<RootStackParamList, 'Splash'>;
-export type loginNavProps = StackNavigationProp<RootStackParamList, 'LoginComponent'>;
-export type registerNavProps = StackNavigationProp<RootStackParamList, 'RegisterComponent'>;
-export type homeNavProps = StackNavigationProp<RootStackParamList, 'Home'>;
-export type accountNavProps = StackNavigationProp<RootStackParamList, 'Account'>;
-export type favoritesNavProps = StackNavigationProp<RootStackParamList, 'Favorites'>;
-export type trendsNavProps = StackNavigationProp<RootStackParamList, 'Trends'>;
+declare global {
+	namespace ReactNavigation {
+		interface RootParamList extends AuthParamList {}
+		interface RootParamList extends HomeParamList {}
+		interface RootParamList extends AccountParamList {}
+		interface RootParamList extends CartParamList {}
+		interface RootParamList extends TrendsParamList {}
+	}
+}
