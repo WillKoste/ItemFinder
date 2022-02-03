@@ -1,7 +1,7 @@
 import {CREATE_PRODUCT, GET_PRODUCT, GET_PRODUCTS, PRODUCTS_ERROR, PRODUCT_CLEAR} from './types';
 import customAxios from '../utils/customAxios';
 import {AxiosResponse} from 'axios';
-import {ProductsOptions, Product} from '../types/redux';
+import {ProductsOptions, Product, Action} from '../types/redux';
 import {clientQueryOptions} from '../utils/clientQueryOptions';
 
 export const getProducts = (options: ProductsOptions) => async (dispatch: any) => {

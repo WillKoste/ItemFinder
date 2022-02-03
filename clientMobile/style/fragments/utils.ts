@@ -38,7 +38,8 @@ export const utils = StyleSheet.create({
 	},
 	image: {
 		width: '100%',
-		height: '100%'
+		height: '90%'
+		// alignSelf: 'center'
 	},
 	contentContainer: {
 		alignItems: aCenter,
@@ -207,7 +208,7 @@ export const utils = StyleSheet.create({
 		justifyContent: 'flex-end',
 		borderRadius: 5,
 		padding: padding1,
-		height: 180,
+		height: 200,
 		backgroundColor: '#e1e1e1'
 	},
 	itemName: {

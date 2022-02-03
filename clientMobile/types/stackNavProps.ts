@@ -1,5 +1,6 @@
 import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
+import {ReactNode} from 'react';
 import {HomeParamList, AccountParamList, AuthParamList, CartParamList, TrendsParamList} from './paramList';
 
 export type HomeStackNavProps<T extends keyof HomeParamList> = {

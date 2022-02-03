@@ -4,15 +4,19 @@ import {FlatGrid} from 'react-native-super-grid';
 import {utils} from '../../style/fragments/utils';
 import {Product} from '../../types/redux';
 import {HomeStackNavProps} from '../../types/stackNavProps';
-const {image, gridView, itemContainer, itemName, p1, p2} = utils;
+import {useNavigation} from '@react-navigation/native';
+const {image, gridView, itemContainer, itemName, py1, p2} = utils;
 
 interface Block2Props {
 	blockProducts: Product[];
-	navigation?: any;
+	// navigation?: HomeStackNavProps<'ProductPage'>;
 }
 
-const Block2: React.FC<Block2Props> = ({blockProducts, navigation}) => {
+const Block2: React.FC<Block2Props> = ({blockProducts}) => {
 	const [products, setProducts] = useState<Product[]>(blockProducts);
+
+	// const {navigation: something}: HomeStackNavProps<'ProductPage'> = rest as any;
+	const navigation = useNavigation();
 
 	return (
 		<FlatGrid
@@ -26,7 +30,9 @@ const Block2: React.FC<Block2Props> = ({blockProducts, navigation}) => {
 					activeOpacity={0.92}
 					style={[itemContainer, p2]}
 					onPress={() => {
-						navigation.navigate('ProductPage');
+						navigation.navigate('ProductPage', {
+							productId: item.id
+						});
 					}}
 				>
 					<Image
@@ -36,7 +42,7 @@ const Block2: React.FC<Block2Props> = ({blockProducts, navigation}) => {
 						}}
 						style={image}
 					/>
-					<Text style={itemName}>{item.name}</Text>
+					<Text style={[itemName]}>{item.name}</Text>
 				</TouchableOpacity>
 			)}
 		/>

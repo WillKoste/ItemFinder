@@ -16,10 +16,12 @@ interface HomeProps {
 	productsRed: ProductsReducer;
 }
 
-const Home: React.FC<HomeProps> = ({getProducts, productsRed: {loading, products}, route, navigation}: HomeStackNavProps<'HomePage'> | any) => {
+const Home: React.FC<HomeProps> = ({getProducts, productsRed: {loading, products}, ...props}) => {
 	const [offsetState, setOffsetState] = useState(0);
 	const [limitState, setLimitState] = useState(12);
 	const [productsData, setProductsData] = useState([]);
+
+	const {navigation}: HomeStackNavProps<'HomePage'> = props as any;
 
 	useEffect(() => {
 		getProducts({limit: limitState, offset: offsetState});
@@ -37,9 +39,9 @@ const Home: React.FC<HomeProps> = ({getProducts, productsRed: {loading, products
 				<SpinnerCustom />
 			) : products.length > 0 ? (
 				<View>
-					<ProductsBlock navigation={navigation} blockProducts={products.slice(0, 4)} />
+					<ProductsBlock blockProducts={products.slice(0, 4)} />
 					<Banner />
-					<ProductsBlock navigation={navigation} blockProducts={products.slice(4, 8)} />
+					<ProductsBlock blockProducts={products.slice(4, 8)} />
 				</View>
 			) : null}
 		</ScrollView>

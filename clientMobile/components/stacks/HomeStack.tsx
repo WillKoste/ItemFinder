@@ -10,7 +10,7 @@ interface HomeStackProps {}
 const HomeStack: React.FC<HomeStackProps> = () => {
 	return (
 		<Stack.Navigator initialRouteName='HomePage'>
-			<Stack.Screen name='HomePage' component={Home} options={{headerTitle: '', headerTransparent: true}} />
+			<Stack.Screen name='HomePage' component={Home} options={{headerTitle: 'Home Page', headerTitleAlign: 'center'}} />
 			<Stack.Screen name='ProductPage' component={ProductPage} />
 			{/* <Stack.Screen name='HomePage' component={Home} options={{headerTransparent: true, headerTitle: ''}} />
 			<Stack.Screen name='ProductPage' component={ProductPage} options={{headerTransparent: true, headerTitle: ''}} /> */}
