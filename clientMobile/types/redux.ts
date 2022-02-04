@@ -187,7 +187,16 @@ export interface UserReducer {
 	loading: boolean;
 	error: any;
 	success?: boolean | null;
-	token?: string | null;
+	token?: {
+		id: number;
+		email2: string;
+		image: string;
+		is_admin: boolean;
+		is_partner: boolean;
+		is_premium: boolean;
+		partner_code: string | null;
+		phone: string;
+	} | null;
 }
 
 export interface ProductsReducer {

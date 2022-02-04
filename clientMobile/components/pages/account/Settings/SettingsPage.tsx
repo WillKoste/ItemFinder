@@ -1,15 +1,19 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, ScrollView} from 'react-native';
 import ScrollableContainer from '../../../reusable/hoc/ScrollableContainer';
+import SettingsChangePassword from './SettingsChangePassword';
+import SettingsMyInfo from './SettingsMyInfo';
 import SettingsTop from './SettingsTop';
 
 interface SettingsPageProps {}
 
 const SettingsPage: React.FC<SettingsPageProps> = () => {
 	return (
-		<View style={{flex: 1}}>
+		<ScrollView style={{flex: 1}}>
 			<SettingsTop />
-		</View>
+			<SettingsMyInfo />
+			<SettingsChangePassword />
+		</ScrollView>
 	);
 };
 
