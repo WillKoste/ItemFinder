@@ -1,6 +1,5 @@
 import React from 'react';
-import {View, ScrollView} from 'react-native';
-import ScrollableContainer from '../../../reusable/hoc/ScrollableContainer';
+import {ScrollView} from 'react-native';
 import SettingsChangePassword from './SettingsChangePassword';
 import SettingsMyInfo from './SettingsMyInfo';
 import SettingsTop from './SettingsTop';

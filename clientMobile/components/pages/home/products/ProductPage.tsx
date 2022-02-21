@@ -1,13 +1,17 @@
-import React, {useEffect} from 'react';
+import React, {Fragment, useEffect} from 'react';
 import {connect} from 'react-redux';
-import {View, Text} from 'react-native';
+import {View, Text, Image, ScrollView} from 'react-native';
 import {HomeStackNavProps} from '../../../../types/stackNavProps';
 import {ProductsReducer} from '../../../../types/redux';
 import {getProduct} from '../../../../actions/products';
 import SpinnerCustom from '../../../layout/SpinnerCustom';
 import {utils} from '../../../../style/fragments/utils';
 import ScrollableContainer from '../../../reusable/hoc/ScrollableContainer';
-const {container, my3} = utils;
+import Rating from '../../../reusable/misc/Rating';
+import {formatCurrency} from '../../../../utils/randomUtils';
+import ProductPageTop from './ProductPageTop';
+import ProductPagePurchase from './ProductPagePurchase';
+const {headerMd, my3, headerLg} = utils;
 
 interface ProductPageProps {
 	productsRed: ProductsReducer;
@@ -27,13 +31,13 @@ const ProductPage: React.FC<ProductPageProps> = ({productsRed: {product, loading
 
 	return (
 		<ScrollableContainer>
-			<Text>I am the Product Page :D</Text>
 			{loadingProduct ? (
 				<SpinnerCustom />
 			) : (
-				<View>
-					<Text>{product?.name}</Text>
-				</View>
+				<Fragment>
+					<ProductPageTop />
+					<ProductPagePurchase />
+				</Fragment>
 			)}
 		</ScrollableContainer>
 	);

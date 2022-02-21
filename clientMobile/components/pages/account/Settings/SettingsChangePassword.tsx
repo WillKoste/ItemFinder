@@ -37,7 +37,7 @@ const SettingsChangePassword: React.FC<SettingsChangePasswordProps> = () => {
 							<FormGroup isPassword formData={formData} setFormData={setFormData} label='Confirm New Password' formValue={'lastName'} />
 						</View>
 					</View>
-					<Button btnText='Update' btnVariant='primary' btnFont={18} />
+					<Button iconProps={{}} btnText='Update' btnVariant='primary' btnFont={18} />
 				</View>
 			</View>
 		</View>

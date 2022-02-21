@@ -2,7 +2,6 @@ import React from 'react';
 import {View, Text, TouchableOpacity, ImageBackground} from 'react-native';
 import {styles} from '../../style/App';
 import {utils} from '../../style/fragments/utils';
-import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {AuthParamList} from '../../types/paramList';
 const SplashImage = require('../../images/splash-img.jpg');
@@ -12,7 +11,6 @@ const {fullWidth, btnLight, btnTextDark, btnHighlight} = utils;
 interface SplashProps {}
 
 const Splash = (props: {navigation: StackNavigationProp<AuthParamList, 'RegisterPage'>}) => {
-	// const {navigate} = useNavigation();
 	const {navigation} = props;
 
 	return (

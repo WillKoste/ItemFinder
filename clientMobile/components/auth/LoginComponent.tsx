@@ -1,4 +1,4 @@
-import React, {ReactNode, useState} from 'react';
+import React, {useState} from 'react';
 import {connect} from 'react-redux';
 import {View, Text, ScrollView, TextInput, TouchableOpacity, Alert} from 'react-native';
 import {login} from '../../actions/auth';
@@ -6,8 +6,6 @@ import {AuthDataProps} from '../../types/general';
 import {styles} from '../../style/App';
 import {utils} from '../../style/fragments/utils';
 import {formStyles} from '../../style/fragments/form';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {AuthParamList} from '../../types/paramList';
 import {AuthStackNavProps} from '../../types/stackNavProps';
 const {authHeader} = styles;
 const {fullWidth, scrollcontainer, contentContainer, btnTextLight, btnSecondary} = utils;
@@ -18,10 +16,6 @@ interface LoginComponentProps {
 }
 
 const LoginComponent: React.FC<LoginComponentProps> = ({login, children, ...props}) => {
-	/* tslint:disable */
-	const {navigation, route}: AuthStackNavProps<'LoginPage'> = props as any;
-	// navigation.navigate('SplashPage');
-
 	const [formData, setFormData] = useState({
 		email: '',
 		password: ''
@@ -30,8 +24,6 @@ const LoginComponent: React.FC<LoginComponentProps> = ({login, children, ...prop
 
 	const onSubmit = (e: any) => {
 		e.preventDefault();
-		console.log({hey: 'hey'});
-
 		if (email === '' || password === '') {
 			Alert.alert('Data required', 'Please provide your valid email and password');
 		} else {

@@ -5,10 +5,10 @@ com/clientmobile/ReactNativeFlipper.java
  com.clientmobile.ReactNativeFlipper$2$1
 com/clientmobile/MainActivity.java
  com.clientmobile.MainActivity
-com/facebook/react/PackageList.java
- com.facebook.react.PackageList
-com/clientmobile/BuildConfig.java
- com.clientmobile.BuildConfig
 com/clientmobile/MainApplication.java
  com.clientmobile.MainApplication
  com.clientmobile.MainApplication$1
+com/clientmobile/BuildConfig.java
+ com.clientmobile.BuildConfig
+com/facebook/react/PackageList.java
+ com.facebook.react.PackageList

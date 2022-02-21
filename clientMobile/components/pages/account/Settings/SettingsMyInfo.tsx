@@ -31,16 +31,16 @@ const SettingsMyInfo: React.FC<SettingsMyInfoProps> = ({authRed: {user, token}})
 			<Text style={[headerMd, textPrimary, {textDecorationLine: 'underline', textDecorationStyle: 'solid', textDecorationColor: primaryColor, marginBottom: 0}]}>My Info</Text>
 			<View style={[p2, {borderColor: highlightColor, borderWidth: 2, borderStyle: 'solid', borderRadius: borderRadius, marginBottom: 36}]}>
 				<View style={[form]}>
-					<FormGroup formData={formData} formValue={'email'} label='Email' setFormData={setFormData} />
+					<FormGroup disabled formData={formData} formValue={'email'} label='Email' setFormData={setFormData} />
 					<View style={[{flexDirection: 'row'}]}>
 						<View style={[{flex: 1, marginRight: 3}]}>
-							<FormGroup formData={formData} setFormData={setFormData} label='First Name' formValue={'firstName'} />
+							<FormGroup disabled formData={formData} setFormData={setFormData} label='First Name' formValue={'firstName'} />
 						</View>
 						<View style={[{flex: 1, marginLeft: 3}]}>
 							<FormGroup formData={formData} setFormData={setFormData} label='Last Name' formValue={'lastName'} />
 						</View>
 					</View>
-					<Button btnText='Update' btnFont={18} />
+					<Button iconProps={{}} btnText='Update' btnFont={18} />
 				</View>
 			</View>
 		</View>
